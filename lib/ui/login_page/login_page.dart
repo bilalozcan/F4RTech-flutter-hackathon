@@ -1,4 +1,5 @@
 
+import 'package:education/ui/login_page/login_page_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController email = TextEditingController();
+  LoginPageModel model =LoginPageModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Center(
                             child: TextField(
                               keyboardType: TextInputType.numberWithOptions(decimal: true),
-                              controller: email,
+                              controller: model.email,
                               decoration: InputDecoration(border: InputBorder.none,hintText: "E-posta",contentPadding: EdgeInsets.only(left:8)),
                               autofocus: true,
 
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Center(
                               child: TextField(
                                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                controller: email,
+                                controller: model.password,
                                 decoration: InputDecoration(border: InputBorder.none,hintText: "Şifre",contentPadding: EdgeInsets.only(left:8)),
                                 autofocus: true,
 
@@ -76,7 +77,10 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.only(top:8.0,left:2),
                           child: GestureDetector(
-                            onTap: (){},
+                            onTap: (){
+                              setState(() {
+                              });
+                            },
                             child: Container(
                               child: Text("Şifreni mi Unuttun?",style: GoogleFonts.poppins(
                                   color:'264dfa'.toColor(),
@@ -90,7 +94,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   Ink(
-
                     child: InkWell(
                       borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30)),
                       splashColor: Colors.red,
