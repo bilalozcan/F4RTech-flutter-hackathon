@@ -1,3 +1,5 @@
+import 'package:education/app/colors.dart';
+import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page_model.dart';
 import 'package:education/ui/login_page/login_page_services.dart';
 import 'package:education/ui/sign_up_page/sign_up_page.dart';
@@ -5,7 +7,6 @@ import 'package:education/widget/button/buttonInkWell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:supercharged/supercharged.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,26 +20,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffffdfc1),
+      backgroundColor: ColorTable.backroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: Constants.getWidth(context),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
                     "assets/landing2.png",
-                    height: MediaQuery.of(context).size.height / 2.1,
+                    height: Constants.getHeight(context) / 2.1,
                   ),
                 ],
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 2,
-              width: MediaQuery.of(context).size.width / 1.5,
+              height: Constants.getHeight(context) / 2,
+              width:Constants.getWidth(context) / 1.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,9 +47,9 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Hoş geldiniz",
                     style: GoogleFonts.roboto(
-                        color: Colors.black,
+                        color: ColorTable.textColor,
                         fontWeight: FontWeight.w900,
-                        fontSize: MediaQuery.of(context).size.height / 20),
+                        fontSize: Constants.getHeight(context) / 20),
                   ),
                   Container(
                     child: Column(
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height / 12.93,
+                          height: Constants.getHeight(context) / 12.93,
                           decoration: BoxDecoration(
                             color: Color(0xffdcbe9b).withOpacity(0.5),
                           ),
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.only(top: 18.0),
                           child: Container(
-                            height: MediaQuery.of(context).size.height / 12.93,
+                            height: Constants.getHeight(context) / 12.93,
                             decoration: BoxDecoration(
                               color: Color(0xffdcbe9b).withOpacity(0.5),
                             ),
@@ -119,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "Hesabın Yok mu?",
                         style: GoogleFonts.poppins(
-                          color: Colors.black,
+                          color: ColorTable.textColor,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

@@ -1,3 +1,5 @@
+import 'package:education/app/colors.dart';
+import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/widget/button/buttonInkWell.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.transparent,
+      backgroundColor: ColorTable.backroundColor,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: PageView(
@@ -34,12 +36,12 @@ class _LandingPageState extends State<LandingPage> {
           scrollDirection: Axis.horizontal,
           children: [
             Scaffold(
-              backgroundColor: Color(0xffffdfc1),
+              backgroundColor: ColorTable.backroundColor,
               body: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: Constants.getWidth(context),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -50,17 +52,17 @@ class _LandingPageState extends State<LandingPage> {
                               Container(
                                 constraints: BoxConstraints(
                                     maxWidth:
-                                    MediaQuery.of(context).size.width * 0.5),
+                                    Constants.getWidth(context) * 0.5),
                                 child: Text(
                                     "Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.",
                                     style: GoogleFonts.roboto(
-                                        color: Colors.black,
+                                        color: ColorTable.textColor,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15)),
                               ),
                               Image.asset(
                                 "assets/landing1.png",
-                                height: MediaQuery.of(context).size.height / 2.1,
+                                height: Constants.getHeight(context) / 2.1,
                               ),
                             ],
                           ),
@@ -68,8 +70,8 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height / 2,
-                      width: MediaQuery.of(context).size.width / 1.5,
+                      height: Constants.getHeight(context) / 2,
+                      width: Constants.getWidth(context) / 1.5,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,13 +79,13 @@ class _LandingPageState extends State<LandingPage> {
                           Text(
                             "F 4 R - E D U C A T I O N",
                             style: GoogleFonts.roboto(
-                                color: Colors.black,
+                                color: ColorTable.textColor,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 25),
                           ),
                           Image.asset(
                             "assets/login.png",
-                            height: 150,
+                            height: Constants.getHeight(context)/4.74,
                           ),
                           textRow("Keşfetmeye hazır mısın?"),
                           ButtonInkWell( () {
@@ -117,7 +119,7 @@ class _LandingPageState extends State<LandingPage> {
         Text(
           text,
           style: GoogleFonts.poppins(
-            color: Colors.black,
+            color: ColorTable.textColor,
             fontWeight: FontWeight.w400,
           ),
         ),

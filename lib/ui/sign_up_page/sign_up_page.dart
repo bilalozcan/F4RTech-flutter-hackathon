@@ -1,4 +1,6 @@
 
+import 'package:education/app/colors.dart';
+import 'package:education/app/constants.dart';
 import 'package:education/ui/sign_up_page/sign_up_page_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,9 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: 'ffdfc1'.toColor(),
+          width: Constants.getWidth(context),
+          height: Constants.getHeight(context),
+          color: ColorTable.backroundColor,
           child: Padding(
             padding: const EdgeInsets.only(left: 35, right: 35, top: 40),
             child: Column(
@@ -31,8 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   "Kayıt Ol",
                   style: GoogleFonts.russoOne(
-                      fontSize: MediaQuery.of(context).size.height / 25,
-                      color: Colors.black,
+                      fontSize: Constants.getHeight(context) / 25,
+                      color: ColorTable.backroundColor,
                       fontWeight: FontWeight.w500),
                 ),
                 Column(
@@ -57,8 +59,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           onTap: (){
                           },
                           child: Container(
-                            height: MediaQuery.of(context).size.height/12.93,
-                            width: MediaQuery.of(context).size.width/1.82,
+                            height: Constants.getHeight(context)/12.93,
+                            width: Constants.getWidth(context)/1.82,
                             decoration: BoxDecoration(
                               border: Border.all(width: 1),
                               borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30)),
@@ -69,8 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Text(
                                   "Kayıt Ol",
                                   style: GoogleFonts.poppins(
-                                      fontSize: MediaQuery.of(context).size.height/35.55,
-                                      color: Colors.black,
+                                      fontSize: Constants.getHeight(context)/35.55,
+                                      color: ColorTable.textColor,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -99,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.only(top: 18.0),
       child: Container(
-        height: MediaQuery.of(context).size.height / 12.93,
+        height: Constants.getHeight(context) / 12.93,
         decoration: BoxDecoration(
             color: 'dcbe9b'.toColor().withOpacity(0.5),
             borderRadius: BorderRadius.all(Radius.circular(5))),
