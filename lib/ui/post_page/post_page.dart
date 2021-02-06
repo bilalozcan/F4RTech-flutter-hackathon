@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/ui/post_detail_page/post_detail_page.dart';
 import 'package:education/ui/post_page/post_page_model.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:education/widget/UserWidget.dart';
@@ -21,6 +22,7 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -207,9 +209,10 @@ class _PostPageState extends State<PostPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(s,style: GoogleFonts.sriracha(
-                fontSize: 12
-            ),),
+            Text(
+              s,
+              style: GoogleFonts.sriracha(fontSize: 12),
+            ),
             Container(
                 alignment: Alignment.centerLeft,
                 height: 30,
@@ -219,16 +222,15 @@ class _PostPageState extends State<PostPage> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 8
-                      )
-                    ]
-                ),
-                child: Text(data,style: GoogleFonts.robotoSlab(),)),
+                          color: Colors.black.withOpacity(0.05), blurRadius: 8)
+                    ]),
+                child: Text(
+                  data,
+                  style: GoogleFonts.robotoSlab(),
+                )),
           ],
         ),
       ),
     );
-
   }
 }
