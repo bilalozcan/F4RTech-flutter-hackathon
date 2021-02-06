@@ -11,15 +11,35 @@ class Student {
   String _identificationNumber;
   int _age;
   String _adress;
-  List<String> _picturesOfStudent;
+  List _picturesOfStudent;
   bool _approvalStatus;
-  Institution _affiliatedInstitution;
+  String _affiliatedInstitution;
   int _donationsReceived;
   double _donationAmountReceived;
-  List<String> _listOfDonations;
+  List _listOfDonations;
   int _classOfStudent;
   String _explanation;
-  List<String> _listOfComments;
+  List _listOfComments;
+
+
+  Student(
+      this._userID,
+      this._dateOfRegistration,
+      this._lastTransactionDate,
+      this._fullname,
+      this._telephone,
+      this._identificationNumber,
+      this._age,
+      this._adress,
+      this._picturesOfStudent,
+      this._approvalStatus,
+      this._affiliatedInstitution,
+      this._donationsReceived,
+      this._donationAmountReceived,
+      this._listOfDonations,
+      this._classOfStudent,
+      this._explanation,
+      this._listOfComments);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _userID = parsedMap['id'],
@@ -102,11 +122,6 @@ class Student {
     _donationsReceived = value;
   }
 
-  Institution get affiliatedInstitution => _affiliatedInstitution;
-
-  set affiliatedInstitution(Institution value) {
-    _affiliatedInstitution = value;
-  }
 
   bool get approvalStatus => _approvalStatus;
 
