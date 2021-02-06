@@ -23,7 +23,6 @@ class Authentication {
   Future signup(String email, String password) async {
     try {
       var userCredential = await FirebaseAuth.instance
-
           .createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -41,7 +40,6 @@ class Authentication {
     } catch (e) {
       print(e);
       return e;
-
     }
   }
 

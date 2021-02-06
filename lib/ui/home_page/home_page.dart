@@ -1,3 +1,4 @@
+import 'package:education/ui/profile_page/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +11,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Merhaba'),
+        child: RaisedButton(
+          child: Text("Tıkla"),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
+          },
+        ),
       ),
     );
   }

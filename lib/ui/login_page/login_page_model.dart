@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginPageModel{
+class LoginPageModel {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
 }

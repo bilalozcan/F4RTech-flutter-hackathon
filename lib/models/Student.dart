@@ -3,18 +3,18 @@ import 'package:education/models/Institution.dart';
 
 class Student {
   DocumentReference reference;
-  String _userID; //Kayıt eden kullanıcını id si
+  String _publisher;
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
   String _fullname;
   String _telephone;
-  String _identificationNumber;
+  String _tcID;
   int _age;
-  String _adress;
-  List _picturesOfStudent;
+  String _address;
+  List<String> _picturesOfStudent;
   bool _approvalStatus;
   String _affiliatedInstitution;
-  int _donationsReceived;
+  List _donationsReceived;
   double _donationAmountReceived;
   List _listOfDonations;
   int _classOfStudent;
@@ -23,14 +23,14 @@ class Student {
 
 
   Student(
-      this._userID,
+      [this._publisher,
       this._dateOfRegistration,
       this._lastTransactionDate,
       this._fullname,
       this._telephone,
-      this._identificationNumber,
+      this._tcID,
       this._age,
-      this._adress,
+      this._address,
       this._picturesOfStudent,
       this._approvalStatus,
       this._affiliatedInstitution,
@@ -39,19 +39,19 @@ class Student {
       this._listOfDonations,
       this._classOfStudent,
       this._explanation,
-      this._listOfComments);
+      this._listOfComments]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
-      : _userID = parsedMap['id'],
+      : _publisher = parsedMap['publisher'],
         _dateOfRegistration =
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
             (parsedMap['lasttransactiondate'] as Timestamp).toDate(),
         _fullname = parsedMap['fullname'],
         _telephone = parsedMap['telephone'],
-        _identificationNumber = parsedMap['identificationnumber'],
+        _tcID = parsedMap['tcID'],
         _age = parsedMap['age'],
-        _adress = parsedMap['adress'],
+        _address = parsedMap['address'],
         _picturesOfStudent = parsedMap['picturesofstudent'],
         _approvalStatus = parsedMap['approvalstatus'],
         _affiliatedInstitution = parsedMap['affiliatedInstitution'],
@@ -64,14 +64,14 @@ class Student {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': _userID,
+      'publisher': _publisher,
       'fullname': _fullname,
       'dateofregistration': _dateOfRegistration,
       'lasttransactiondate': _lastTransactionDate,
       'telephone': _telephone,
-      'identificationnumber': _identificationNumber,
+      'tcID': _tcID,
       'age': _age,
-      'adress': _adress,
+      'address': _address,
       'picturesofstudent': _picturesOfStudent,
       'approvalstatus': _approvalStatus,
       'affiliatedInstitution': _affiliatedInstitution,
@@ -116,13 +116,6 @@ class Student {
     _donationAmountReceived = value;
   }
 
-  int get donationsReceived => _donationsReceived;
-
-  set donationsReceived(int value) {
-    _donationsReceived = value;
-  }
-
-
   bool get approvalStatus => _approvalStatus;
 
   set approvalStatus(bool value) {
@@ -135,10 +128,10 @@ class Student {
     _picturesOfStudent = value;
   }
 
-  String get adress => _adress;
+  String get address => _address;
 
-  set adress(String value) {
-    _adress = value;
+  set address(String value) {
+    _address = value;
   }
 
   int get age => _age;
@@ -147,10 +140,11 @@ class Student {
     _age = value;
   }
 
-  String get identificationNumber => _identificationNumber;
+  String get tcID => _tcID;
 
-  set identificationNumber(String value) {
-    _identificationNumber = value;
+  set tcID(String value) {
+    _tcID = value;
+
   }
 
   String get telephone => _telephone;
@@ -176,10 +170,11 @@ class Student {
   set dateOfRegistration(DateTime value) {
     _dateOfRegistration = value;
   }
+    
+  String get publisher => _publisher;
 
-  String get userID => _userID;
-
-  set userID(String value) {
-    _userID = value;
+  set publisher(String value) {
+    _publisher = value;
   }
+
 }
