@@ -247,11 +247,12 @@ class _ShareContentState extends State<ShareContent> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 shareButton(),
-                                SizedBox(
-                                    height:
-                                        Constants.getHeight(context) * 0.05),
+
                               ],
                             ),
+                            SizedBox(
+                                height:
+                                Constants.getHeight(context) * 0.05)
                           ]),
                     ),
                   ),
