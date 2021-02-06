@@ -18,11 +18,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
-            future: model.user,
+            future: model.getUser(),
             builder: (context, snapshot) {
+
               if (snapshot.hasData) {
                 return ListView(
                   physics: BouncingScrollPhysics(),
+
+
                   children: [
                     Stack(
                       children: [
@@ -242,7 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               ],
             ),
-            ListMethod(5),
+            ListMethod(model.user.numberOfStudentsAdded ?? 0),
           ],
         ),
       ),
@@ -259,14 +262,15 @@ class _ProfilePageState extends State<ProfilePage> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  model.listType == false ? AddStudentWidget() : YApilanBagis(),
+              child: model.listType == false
+                  ? AddStudentWidget(index)
+                  : YApilanBagis(),
             );
           }),
     );
   }
 
-  Padding AddStudentWidget() {
+  AddStudentWidget(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -300,22 +304,38 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'name',
-                      style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          color: ColorTable.textColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: FutureBuilder(
+                          future: model.firestoreDBService
+                              .getStudent(model.user.listOfPost[index]),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      snapshot.data.fullname,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: ColorTable.textColor,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: CheckStatus(
+                                          snapshot.data.approvalStatus == true
+                                              ? 1
+                                              : 2),
+                                    ),
+                                  ]);
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          })),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: CheckStatus(3),
-            )
           ],
         ),
       ),

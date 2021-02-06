@@ -51,7 +51,7 @@ class User {
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
             (parsedMap['lasttransactiondate'] as Timestamp).toDate(),
-        _addedStudentList = parsedMap['addedstudentslist'],
+        _addedStudentList = parsedMap['addedstudentlist'],
         _listOfDonationsMade = parsedMap['listofdonationsmade'],
         _numberOfDonationsMade = parsedMap['numberofdonationsmade'],
         _donationAmount = parsedMap['donationamount'],
@@ -106,15 +106,15 @@ class User {
     _numberOfDonationsMade = value;
   }
 
-  List<String> get listOfDonationsMade => _listOfDonationsMade;
+  List get listOfDonationsMade => _listOfDonationsMade;
 
   set listOfDonationsMade(List<String> value) {
     _listOfDonationsMade = value;
   }
 
-  List<String> get addedStudentList => _addedStudentList;
+  List get addedStudentList => _addedStudentList;
 
-  set addedStudentList(List<String> value) {
+  set addedStudentList(List value) {
     _addedStudentList = value;
   }
 
@@ -162,9 +162,9 @@ class User {
     _fullname = value;
   }
 
-  List<String> get listOfPost => _listOfPost;
+  List get listOfPost => _listOfPost;
 
-  set listOfPost(List<String> value) {
+  set listOfPost(List value) {
     _listOfPost = value;
   }
 }
