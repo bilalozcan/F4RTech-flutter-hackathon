@@ -54,10 +54,19 @@ class _PostPageState extends State<PostPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              UserWidget(
-                                  rozet: 'assets/1st.png',
-                                  username: 'username',
-                                  seviye: 100),
+                              FutureBuilder(
+                                  future: _postPageServices
+                                      .initUser(snapshot.data[index].publisher),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot sp) {
+                                    if(sp.hasData){
+                                      return UserWidget(rozet: 'assets/1st.png',
+                                          username: sp.data.username,
+                                          seviye: sp.data.level);
+                                    }else{
+                                      return CircularProgressIndicator();
+                                    }
+                                  }),
                               Container(
                                 child: Icon(
                                   Icons.verified_outlined,
@@ -85,9 +94,9 @@ class _PostPageState extends State<PostPage> {
                                 ),
                                Column(
                                  children: [
-                                   StudentInfo("Öğrenci Adı-Soyadı","Bilal Özcan"),
-                                   StudentInfo("Öğrenci Yaşı","20"),
-                                   StudentInfo("Sınıfı","5"),
+                                   StudentInfo('Öğrenci Adı-Soyadı',snapshot.data[index].fullname),
+                                   StudentInfo('Öğrenci Yaşı',snapshot.data[index].age.toString()),
+                                   StudentInfo('Sınıfı',snapshot.data[index].classOfStudent.toString()),
                                  ],
                                )
                               ],
