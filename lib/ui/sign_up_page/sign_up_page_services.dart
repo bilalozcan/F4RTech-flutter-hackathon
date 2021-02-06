@@ -38,7 +38,7 @@ class SignUpPageServices {
           'username': username,
           'numberofstudentsadded': 0,
           'dateofregistration': DateTime.now(),
-          'lasttransactiondate': <String>[],
+          'lasttransactiondate': DateTime.now(),
           'addedstudentlist': <String>[],
           'numberofdonationsmade': 0,
           'donationamount': 0,

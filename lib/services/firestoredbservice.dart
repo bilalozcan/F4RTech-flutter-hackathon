@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:education/models/User.dart' as usr;
-import 'package:flutter/cupertino.dart';
 
 class FirestoreDBService {
   final _instance = FirebaseFirestore.instance;

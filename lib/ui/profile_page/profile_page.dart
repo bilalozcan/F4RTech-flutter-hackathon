@@ -1,15 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
-import 'package:education/services/authentication.dart';
-import 'package:education/services/firestoredbservice.dart';
 import 'package:education/ui/profile_page/profile_page_model.dart';
-import 'package:education/ui/profile_page/profile_page_services.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-import 'package:education/models/User.dart' as usr;
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -88,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
             }));
   }
 
-  UserInfoWidget(String s, String username) {
+  Container UserInfoWidget(String s, String username) {
     return Container(
       width: Constants.getWidth(context) / 1.5,
       height: Constants.getHeight(context) / 12,
@@ -127,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  UserInfoWidget2(String info, String userInfo) {
+  Padding UserInfoWidget2(String info, String userInfo) {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Column(
@@ -172,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Listwidget(ProfilePageModel model) {
+  Padding Listwidget(ProfilePageModel model) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
@@ -254,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  ListMethod(int itemCount) {
+  Expanded ListMethod(int itemCount) {
     return Expanded(
       child: ListView.builder(
           scrollDirection: Axis.vertical,
@@ -329,7 +323,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  CheckStatus(int a) {
+  // ignore: missing_return
+  Row CheckStatus(int a) {
     if (a == 1) {
       return Row(
         children: [
@@ -365,7 +360,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  YApilanBagis() {
+  Container YApilanBagis() {
     return Container(
       width: Constants.getWidth(context) / 2,
       height: Constants.getHeight(context) / 8,
