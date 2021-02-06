@@ -21,6 +21,7 @@ class Student {
   String _explanation;
   List _listOfComments;
 
+
   Student(
       [this._publisher,
       this._dateOfRegistration,
@@ -38,8 +39,7 @@ class Student {
       this._listOfDonations,
       this._classOfStudent,
       this._explanation,
-      this._listOfComments,
-      this.reference]);
+      this._listOfComments]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
