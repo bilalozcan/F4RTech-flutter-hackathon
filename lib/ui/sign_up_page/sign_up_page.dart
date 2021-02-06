@@ -1,4 +1,3 @@
-
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 
@@ -26,7 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
           width: Constants.getWidth(context),
           height: Constants.getHeight(context),
           color: ColorTable.swatch2,
-
           child: Padding(
             padding: const EdgeInsets.only(left: 35, right: 35, top: 40),
             child: Column(
@@ -36,10 +34,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   "Kayıt Ol",
                   style: GoogleFonts.russoOne(
-
                       fontSize: Constants.getHeight(context) / 25,
                       color: ColorTable.textColor,
-
                       fontWeight: FontWeight.w500),
                 ),
                 Column(
@@ -76,10 +72,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 model.phone.text);
                           },
                           child: Container(
-
-                            height: Constants.getHeight(context)/12.93,
-                            width: Constants.getWidth(context)/1.82,
-
+                            height: Constants.getHeight(context) / 12.93,
+                            width: Constants.getWidth(context) / 1.82,
                             decoration: BoxDecoration(
                               border: Border.all(width: 1),
                               borderRadius: BorderRadius.only(
@@ -92,19 +86,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Text(
                                   "Kayıt Ol",
                                   style: GoogleFonts.poppins(
-
-                                      fontSize: Constants.getHeight(context)/35.55,
+                                      fontSize:
+                                          Constants.getHeight(context) / 35.55,
                                       color: ColorTable.textColor,
-
-                                      fontWeight: FontWeight.w600
-                                  ),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Icon(
                                   Icons.arrow_right_alt_outlined,
-                                  size: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 20,
+                                  size: MediaQuery.of(context).size.height / 20,
                                 )
                               ],
                             ),
@@ -127,9 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.only(top: 18.0),
       child: Container(
-
         height: Constants.getHeight(context) / 12.93,
-
         decoration: BoxDecoration(
             color: ColorTable.swatch1.withOpacity(0.5),
             borderRadius: BorderRadius.all(Radius.circular(5))),

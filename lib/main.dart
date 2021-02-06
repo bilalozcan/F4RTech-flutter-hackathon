@@ -1,5 +1,5 @@
 import 'package:education/services/authentication.dart';
-import 'package:education/ui/home_page/home_page.dart';
+import 'package:education/ui/home_page/ShareContent.dart';
 import 'package:education/ui/landing_page/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +26,15 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: _authentication.currentUser(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+<<<<<<< Updated upstream
           if (snapshot.hasData)
             return HomePage();
           else
+=======
+          if (snapshot.hasData) {
+            return ShareContent();
+          } else {
+>>>>>>> Stashed changes
             return LandingPage();
         },
       ),
