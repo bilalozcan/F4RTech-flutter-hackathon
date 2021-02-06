@@ -1,6 +1,7 @@
 import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:education/models/User.dart' as usr;
 
 class PostPage extends StatefulWidget {
   @override
@@ -55,21 +56,31 @@ class _PostPageState extends State<PostPage> {
                               ),
                               Column(
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '@username',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text('Seviye',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                          )),
-                                    ],
-                                  )
+                                  FutureBuilder(
+                                      future: _postPageServices
+                                          .initUser(snapshot.data[index].publisher),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot sp) {
+                                        if(sp.hasData){
+                                          return Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                sp.data.username,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              Text('Seviye',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                  )),
+                                            ],
+                                          );
+                                        }else{
+                                          return CircularProgressIndicator();
+                                        }
+                                      }),
                                 ],
                               ),
                               Icon(Icons.share),
@@ -120,7 +131,7 @@ class _PostPageState extends State<PostPage> {
                   });
             } else {
               return Center(
-                child: Text('YOK'),
+                child: CircularProgressIndicator(),
               );
             }
           },

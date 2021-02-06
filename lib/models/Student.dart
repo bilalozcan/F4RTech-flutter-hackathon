@@ -84,7 +84,6 @@ class Student {
   }
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
-
   List<String> get listOfComments => _listOfComments;
 
   set listOfComments(List<String> value) {
@@ -169,7 +168,7 @@ class Student {
   set dateOfRegistration(DateTime value) {
     _dateOfRegistration = value;
   }
-    
+
   String get publisher => _publisher;
 
   set publisher(String value) {
