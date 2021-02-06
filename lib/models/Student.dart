@@ -2,25 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/models/Institution.dart';
 
 class Student {
-  final String _userID; //Kayıt eden kullanıcını id si
-  final DateTime _dateOfRegistration;
-  final DateTime _lastTransactionDate;
-  final String _fullname;
-  final String _telephone;
-  final String _identificationNumber;
-  final int _age;
-  final String _adress;
-  final List<String> _picturesOfStudent;
-  final bool _approvalStatus;
-  final Institution _affiliatedInstitution;
-  final int _donationsReceived;
-  final double _donationAmountReceived;
-  final List<String> _listOfDonations;
-  final int _classOfStudent;
-  final String _explanation;
-  final List<String> _listOfComments;
+  DocumentReference reference;
+  String _userID; //Kayıt eden kullanıcını id si
+  DateTime _dateOfRegistration;
+  DateTime _lastTransactionDate;
+  String _fullname;
+  String _telephone;
+  String _identificationNumber;
+  int _age;
+  String _adress;
+  List<String> _picturesOfStudent;
+  bool _approvalStatus;
+  Institution _affiliatedInstitution;
+  int _donationsReceived;
+  double _donationAmountReceived;
+  List<String> _listOfDonations;
+  int _classOfStudent;
+  String _explanation;
+  List<String> _listOfComments;
 
-  Student.fromMap(Map<String, dynamic> parsedMap)
+  Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _userID = parsedMap['id'],
         _dateOfRegistration =
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
@@ -61,5 +62,109 @@ class Student {
       'explanation': _explanation,
       'listofcomments': _listOfComments,
     };
+  }
+  Student.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  List<String> get listOfComments => _listOfComments;
+
+  set listOfComments(List<String> value) {
+    _listOfComments = value;
+  }
+
+  String get explanation => _explanation;
+
+  set explanation(String value) {
+    _explanation = value;
+  }
+
+  int get classOfStudent => _classOfStudent;
+
+  set classOfStudent(int value) {
+    _classOfStudent = value;
+  }
+
+  List<String> get listOfDonations => _listOfDonations;
+
+  set listOfDonations(List<String> value) {
+    _listOfDonations = value;
+  }
+
+  double get donationAmountReceived => _donationAmountReceived;
+
+  set donationAmountReceived(double value) {
+    _donationAmountReceived = value;
+  }
+
+  int get donationsReceived => _donationsReceived;
+
+  set donationsReceived(int value) {
+    _donationsReceived = value;
+  }
+
+  Institution get affiliatedInstitution => _affiliatedInstitution;
+
+  set affiliatedInstitution(Institution value) {
+    _affiliatedInstitution = value;
+  }
+
+  bool get approvalStatus => _approvalStatus;
+
+  set approvalStatus(bool value) {
+    _approvalStatus = value;
+  }
+
+  List<String> get picturesOfStudent => _picturesOfStudent;
+
+  set picturesOfStudent(List<String> value) {
+    _picturesOfStudent = value;
+  }
+
+  String get adress => _adress;
+
+  set adress(String value) {
+    _adress = value;
+  }
+
+  int get age => _age;
+
+  set age(int value) {
+    _age = value;
+  }
+
+  String get identificationNumber => _identificationNumber;
+
+  set identificationNumber(String value) {
+    _identificationNumber = value;
+  }
+
+  String get telephone => _telephone;
+
+  set telephone(String value) {
+    _telephone = value;
+  }
+
+  String get fullname => _fullname;
+
+  set fullname(String value) {
+    _fullname = value;
+  }
+
+  DateTime get lastTransactionDate => _lastTransactionDate;
+
+  set lastTransactionDate(DateTime value) {
+    _lastTransactionDate = value;
+  }
+
+  DateTime get dateOfRegistration => _dateOfRegistration;
+
+  set dateOfRegistration(DateTime value) {
+    _dateOfRegistration = value;
+  }
+
+  String get userID => _userID;
+
+  set userID(String value) {
+    _userID = value;
   }
 }
