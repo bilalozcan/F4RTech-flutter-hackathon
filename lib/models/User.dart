@@ -15,7 +15,7 @@ class User {
 
   List<String> _addedStudentList; //Student or String List
   List<String> _listOfDonationsMade;
-
+  List<String> _listOfPost;
   int _numberOfDonationsMade;
   double _donationAmount;
   int _level;
@@ -56,7 +56,8 @@ class User {
         _numberOfDonationsMade = parsedMap['numberofdonationsmade'],
         _donationAmount = parsedMap['donationamount'],
         _level = parsedMap['level'],
-        _point = parsedMap['point'];
+        _point = parsedMap['point'],
+        _listOfPost = parsedMap['listOfPost'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -73,11 +74,98 @@ class User {
       'numberofdonationsmade': _numberOfDonationsMade,
       'donationamount': _donationAmount,
       'level': _level,
-      'point': _point
+      'point': _point,
+      'listOfPost' : _listOfPost,
 
     };
   }
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  double get point => _point;
+
+  set point(double value) {
+    _point = value;
+  }
+
+  int get level => _level;
+
+  set level(int value) {
+    _level = value;
+  }
+
+  double get donationAmount => _donationAmount;
+
+  set donationAmount(double value) {
+    _donationAmount = value;
+  }
+
+  int get numberOfDonationsMade => _numberOfDonationsMade;
+
+  set numberOfDonationsMade(int value) {
+    _numberOfDonationsMade = value;
+  }
+
+  List<String> get listOfDonationsMade => _listOfDonationsMade;
+
+  set listOfDonationsMade(List<String> value) {
+    _listOfDonationsMade = value;
+  }
+
+  List<String> get addedStudentList => _addedStudentList;
+
+  set addedStudentList(List<String> value) {
+    _addedStudentList = value;
+  }
+
+  DateTime get lastTransactionDate => _lastTransactionDate;
+
+  set lastTransactionDate(DateTime value) {
+    _lastTransactionDate = value;
+  }
+
+  DateTime get dateOfRegistration => _dateOfRegistration;
+
+  set dateOfRegistration(DateTime value) {
+    _dateOfRegistration = value;
+  }
+
+  String get numberOfStudentsAdded => _numberOfStudentsAdded;
+
+  set numberOfStudentsAdded(String value) {
+    _numberOfStudentsAdded = value;
+  }
+
+  String get uid => _uid;
+
+  String get username => _username;
+
+  set username(String value) {
+    _username = value;
+  }
+
+  String get email => _email;
+
+  set email(String value) {
+    _email = value;
+  }
+
+  String get telephone => _telephone;
+
+  set telephone(String value) {
+    _telephone = value;
+  }
+
+  String get fullname => _fullname;
+
+  set fullname(String value) {
+    _fullname = value;
+  }
+
+  List<String> get listOfPost => _listOfPost;
+
+  set listOfPost(List<String> value) {
+    _listOfPost = value;
+  }
 }

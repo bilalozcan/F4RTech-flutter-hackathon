@@ -1,11 +1,14 @@
-class Institution {
-  final String _name;
-  final String _websiteUrl;
-  final String _numberOfStudentsIntheInstitution;
-  final String _contact;
-  final String _adress;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Institution.fromMap(Map<String, dynamic> parsedMap)
+class Institution {
+  DocumentReference reference;
+  String _name;
+  String _websiteUrl;
+  String _numberOfStudentsIntheInstitution;
+  String _contact;
+  String _adress;
+
+  Institution.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _name = parsedMap['name'],
         _websiteUrl = parsedMap['websiteurl'],
         _numberOfStudentsIntheInstitution =
@@ -21,5 +24,39 @@ class Institution {
       'contact': _contact,
       'adress': _adress,
     };
+  }
+
+  Institution.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  String get adress => _adress;
+
+  set adress(String value) {
+    _adress = value;
+  }
+
+  String get contact => _contact;
+
+  set contact(String value) {
+    _contact = value;
+  }
+
+  String get numberOfStudentsIntheInstitution =>
+      _numberOfStudentsIntheInstitution;
+
+  set numberOfStudentsIntheInstitution(String value) {
+    _numberOfStudentsIntheInstitution = value;
+  }
+
+  String get websiteUrl => _websiteUrl;
+
+  set websiteUrl(String value) {
+    _websiteUrl = value;
+  }
+
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
   }
 }
