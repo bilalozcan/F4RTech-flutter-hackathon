@@ -18,9 +18,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
-            future: model.user,
+            future: model.getUser(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (model.user != null) {
                 return Column(
                   children: [
                     Stack(
@@ -241,7 +241,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               ],
             ),
-            ListMethod(5),
+            ListMethod(model.user.numberOfStudentsAdded ?? 0),
           ],
         ),
       ),
@@ -258,14 +258,15 @@ class _ProfilePageState extends State<ProfilePage> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  model.listType == false ? AddStudentWidget() : YApilanBagis(),
+              child: model.listType == false
+                  ? AddStudentWidget(index)
+                  : YApilanBagis(),
             );
           }),
     );
   }
 
-  Padding AddStudentWidget() {
+  AddStudentWidget(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -301,7 +302,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      'name',
+                      model.user.listOfPost[index] ??
+                          'Henüz bir öğrenciye bağışta bulunulmadı',
                       style: GoogleFonts.poppins(
                           fontSize: 15,
                           color: ColorTable.textColor,
