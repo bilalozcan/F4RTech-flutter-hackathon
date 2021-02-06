@@ -2,6 +2,7 @@ import 'package:education/services/authentication.dart';
 import 'package:education/ui/home_page/home_page.dart';
 import 'package:education/ui/home_page/share_student.dart';
 import 'package:education/ui/landing_page/landing_page.dart';
+import 'package:education/ui/navigationBar.dart';
 import 'package:education/ui/leaderboard/leaderboard.dart';
 import 'package:education/ui/post_page/post_page.dart';
 import 'package:education/ui/profile_page/profile_page.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         future: _authentication.currentUser(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return HomeScreen();
           } else {
             return LandingPage();
           }

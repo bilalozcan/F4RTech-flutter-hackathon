@@ -18,6 +18,7 @@ class ShareContent extends StatefulWidget {
 
 class _ShareContentState extends State<ShareContent> {
   ShareStudentModel model = ShareStudentModel();
+
   Authentication user = Authentication();
   List<Asset> images = <Asset>[];
   List<String> imageUrls = <String>[];
@@ -89,7 +90,7 @@ class _ShareContentState extends State<ShareContent> {
 
   Future postPaylasim() async {
     var db = Student(
-        'OTRErzypWlVjpI9Izf7fEJzZXlz2',
+        model.user.toString(),
         DateTime.now(),
         DateTime.now(),
         model.studentName.text,
@@ -249,6 +250,8 @@ class _ShareContentState extends State<ShareContent> {
                                 shareButton(),
 
                               ],
+                            ),
+                           ],
                             ),
                             SizedBox(
                                 height:
