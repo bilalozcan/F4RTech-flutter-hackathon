@@ -1,3 +1,4 @@
+import 'package:education/ui/home_page/share_student.dart';
 import 'package:education/ui/post_page/post_page.dart';
 import 'package:education/ui/profile_page/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Leaderboard(),
     PostPage(),
     ProfilePage(),
+    ShareContent()
   ];
 
   @override
@@ -70,12 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedColor: Colors.orange,
           ),
 
-          /// More
-          // SalomonBottomBarItem(
-          //   icon: Icon(Icons.person),
-          //   title: Text('More'),
-          //   selectedColor: Colors.teal,
-          // ),
+          // More
+          SalomonBottomBarItem(
+            icon: Icon(Icons.person),
+            title: Text('More'),
+            selectedColor: Colors.teal,
+          ),
         ],
       ),
       body: _widgetOptions.elementAt(bottomNavBarSelectedIndex),
