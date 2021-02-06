@@ -1,15 +1,16 @@
-import 'package:education/ui/login_page/signIn_page/sign_in_page_model.dart';
+
+import 'package:education/ui/sign_up_page/sign_up_page_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
 
-class SignInPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   SignInPageModel model = SignInPageModel();
 
   @override
@@ -35,7 +36,6 @@ class _SignInPageState extends State<SignInPage> {
                       fontWeight: FontWeight.w500),
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InputWidget(model.fullname, context, "İsim-Soyisim",
                         TextInputType.name),
