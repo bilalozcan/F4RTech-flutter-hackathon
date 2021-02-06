@@ -35,8 +35,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 left: Constants.getWidth(context) / 2.4,
                 right: Constants.getWidth(context) / 2.4,
                 child: Container(
-                  width: 75,
-                  height: 75,
+                  width: Constants.getWidth(context)/5.48,
+                  height: Constants.getHeight(context)/9.48,
                   decoration: BoxDecoration(
                       color: Colors.indigo,
                       borderRadius: BorderRadius.all(Radius.circular(50))),
@@ -180,8 +180,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   },
                   child: Container(
-                    height: 25,
-                    width: 150,
+                    height: Constants.getHeight(context)/28.44,
+                    width: Constants.getWidth(context)/2.74,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
@@ -206,8 +206,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     });
                   },
                   child: Container(
-                    height: 25,
-                    width: 150,
+                    height: Constants.getHeight(context)/28.44,
+                    width: Constants.getWidth(context)/2.74,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
@@ -277,8 +277,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: 24,
-                    height: 24,
+                    width: Constants.getHeight(context)/29.5,
+                    height: Constants.getHeight(context)/29.5,
                     decoration: BoxDecoration(
                       color: ColorTable.swatch4.withOpacity(0.1),
                       borderRadius: BorderRadius.all(Radius.circular(5)),
