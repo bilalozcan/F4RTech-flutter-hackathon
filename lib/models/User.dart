@@ -8,23 +8,23 @@ class User {
   String _email;
   String _username;
   String _uid;
-  String _numberOfStudentsAdded;
+  int _numberOfStudentsAdded;
 
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
 
-  List<String> _addedStudentList; //Student or String List
-  List<String> _listOfDonationsMade;
-  List<String> _listOfPost;
+  List _addedStudentList; //Student or String List
+  List _listOfDonationsMade;
+  List _listOfPost;
+
   int _numberOfDonationsMade;
-  double _donationAmount;
+  int _donationAmount;
   int _level;
-  double _point;
+  int _point;
 
   User({@required id, @required email}) {
     _uid = id;
     _email = email;
-
   }
 
   User.Info(
@@ -75,17 +75,16 @@ class User {
       'donationamount': _donationAmount,
       'level': _level,
       'point': _point,
-      'listOfPost' : _listOfPost,
-
+      'listOfPost': _listOfPost,
     };
   }
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
-  double get point => _point;
+  int get point => _point;
 
-  set point(double value) {
+  set point(int value) {
     _point = value;
   }
 
@@ -95,9 +94,9 @@ class User {
     _level = value;
   }
 
-  double get donationAmount => _donationAmount;
+  int get donationAmount => _donationAmount;
 
-  set donationAmount(double value) {
+  set donationAmount(int value) {
     _donationAmount = value;
   }
 
@@ -131,9 +130,9 @@ class User {
     _dateOfRegistration = value;
   }
 
-  String get numberOfStudentsAdded => _numberOfStudentsAdded;
+  int get numberOfStudentsAdded => _numberOfStudentsAdded;
 
-  set numberOfStudentsAdded(String value) {
+  set numberOfStudentsAdded(int value) {
     _numberOfStudentsAdded = value;
   }
 
