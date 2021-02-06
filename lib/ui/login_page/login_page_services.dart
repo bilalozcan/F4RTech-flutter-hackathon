@@ -1,11 +1,11 @@
 import 'package:education/services/authentication.dart';
+import 'package:education/ui/navigation_bar/navigationBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPageServices {
   final Authentication _authentication = Authentication();
-
 
   void signIn(BuildContext context, String email, String password) async {
     var login = await _authentication.login(email, password, context);
@@ -29,13 +29,7 @@ class LoginPageServices {
       }
     } else if (login != null) {
       await Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Scaffold(
-                    body: Center(
-                      child: Text('Giriş Yapıldı'),
-                    ),
-                  )));
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }
   }
 }

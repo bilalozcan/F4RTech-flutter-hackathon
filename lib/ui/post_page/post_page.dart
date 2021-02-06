@@ -3,6 +3,7 @@ import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:education/widget/UserWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:education/models/User.dart' as usr;
 import 'package:google_fonts/google_fonts.dart';
 
 class PostPage extends StatefulWidget {
@@ -139,7 +140,7 @@ class _PostPageState extends State<PostPage> {
                   });
             } else {
               return Center(
-                child: Text('YOK'),
+                child: CircularProgressIndicator(),
               );
             }
           },

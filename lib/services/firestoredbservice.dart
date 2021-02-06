@@ -39,6 +39,21 @@ class FirestoreDBService {
     }
   }
 
+
+  Future<dynamic> getUser(String uid) async{
+    var _user;
+    try{
+      var result = await _instance.collection('Users').doc(uid).get();
+      if(result != null){
+        _user = usr.User.fromSnapshot(result);
+      }
+      return _user;
+    }catch(e){
+      print('A'+e);
+      return e;
+    }
+  }
+
   Future<dynamic> getStudent(userID) async {
     var _instance = FirebaseFirestore.instance;
     var _student;
