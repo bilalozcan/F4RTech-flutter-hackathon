@@ -18,10 +18,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
-            future: model.user,
+            future: model.getUser(),
             builder: (context, snapshot) {
+
               if (snapshot.hasData) {
-                return Column(
+                return ListView(
+                  physics: BouncingScrollPhysics(),
+
+
                   children: [
                     Stack(
                       children: [
@@ -61,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       height: Constants.getHeight(context) -
-                          Constants.getHeight(context) / 4,
+                          Constants.getHeight(context) / 3,
                       width: Constants.getWidth(context),
                       child: Column(
                         children: [
@@ -170,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        height: Constants.getHeight(context) / 2.5,
+        height: Constants.getHeight(context) / 3.3,
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(color: ColorTable.swatch1.withOpacity(0.2), blurRadius: 10)
         ]),
@@ -241,7 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               ],
             ),
-            ListMethod(5),
+            ListMethod(model.user.numberOfStudentsAdded ?? 0),
           ],
         ),
       ),
@@ -258,14 +262,15 @@ class _ProfilePageState extends State<ProfilePage> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  model.listType == false ? AddStudentWidget() : YApilanBagis(),
+              child: model.listType == false
+                  ? AddStudentWidget(index)
+                  : YApilanBagis(),
             );
           }),
     );
   }
 
-  Padding AddStudentWidget() {
+  AddStudentWidget(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -299,22 +304,38 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'name',
-                      style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          color: ColorTable.textColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: FutureBuilder(
+                          future: model.firestoreDBService
+                              .getStudent(model.user.listOfPost[index]),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      snapshot.data.fullname,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: ColorTable.textColor,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: CheckStatus(
+                                          snapshot.data.approvalStatus == true
+                                              ? 1
+                                              : 2),
+                                    ),
+                                  ]);
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          })),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: CheckStatus(3),
-            )
           ],
         ),
       ),
@@ -330,7 +351,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.check,
             color: Colors.green,
           ),
-          Text('ONAYLANDI'),
+          Text('ONAYLANDI',style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w500,
+            color: Colors.green
+          ),),
         ],
       );
     }
@@ -341,7 +365,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.close,
             color: Colors.red,
           ),
-          Text('ONAYLANMADI'),
+          Text('ONAYLANMADI',style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              color: Colors.red
+          ),),
         ],
       );
     }
@@ -352,7 +379,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.linear_scale,
             color: Colors.yellow,
           ),
-          Text('BEKLİYOR'),
+          Text('BEKLİYOR',style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              color: Colors.yellow
+          ),),
         ],
       );
     }

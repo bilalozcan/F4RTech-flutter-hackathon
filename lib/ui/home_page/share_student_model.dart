@@ -9,6 +9,4 @@ class ShareStudentModel {
   TextEditingController studentAddress = TextEditingController();
   TextEditingController studentClass = TextEditingController();
   TextEditingController explanation = TextEditingController();
-  var user = FirestoreDBService().getCurrentUser();
-
 }

@@ -1,6 +1,4 @@
 import 'package:education/services/authentication.dart';
-import 'package:education/ui/home_page/home_page.dart';
-import 'package:education/ui/home_page/share_student.dart';
 import 'package:education/ui/landing_page/landing_page.dart';
 import 'package:education/ui/leaderboard/leaderboard.dart';
 import 'package:education/ui/navigation_bar/navigationBar.dart';

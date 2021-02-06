@@ -4,10 +4,15 @@ import 'package:education/app/constants.dart';
 import 'package:education/models/Student.dart';
 import 'package:education/services/authentication.dart';
 import 'package:education/ui/home_page/share_student_model.dart';
+import 'package:education/ui/navigation_bar/navigationBar.dart';
+import 'package:education/ui/navigation_bar/navigationbar_model.dart';
+import 'package:education/ui/post_page/post_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -18,8 +23,6 @@ class ShareContent extends StatefulWidget {
 
 class _ShareContentState extends State<ShareContent> {
   ShareStudentModel model = ShareStudentModel();
-
-  Authentication user = Authentication();
   List<Asset> images = <Asset>[];
   List<String> imageUrls = <String>[];
   bool firstpress = true;
@@ -89,8 +92,9 @@ class _ShareContentState extends State<ShareContent> {
   }
 
   Future postPaylasim() async {
+    var user = FirebaseAuth.instance.currentUser;
     var db = Student(
-        model.user.toString(),
+        user.uid,
         DateTime.now(),
         DateTime.now(),
         model.studentName.text,
@@ -113,10 +117,7 @@ class _ShareContentState extends State<ShareContent> {
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);
     await studentInfo.set(db.toMap());
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(db.publisher)
-        .update({
+    await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
       'listOfPost': FieldValue.arrayUnion([shareName])
     });
     for (var imageFile in images) {
@@ -135,11 +136,20 @@ class _ShareContentState extends State<ShareContent> {
       });
       await FirebaseFirestore.instance
           .collection('Users')
-          .doc(db.publisher)
+          .doc(user.uid)
           .update({
         'listOfPost': FieldValue.arrayUnion([shareName])
       });
     }
+  }
+
+  Future delay() async {
+    await Future.delayed(Duration(milliseconds: 4000), () {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+          (Route<dynamic> route) => true);
+      bottomNavBarSelectedIndex = 1;
+    });
   }
 
   @override
@@ -277,10 +287,17 @@ class _ShareContentState extends State<ShareContent> {
         InkWell(
           onTap: () async {
             if (firstpress) {
-              setState(() {
-                firstpress = false;
-              });
+              firstpress = false;
+
               await postPaylasim();
+              setState(() {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            (loadingIcon(context))),
+                    (Route<dynamic> route) => true);
+                delay();
+              });
             }
           },
           child: Container(
@@ -293,6 +310,21 @@ class _ShareContentState extends State<ShareContent> {
               child: Icon(FontAwesomeIcons.check, color: Colors.white)),
         ),
       ],
+    );
+  }
+
+  Widget loadingIcon(BuildContext context) {
+    return Center(
+      child: Container(
+        width: Constants.getWidth(context),
+        height: Constants.getHeight(context),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40), color: Color(0xff0f3057)),
+        child: LoadingBouncingGrid.square(
+          size: 30,
+          backgroundColor: Color(0xff8cfffb),
+        ),
+      ),
     );
   }
 

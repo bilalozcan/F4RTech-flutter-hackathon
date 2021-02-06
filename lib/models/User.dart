@@ -107,12 +107,11 @@ class User {
     _numberOfDonationsMade = value;
   }
 
-  List<String> get listOfDonationsMade => _listOfDonationsMade;
+  List get listOfDonationsMade => _listOfDonationsMade;
 
   set listOfDonationsMade(List<String> value) {
     _listOfDonationsMade = value;
   }
-
 
   DateTime get lastTransactionDate => _lastTransactionDate;
 
@@ -158,9 +157,9 @@ class User {
     _fullname = value;
   }
 
-  List<String> get listOfPost => _listOfPost;
+  List get listOfPost => _listOfPost;
 
-  set listOfPost(List<String> value) {
+  set listOfPost(List value) {
     _listOfPost = value;
   }
   @override
