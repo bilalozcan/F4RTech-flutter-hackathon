@@ -1,5 +1,7 @@
 
 import 'package:education/ui/login_page/login_page_model.dart';
+import 'package:education/ui/sign_up_page/sign_up_page.dart';
+import 'package:education/widget/button/buttonInkWell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,27 +16,37 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:'ffdfc1'.toColor() ,
-      body:Stack(
-        children: [
-          Positioned(
-            bottom: MediaQuery.of(context).size.height/20,
-            left: MediaQuery.of(context).size.width/8.22,
-            right: MediaQuery.of(context).size.width/5.13,
-            child: Container(
-              height: MediaQuery.of(context).size.height/2,
-              width: MediaQuery.of(context).size.width/1.5,
+      backgroundColor: Color(0xffffdfc1),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/landing2.png",
+                    height: MediaQuery.of(context).size.height / 2.1,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width / 1.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hoşgeldiniz",
+                    "Hoş geldiniz",
                     style: GoogleFonts.roboto(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: MediaQuery.of(context).size.height/20
-                    ),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize:
+                        MediaQuery.of(context).size.height / 20),
                   ),
                   Container(
                     child: Column(
@@ -42,124 +54,107 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height/12.93,
+                          height:
+                          MediaQuery.of(context).size.height / 12.93,
                           decoration: BoxDecoration(
-                            color:'dcbe9b'.toColor().withOpacity(0.5),
+                            color: Color(0xffdcbe9b).withOpacity(0.5),
                           ),
                           child: Center(
                             child: TextField(
-                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              keyboardType:
+                              TextInputType.numberWithOptions(
+                                  decimal: true),
                               controller: model.email,
-                              decoration: InputDecoration(border: InputBorder.none,hintText: "E-posta",contentPadding: EdgeInsets.only(left:8)),
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "E-posta",
+                                  contentPadding:
+                                  EdgeInsets.only(left: 8)),
                               autofocus: true,
-
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top:18.0),
+                          padding: const EdgeInsets.only(top: 18.0),
                           child: Container(
-                            height: MediaQuery.of(context).size.height/12.93,
+                            height: MediaQuery.of(context).size.height /
+                                12.93,
                             decoration: BoxDecoration(
-                              color:'dcbe9b'.toColor().withOpacity(0.5),
+                              color: Color(0xffdcbe9b).withOpacity(0.5),
                             ),
                             child: Center(
                               child: TextField(
-                                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                controller: model.password,
-                                decoration: InputDecoration(border: InputBorder.none,hintText: "Şifre",contentPadding: EdgeInsets.only(left:8)),
+                                keyboardType:
+                                TextInputType.numberWithOptions(
+                                    decimal: true),
+                                controller: model.email,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Şifre",
+                                    contentPadding:
+                                    EdgeInsets.only(left: 8)),
                                 autofocus: true,
-
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top:8.0,left:2),
+                          padding:
+                          const EdgeInsets.only(top: 8.0, left: 2),
                           child: GestureDetector(
-                            onTap: (){
-                              setState(() {
-                              });
-                            },
+                            onTap: () {},
                             child: Container(
-                              child: Text("Şifreni mi Unuttun?",style: GoogleFonts.poppins(
-                                  color:'264dfa'.toColor(),
-                                  fontSize: 13
-                              ),),
+                              child: Text(
+                                "Şifreni mi Unuttun?",
+                                style: GoogleFonts.poppins(
+                                    color: Color(0xff264dfa),
+                                    fontSize: 13),
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-
-                  Ink(
-                    child: InkWell(
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30)),
-                      splashColor: Colors.red,
-                      onTap: (){
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height/12.93,
-                        width: MediaQuery.of(context).size.width/1.82,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1),
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Giriş",
-                              style: GoogleFonts.poppins(
-                                fontSize: MediaQuery.of(context).size.height/35.55,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_right_alt_outlined,
-                              size: MediaQuery.of(context).size.height/20,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Hesabın Yok mu?",style: GoogleFonts.poppins(
+                  ButtonInkWell(  () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                  },"Giriş"),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hesabın Yok mu?",
+                        style: GoogleFonts.poppins(
                           color: Colors.black,
                           fontWeight: FontWeight.w400,
-                        ),),
-                        GestureDetector(
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left:8.0),
-                              child: GestureDetector(
-                                onTap: (){},
-                                child: Text(
-                                  "Kayıt ol"
-                                  ,style: GoogleFonts.poppins(
-                                  color: '264dfa'.toColor(),
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                "Kayıt ol",
+                                style: GoogleFonts.poppins(
+                                  color: Color(0xff264dfa),
                                   fontWeight: FontWeight.w400,
-                                ),
                                 ),
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
