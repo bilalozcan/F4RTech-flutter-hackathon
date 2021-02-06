@@ -64,6 +64,7 @@ class _LandingPageState extends State<LandingPage> {
                               ),
                               Image.asset(
                                 'assets/landing1.png',
+
                                 height: Constants.getHeight(context) / 2.1,
                               ),
                             ],
@@ -80,6 +81,7 @@ class _LandingPageState extends State<LandingPage> {
                         children: [
                           Text(
                             'F 4 R - E D U C A T I O N',
+
                             style: GoogleFonts.roboto(
                                 color: ColorTable.textColor,
                                 fontWeight: FontWeight.w900,
@@ -93,6 +95,7 @@ class _LandingPageState extends State<LandingPage> {
                           ButtonInkWell(() {
                             page();
                           }, 'Keşfet'),
+
                         ],
                       ),
                     ),
@@ -131,6 +134,7 @@ class _LandingPageState extends State<LandingPage> {
       ],
     );
   }
+
 }
 
 class MyBehavior extends ScrollBehavior {

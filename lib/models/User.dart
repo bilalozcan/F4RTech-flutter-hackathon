@@ -24,6 +24,7 @@ class User {
   User({@required id, @required email}) {
     _uid = id;
     _email = email;
+
   }
 
   User.Info(
@@ -73,6 +74,7 @@ class User {
       'donationamount': _donationAmount,
       'level': _level,
       'point': _point
+
     };
   }
 

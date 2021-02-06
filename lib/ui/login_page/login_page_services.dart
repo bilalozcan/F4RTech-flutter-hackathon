@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class LoginPageServices {
   final Authentication _authentication = Authentication();
 
+
   void signIn(BuildContext context, String email, String password) async {
     var login = await _authentication.login(email, password, context);
     if (login.runtimeType == FirebaseAuthException) {
