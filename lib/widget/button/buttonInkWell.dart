@@ -1,3 +1,4 @@
+import 'package:education/app/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +32,7 @@ class ButtonInkWell extends StatelessWidget {
                 test,
                 style: GoogleFonts.poppins(
                     fontSize: MediaQuery.of(context).size.height / 35.55,
-                    color: Colors.black,
+                    color: ColorTable.textColor,
                     fontWeight: FontWeight.w600),
               ),
               Icon(
