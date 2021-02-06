@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education/models/Student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:education/models/User.dart' as usr;
 
@@ -35,6 +36,22 @@ class FirestoreDBService {
     } catch (e) {
       print(e);
       return null;
+    }
+  }
+
+  Future<dynamic> getStudent(userID) async {
+    var _instance = FirebaseFirestore.instance;
+    var _student;
+    try {
+      var result =
+          await _instance.collection('Students').doc('${userID}').get();
+      if (result != null) {
+        _student = Student.fromSnapshot(result);
+        return _student;
+      }
+    } catch (e) {
+      print(e);
+      return e;
     }
   }
 }
