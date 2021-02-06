@@ -1,8 +1,9 @@
-import 'package:education/app/colors/colors.dart';
+
 import 'package:education/app/constants.dart';
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:education/models/User.dart' as usr;
 import 'package:google_fonts/google_fonts.dart';
@@ -353,5 +354,6 @@ class _ProfilePageState extends State<ProfilePage> {
       height: Constants.getHeight(context) / 8,
       color: ColorTable.swatch2.withOpacity(0.5),
     );
+
   }
 }

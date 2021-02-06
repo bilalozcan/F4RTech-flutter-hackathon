@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:education/ui/home_page/home_page.dart';
 
-class SignUpPageServices{
-  Authentication _authentication = Authentication();
+class SignUpPageServices {
+  final Authentication _authentication = Authentication();
   void signUp(
       BuildContext context,
       String email,
@@ -16,36 +16,38 @@ class SignUpPageServices{
       String username,
       String phone) async {
     if (password != passwordAgain) {
-      Fluttertoast.showToast(msg: "Şifreler Uyuşmuyor!");
+      await Fluttertoast.showToast(msg: 'Şifreler Uyuşmuyor!');
     } else {
       var signup = await _authentication.signup(email, password);
       if (signup.runtimeType == FirebaseAuthException) {
         if (signup.code == 'email-already-in-use') {
-          Fluttertoast.showToast(
+          await Fluttertoast.showToast(
               msg: 'Bu email için zaten bir hesap var!',
               toastLength: Toast.LENGTH_LONG);
         } else if (signup.code == 'invalid-email') {
-          Fluttertoast.showToast(
+          await Fluttertoast.showToast(
               msg: 'E mail formatı yanlış!', toastLength: Toast.LENGTH_LONG);
         }
       } else if (signup != null) {
-        final User user = FirebaseAuth.instance.currentUser;
+        final user = FirebaseAuth.instance.currentUser;
         await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
-          'id' : user.uid,
-          'fullname' : fullName,
-          'telephone' : phone,
+          'id': user.uid,
+          'fullname': fullName,
+          'telephone': phone,
           'email': email,
-          'username' : username,
-          'numberofstudentsadded' : null,
+          'username': username,
+          'numberofstudentsadded': 0,
           'dateofregistration': DateTime.now(),
-          'lasttransactiondate':null,
-          'addedstudentlist':null,
-          'numberofdonationsmade':null,
-          'donationamount':null,
-          'level':0,
-          'point':0,
+          'lasttransactiondate': <String>[],
+          'addedstudentlist': <String>[],
+          'numberofdonationsmade': 0,
+          'donationamount': 0,
+          'level': 0,
+          'point': 0,
+          'listOfPost' : <String>[],
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        await Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }
   }

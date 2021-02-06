@@ -9,7 +9,7 @@ class Authentication {
 
   Future login(String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      var userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -22,7 +22,8 @@ class Authentication {
 
   Future signup(String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      var userCredential = await FirebaseAuth.instance
+
           .createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -35,10 +36,12 @@ class Authentication {
 
   Future<usr.User> currentUser() async {
     try {
-      User _user = await FirebaseAuth.instance.currentUser;
+      var _user = await FirebaseAuth.instance.currentUser;
       return userFromFirebase(_user);
     } catch (e) {
       print(e);
+      return e;
+
     }
   }
 
