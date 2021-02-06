@@ -80,11 +80,11 @@ class _LeaderboardState extends State<Leaderboard> {
                             Positioned(
                               top: -50,
                               right: 0,
-                              child: Image.asset(
-                                'assets/giphy.webp',
-                                height: 600.0,
-                                width: 400.0,
-                              ),
+                              // child: Image.asset(
+                              //   'assets/giphy.webp',
+                              //   height: 600.0,
+                              //   width: 400.0,
+                              // ),
                             ),
                             FutureBuilder(
                                 future: _firestoreDBService.getUsers(),
