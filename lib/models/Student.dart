@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education/models/Institution.dart';
 
 class Student {
   DocumentReference reference;
@@ -11,7 +10,7 @@ class Student {
   String _tcID;
   int _age;
   String _address;
-  List<String> _picturesOfStudent;
+  List _picturesOfStudent;
   bool _approvalStatus;
   String _affiliatedInstitution;
   List _donationsReceived;
@@ -20,6 +19,7 @@ class Student {
   int _classOfStudent;
   String _explanation;
   List _listOfComments;
+
 
   Student(
       [this._publisher,
@@ -38,8 +38,7 @@ class Student {
       this._listOfDonations,
       this._classOfStudent,
       this._explanation,
-      this._listOfComments,
-      this.reference]);
+      this._listOfComments]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],

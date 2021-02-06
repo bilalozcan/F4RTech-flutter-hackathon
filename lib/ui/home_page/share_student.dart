@@ -248,18 +248,14 @@ class _ShareContentState extends State<ShareContent> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 shareButton(),
-<<<<<<< Updated upstream
-                                SizedBox(
-                                    height:
-                                        Constants.getHeight(context) * 0.05),
+
                               ],
                             ),
-=======
-                              ],
+                           ],
                             ),
                             SizedBox(
-                                height: Constants.getHeight(context) * 0.05)
->>>>>>> Stashed changes
+                                height:
+                                Constants.getHeight(context) * 0.05)
                           ]),
                     ),
                   ),
