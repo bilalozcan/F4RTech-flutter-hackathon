@@ -3,6 +3,7 @@ import 'package:education/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:education/ui/home_page/home_page.dart';
 
 class SignUpPageServices{
   Authentication _authentication = Authentication();
@@ -36,15 +37,15 @@ class SignUpPageServices{
           'email': email,
           'username' : username,
           'numberofstudentsadded' : null,
-          'dateofregistration': null,
+          'dateofregistration': DateTime.now(),
           'lasttransactiondate':null,
           'addedstudentlist':null,
           'numberofdonationsmade':null,
           'donationamount':null,
-          'level':null,
-          'point':null,
+          'level':0,
+          'point':0,
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Center(child: Text('Sa'),)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }
   }
