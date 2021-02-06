@@ -300,23 +300,38 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      model.user.listOfPost[index] ??
-                          'Henüz bir öğrenciye bağışta bulunulmadı',
-                      style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          color: ColorTable.textColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: FutureBuilder(
+                          future: model.firestoreDBService
+                              .getStudent(model.user.listOfPost[index]),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      snapshot.data.fullname,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: ColorTable.textColor,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: CheckStatus(
+                                          snapshot.data.approvalStatus == true
+                                              ? 1
+                                              : 2),
+                                    ),
+                                  ]);
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          })),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: CheckStatus(3),
-            )
           ],
         ),
       ),
