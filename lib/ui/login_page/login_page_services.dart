@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,23 +36,6 @@ class LoginPageServices {
                       child: Text('Giriş Yapıldı'),
                     ),
                   )));
-    }
-  }
-
-  void signUp(BuildContext context, String email, String password,
-      String fullName, String username, String phone) async {
-    var signup = await _authentication.signup(email, password);
-    if (signup.runtimeType == FirebaseAuthException) {
-      if (signup.code == 'email-already-in-use') {
-        Fluttertoast.showToast(
-            msg: 'Bu email için zaten bir hesap var!',
-            toastLength: Toast.LENGTH_LONG);
-      } else if (signup.code == 'invalid-email') {
-        Fluttertoast.showToast(
-            msg: 'E mail formatı yanlış!', toastLength: Toast.LENGTH_LONG);
-      }
-    } else if (signup != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => null));
     }
   }
 }

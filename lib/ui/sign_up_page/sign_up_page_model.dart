@@ -7,4 +7,5 @@ class SignInPageModel{
   TextEditingController email = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController passwordAgain = TextEditingController();
 }

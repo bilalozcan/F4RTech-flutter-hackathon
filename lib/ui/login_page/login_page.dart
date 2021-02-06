@@ -129,7 +129,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                              },
                               child: Text(
                                 "Kayıt ol",
                                 style: GoogleFonts.poppins(

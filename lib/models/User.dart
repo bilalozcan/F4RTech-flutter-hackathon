@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User {
+  DocumentReference reference;
   String _fullname;
   String _telephone;
   String _email;
   String _username;
-  String _uuid;
+  String _uid;
   String _numberOfStudentsAdded;
 
   DateTime _dateOfRegistration;
@@ -21,7 +22,7 @@ class User {
   double _point;
 
   User({@required id, @required email}) {
-    this._uuid = id;
+    this._uid = id;
     this._email = email;
   }
 
@@ -31,15 +32,15 @@ class User {
       @required username,
       @required fullname,
       @required telephone}) {
-    this._uuid = id;
+    this._uid = id;
     this._email = email;
     this._username = username;
     this._fullname = fullname;
     this._telephone = telephone;
   }
 
-  User.fromMap(Map<String, dynamic> parsedMap)
-      : _uuid = parsedMap["id"],
+  User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
+      : _uid = parsedMap["id"],
         _fullname = parsedMap["fullname"],
         _telephone = parsedMap["telephone"],
         _email = parsedMap["email"],
@@ -58,7 +59,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
-      "id": _uuid,
+      "id": _uid,
       "fullname": _fullname,
       "telephone": _telephone,
       "email": _email,
@@ -74,4 +75,7 @@ class User {
       "point": _point
     };
   }
+
+  User.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data(), reference: snapshot.reference);
 }
