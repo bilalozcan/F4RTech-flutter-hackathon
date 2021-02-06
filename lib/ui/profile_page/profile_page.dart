@@ -1,5 +1,4 @@
 import 'package:education/services/authentication.dart';
-import 'package:education/ui/profile_page/profile_page_services.dart';
 import 'package:flutter/material.dart';
 import 'package:education/models/User.dart' as usr;
 

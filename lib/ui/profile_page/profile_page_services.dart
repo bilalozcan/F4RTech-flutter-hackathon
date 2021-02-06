@@ -1,5 +1,5 @@
 import 'package:education/models/User.dart' as usr;
 
-futureCurrentUser(Future<usr.User> user) async {
+Future<usr.User> futureCurrentUser(Future<usr.User> user) async {
   return await user;
 }

@@ -45,7 +45,7 @@ class SignUpPageServices {
           'level': 0,
           'point': 0,
         });
-        await Navigator.push(
+        await Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }

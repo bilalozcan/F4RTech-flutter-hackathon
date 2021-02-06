@@ -13,7 +13,7 @@ class ContentShare extends StatefulWidget {
 
 class _ContentShareState extends State<ContentShare> {
   final TextEditingController _detay = TextEditingController();
-  List<Asset> images = List<Asset>();
+  List<Asset> images = <Asset>[];
   List<String> imageUrls = <String>[];
   bool firstpress = true;
 
