@@ -20,7 +20,7 @@ class Authentication {
   }
   Future signup(String email, String password) async {
     try{
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: null, password: null);
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch(e){
       print(e);
