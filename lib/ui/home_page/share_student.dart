@@ -173,90 +173,83 @@ class _ShareContentState extends State<ShareContent> {
                     ),
                     child: SingleChildScrollView(
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              height: 20,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Öğrenci Bildir',
+                            style: TextStyle(
+                              fontFamily: 'ElYazisi',
+                              color: ColorTable.swatch6,
+                              fontSize: 30,
                             ),
-                            Text(
-                              'Öğrenci Bildir',
-                              style: TextStyle(
-                                fontFamily: 'ElYazisi',
-                                color: ColorTable.swatch6,
-                                fontSize: 30,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                                height: 2,
-                                width: 50,
-                                color: ColorTable.swatch5),
-                            userInput(model.studentName, 'Öğrenci Adı',
-                                TextInputType.text, 50),
-                            userInput(model.studentPhone, 'Telefon Numarası',
-                                TextInputType.number, 11),
-                            userInput(
-                                model.studentTC,
-                                'TC Kimlik Numarası (İsteğe Bağlı)',
-                                TextInputType.number,
-                                11),
-                            userInput(model.studentAge, 'Yaşı',
-                                TextInputType.number, 2),
-                            userInput(model.studentAddress, 'Adresi',
-                                TextInputType.text, 80),
-                            userInput(model.studentClass, 'Sınıf',
-                                TextInputType.number, 2),
-                            userInput(model.explanation, 'Açıklama',
-                                TextInputType.text, 400),
-                            Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  InkWell(
-                                    onTap: () {
-                                      loadAssets();
-                                    },
-                                    child: Container(
-                                      height: 44,
-                                      width: 44,
-                                      child: Icon(FontAwesomeIcons.image,
-                                          color: Colors.blueGrey),
-                                    ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                              height: 2, width: 50, color: ColorTable.swatch5),
+                          userInput(model.studentName, 'Öğrenci Adı',
+                              TextInputType.text, 50),
+                          userInput(model.studentPhone, 'Telefon Numarası',
+                              TextInputType.number, 11),
+                          userInput(
+                              model.studentTC,
+                              'TC Kimlik Numarası (İsteğe Bağlı)',
+                              TextInputType.number,
+                              11),
+                          userInput(model.studentAge, 'Yaşı',
+                              TextInputType.number, 2),
+                          userInput(model.studentAddress, 'Adresi',
+                              TextInputType.text, 80),
+                          userInput(model.studentClass, 'Sınıf',
+                              TextInputType.number, 2),
+                          userInput(model.explanation, 'Açıklama',
+                              TextInputType.text, 400),
+                          Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    loadAssets();
+                                  },
+                                  child: Container(
+                                    height: 44,
+                                    width: 44,
+                                    child: Icon(FontAwesomeIcons.image,
+                                        color: Colors.blueGrey),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 30),
-                                    child: Text(
-                                      '${images.length}/4',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 14),
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 30),
+                                  child: Text(
+                                    '${images.length}/4',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 14),
                                   ),
-                                ],
-                              ),
-                            ),
-                            images.isEmpty
-                                ? SizedBox()
-                                : Container(child: buildGridView()),
-                            SizedBox(
-                                height: Constants.getHeight(context) * 0.05),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                shareButton(),
-
+                                ),
                               ],
                             ),
-                           ],
-                            ),
-                            SizedBox(
-                                height:
-                                Constants.getHeight(context) * 0.05)
-                          ]),
+                          ),
+                          images.isEmpty
+                              ? SizedBox()
+                              : Container(child: buildGridView()),
+                          SizedBox(height: Constants.getHeight(context) * 0.05),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              shareButton(),
+                            ],
+                          ),
+                          SizedBox(height: Constants.getHeight(context) * 0.05)
+                        ],
+                      ),
                     ),
                   ),
                 ),
