@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class User {
   DocumentReference reference;
-  String _fullname;
+  String fullname;
   String _telephone;
   String _email;
   String _username;
@@ -35,13 +35,13 @@ class User {
     this._uid = id;
     this._email = email;
     this._username = username;
-    this._fullname = fullname;
+    this.fullname = fullname;
     this._telephone = telephone;
   }
 
   User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _uid = parsedMap["id"],
-        _fullname = parsedMap["fullname"],
+        fullname = parsedMap["fullname"],
         _telephone = parsedMap["telephone"],
         _email = parsedMap["email"],
         _username = parsedMap["username"],
@@ -60,7 +60,7 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       "id": _uid,
-      "fullname": _fullname,
+      "fullname": fullname,
       "telephone": _telephone,
       "email": _email,
       "username": _username,
