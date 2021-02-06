@@ -1,5 +1,5 @@
 
-import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
+import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 
 import 'package:education/ui/sign_up_page/sign_up_page_model.dart';
@@ -7,7 +7,6 @@ import 'package:education/ui/sign_up_page/sign_up_page_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:supercharged/supercharged.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

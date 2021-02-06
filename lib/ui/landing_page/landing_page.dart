@@ -1,4 +1,5 @@
-import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
+
+import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/widget/button/buttonInkWell.dart';
