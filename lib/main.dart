@@ -1,6 +1,10 @@
 import 'package:education/services/authentication.dart';
 import 'package:education/ui/home_page/ShareContent.dart';
 import 'package:education/ui/landing_page/landing_page.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:education/ui/navigationBar.dart';
+>>>>>>> Stashed changes
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
         future: _authentication.currentUser(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return HomeScreen();
           } else {
             return LandingPage();
           }

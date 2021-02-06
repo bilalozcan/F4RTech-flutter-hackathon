@@ -40,6 +40,9 @@ dependencies:
   multi_image_picker: ^4.7.14
   font_awesome_flutter: ^8.11.0
   shimmer: ^1.1.2
+  salomon_bottom_bar: ^2.0.0
+  loading_animations: ^2.1.0
+
 
 
 dev_dependencies:
