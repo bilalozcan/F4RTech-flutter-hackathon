@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class User {
   DocumentReference reference;
-  String fullname;
+  String _fullname;
   String _telephone;
   String _email;
   String _username;
@@ -22,8 +22,9 @@ class User {
   double _point;
 
   User({@required id, @required email}) {
-    this._uid = id;
-    this._email = email;
+    _uid = id;
+    _email = email;
+
   }
 
   User.Info(
@@ -32,47 +33,48 @@ class User {
       @required username,
       @required fullname,
       @required telephone}) {
-    this._uid = id;
-    this._email = email;
-    this._username = username;
-    this.fullname = fullname;
-    this._telephone = telephone;
+    _uid = id;
+    _email = email;
+    _username = username;
+    _fullname = fullname;
+    _telephone = telephone;
   }
 
   User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
-      : _uid = parsedMap["id"],
-        fullname = parsedMap["fullname"],
-        _telephone = parsedMap["telephone"],
-        _email = parsedMap["email"],
-        _username = parsedMap["username"],
-        _numberOfStudentsAdded = parsedMap["numberofstudentsadded"],
+      : _uid = parsedMap['id'],
+        _fullname = parsedMap['fullname'],
+        _telephone = parsedMap['telephone'],
+        _email = parsedMap['email'],
+        _username = parsedMap['username'],
+        _numberOfStudentsAdded = parsedMap['numberofstudentsadded'],
         _dateOfRegistration =
-            (parsedMap["dateofregistration"] as Timestamp).toDate(),
+            (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
-            (parsedMap["lasttransactiondate"] as Timestamp).toDate(),
-        _addedStudentList = parsedMap["addedstudentslist"],
-        _listOfDonationsMade = parsedMap["listofdonationsmade"],
-        _numberOfDonationsMade = parsedMap["numberofdonationsmade"],
-        _donationAmount = parsedMap["donationamount"],
-        _level = parsedMap["level"],
-        _point = parsedMap["point"];
+            (parsedMap['lasttransactiondate'] as Timestamp).toDate(),
+        _addedStudentList = parsedMap['addedstudentslist'],
+        _listOfDonationsMade = parsedMap['listofdonationsmade'],
+        _numberOfDonationsMade = parsedMap['numberofdonationsmade'],
+        _donationAmount = parsedMap['donationamount'],
+        _level = parsedMap['level'],
+        _point = parsedMap['point'];
 
   Map<String, dynamic> toMap() {
     return {
-      "id": _uid,
-      "fullname": fullname,
-      "telephone": _telephone,
-      "email": _email,
-      "username": _username,
-      "numberofstudentsadded": _numberOfStudentsAdded,
-      "dateofregistration": _dateOfRegistration,
-      "lasttransactiondate": _lastTransactionDate,
-      "addedstudentlist": _addedStudentList,
-      "listofdonationsmade": _listOfDonationsMade,
-      "numberofdonationsmade": _numberOfDonationsMade,
-      "donationamount": _donationAmount,
-      "level": _level,
-      "point": _point
+      'id': _uid,
+      'fullname': _fullname,
+      'telephone': _telephone,
+      'email': _email,
+      'username': _username,
+      'numberofstudentsadded': _numberOfStudentsAdded,
+      'dateofregistration': _dateOfRegistration,
+      'lasttransactiondate': _lastTransactionDate,
+      'addedstudentlist': _addedStudentList,
+      'listofdonationsmade': _listOfDonationsMade,
+      'numberofdonationsmade': _numberOfDonationsMade,
+      'donationamount': _donationAmount,
+      'level': _level,
+      'point': _point
+
     };
   }
 

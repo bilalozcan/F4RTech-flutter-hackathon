@@ -1,5 +1,4 @@
-
-import 'package:education/app/colors/colors.dart';
+import 'package:education/app/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/widget/button/buttonInkWell.dart';
@@ -15,11 +14,13 @@ class _LandingPageState extends State<LandingPage> {
   PageController _pageController = PageController();
   TextEditingController email = TextEditingController();
 
+  @override
   void initState() {
     super.initState();
     _pageController = PageController();
   }
 
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
@@ -29,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: ColorTable.swatch2,
+      backgroundColor: ColorTable.backroundColor,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: PageView(
@@ -37,7 +38,7 @@ class _LandingPageState extends State<LandingPage> {
           scrollDirection: Axis.horizontal,
           children: [
             Scaffold(
-              backgroundColor: ColorTable.swatch2,
+              backgroundColor: ColorTable.backroundColor,
               body: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -53,16 +54,17 @@ class _LandingPageState extends State<LandingPage> {
                               Container(
                                 constraints: BoxConstraints(
                                     maxWidth:
-                                    Constants.getWidth(context) * 0.5),
+                                        Constants.getWidth(context) * 0.5),
                                 child: Text(
-                                    "Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.",
+                                    'Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.',
                                     style: GoogleFonts.roboto(
                                         color: ColorTable.textColor,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15)),
                               ),
                               Image.asset(
-                                "assets/landing1.png",
+                                'assets/landing1.png',
+
                                 height: Constants.getHeight(context) / 2.1,
                               ),
                             ],
@@ -78,20 +80,22 @@ class _LandingPageState extends State<LandingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "F 4 R - E D U C A T I O N",
+                            'F 4 R - E D U C A T I O N',
+
                             style: GoogleFonts.roboto(
                                 color: ColorTable.textColor,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 25),
                           ),
                           Image.asset(
-                            "assets/login.png",
-                            height: Constants.getHeight(context)/4.74,
+                            'assets/login.png',
+                            height: Constants.getHeight(context) / 4.74,
                           ),
-                          textRow("Keşfetmeye hazır mısın?"),
-                          ButtonInkWell( () {
+                          textRow('Keşfetmeye hazır mısın?'),
+                          ButtonInkWell(() {
                             page();
-                          },"Keşfet"),
+                          }, 'Keşfet'),
+
                         ],
                       ),
                     ),
@@ -105,6 +109,8 @@ class _LandingPageState extends State<LandingPage> {
       ),
     );
   }
+
+  // ignore: always_declare_return_types
   page() {
     _pageController.animateToPage(
       1,
@@ -112,6 +118,7 @@ class _LandingPageState extends State<LandingPage> {
       curve: Curves.easeIn,
     );
   }
+
   Row textRow(text) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,

@@ -15,11 +15,14 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    currentUser = futureCurrentUser(_authentication.currentUser());
+    //currentUser = futureCurrentUser(_authentication.currentUser());
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container(child: Text(currentUser.fullname)));
+    return Container();
+    // return Scaffold(body: Container(child: Text(currentUser.fullname)));
+
   }
 }
