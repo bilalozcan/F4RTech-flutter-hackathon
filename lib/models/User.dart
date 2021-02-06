@@ -8,23 +8,23 @@ class User {
   String _email;
   String _username;
   String _uid;
-  String _numberOfStudentsAdded;
+  int _numberOfStudentsAdded;
 
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
 
-  List<String> _addedStudentList; //Student or String List
-  List<String> _listOfDonationsMade;
+  List _addedStudentList; //Student or String List
+  List _listOfDonationsMade;
+  List _listOfPost;
 
   int _numberOfDonationsMade;
-  double _donationAmount;
+  int _donationAmount;
   int _level;
-  double _point;
+  int _point;
 
   User({@required id, @required email}) {
     _uid = id;
     _email = email;
-
   }
 
   User.Info(
@@ -56,7 +56,8 @@ class User {
         _numberOfDonationsMade = parsedMap['numberofdonationsmade'],
         _donationAmount = parsedMap['donationamount'],
         _level = parsedMap['level'],
-        _point = parsedMap['point'];
+        _point = parsedMap['point'],
+        _listOfPost = parsedMap['listOfPost'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -73,11 +74,97 @@ class User {
       'numberofdonationsmade': _numberOfDonationsMade,
       'donationamount': _donationAmount,
       'level': _level,
-      'point': _point
-
+      'point': _point,
+      'listOfPost': _listOfPost,
     };
   }
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  int get point => _point;
+
+  set point(int value) {
+    _point = value;
+  }
+
+  int get level => _level;
+
+  set level(int value) {
+    _level = value;
+  }
+
+  int get donationAmount => _donationAmount;
+
+  set donationAmount(int value) {
+    _donationAmount = value;
+  }
+
+  int get numberOfDonationsMade => _numberOfDonationsMade;
+
+  set numberOfDonationsMade(int value) {
+    _numberOfDonationsMade = value;
+  }
+
+  List<String> get listOfDonationsMade => _listOfDonationsMade;
+
+  set listOfDonationsMade(List<String> value) {
+    _listOfDonationsMade = value;
+  }
+
+  List<String> get addedStudentList => _addedStudentList;
+
+  set addedStudentList(List<String> value) {
+    _addedStudentList = value;
+  }
+
+  DateTime get lastTransactionDate => _lastTransactionDate;
+
+  set lastTransactionDate(DateTime value) {
+    _lastTransactionDate = value;
+  }
+
+  DateTime get dateOfRegistration => _dateOfRegistration;
+
+  set dateOfRegistration(DateTime value) {
+    _dateOfRegistration = value;
+  }
+
+  int get numberOfStudentsAdded => _numberOfStudentsAdded;
+
+  set numberOfStudentsAdded(int value) {
+    _numberOfStudentsAdded = value;
+  }
+
+  String get uid => _uid;
+
+  String get username => _username;
+
+  set username(String value) {
+    _username = value;
+  }
+
+  String get email => _email;
+
+  set email(String value) {
+    _email = value;
+  }
+
+  String get telephone => _telephone;
+
+  set telephone(String value) {
+    _telephone = value;
+  }
+
+  String get fullname => _fullname;
+
+  set fullname(String value) {
+    _fullname = value;
+  }
+
+  List<String> get listOfPost => _listOfPost;
+
+  set listOfPost(List<String> value) {
+    _listOfPost = value;
+  }
 }

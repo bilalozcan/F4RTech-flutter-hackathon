@@ -14,7 +14,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   SignInPageModel model = SignInPageModel();
-  SignUpPageServices _services = SignUpPageServices();
+  final SignUpPageServices _services = SignUpPageServices();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Kayıt Ol",
+                  'Kayıt Ol',
                   style: GoogleFonts.russoOne(
                       fontSize: Constants.getHeight(context) / 25,
                       color: ColorTable.textColor,
@@ -40,17 +40,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Column(
                   children: [
-                    InputWidget(model.fullname, context, "İsim-Soyisim",
+                    InputWidget(model.fullname, context, 'İsim-Soyisim',
                         TextInputType.name),
-                    InputWidget(model.username, context, "Kullanıcı adı",
+                    InputWidget(model.username, context, 'Kullanıcı adı',
                         TextInputType.text),
-                    InputWidget(model.phone, context, "Telefon Numarası",
+                    InputWidget(model.phone, context, 'Telefon Numarası',
                         TextInputType.numberWithOptions(decimal: true)),
-                    InputWidget(model.email, context, "E-posta",
+                    InputWidget(model.email, context, 'E-posta',
                         TextInputType.emailAddress),
-                    InputWidget(model.password, context, "Şifre",
+                    InputWidget(model.password, context, 'Şifre',
                         TextInputType.visiblePassword),
-                    InputWidget(model.passwordAgain, context, "Şifre tekrar",
+                    InputWidget(model.passwordAgain, context, 'Şifre tekrar',
                         TextInputType.visiblePassword),
                     Padding(
                       padding: const EdgeInsets.only(top: 18.0),
@@ -84,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  "Kayıt Ol",
+                                  'Kayıt Ol',
                                   style: GoogleFonts.poppins(
                                       fontSize:
                                           Constants.getHeight(context) / 35.55,

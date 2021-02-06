@@ -2,28 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/models/Institution.dart';
 
 class Student {
-<<<<<<< Updated upstream
-  final String _userID; //Kayıt eden kullanıcını id si
-  final DateTime _dateOfRegistration;
-  final DateTime _lastTransactionDate;
-  final String _fullname;
-  final String _telephone;
-  final String _identificationNumber;
-  final int _age;
-  final String _adress;
-  final List<String> _picturesOfStudent;
-  final bool _approvalStatus;
-  final Institution _affiliatedInstitution;
-  final int _donationsReceived;
-  final double _donationAmountReceived;
-  final List<String> _listOfDonations;
-  final int _classOfStudent;
-  final String _explanation;
-  final List<String> _listOfComments;
-
-  Student.fromMap(Map<String, dynamic> parsedMap)
-      : _userID = parsedMap['id'],
-=======
   DocumentReference reference;
   String _publisher;
   DateTime _dateOfRegistration;
@@ -65,7 +43,6 @@ class Student {
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
->>>>>>> Stashed changes
         _dateOfRegistration =
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
@@ -106,9 +83,6 @@ class Student {
       'listofcomments': _listOfComments,
     };
   }
-<<<<<<< Updated upstream
-=======
-
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
@@ -170,6 +144,7 @@ class Student {
 
   set tcID(String value) {
     _tcID = value;
+
   }
 
   String get telephone => _telephone;
@@ -195,11 +170,11 @@ class Student {
   set dateOfRegistration(DateTime value) {
     _dateOfRegistration = value;
   }
-
+    
   String get publisher => _publisher;
 
   set publisher(String value) {
     _publisher = value;
   }
->>>>>>> Stashed changes
+
 }

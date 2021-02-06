@@ -12,7 +12,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  Authentication _authentication = Authentication();
+  final Authentication _authentication = Authentication();
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,11 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: _authentication.currentUser(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-<<<<<<< Updated upstream
-          if (snapshot.hasData)
-            return HomePage();
-          else
-=======
           if (snapshot.hasData) {
-            return ShareContent();
+            return HomePage();
           } else {
->>>>>>> Stashed changes
             return LandingPage();
+          }
         },
       ),
     );

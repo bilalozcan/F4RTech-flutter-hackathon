@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginPageModel model = LoginPageModel();
-  LoginPageServices _services = LoginPageServices();
+  final LoginPageServices _services = LoginPageServices();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    "assets/landing2.png",
+                    'assets/landing2.png',
                     height: Constants.getHeight(context) / 2.1,
                   ),
                 ],
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hoş geldiniz",
+                    'Hoş geldiniz',
                     style: GoogleFonts.roboto(
                         color: ColorTable.textColor,
                         fontWeight: FontWeight.w900,
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                               controller: model.email,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "E-posta",
+                                  hintText: 'E-posta',
                                   contentPadding: EdgeInsets.only(left: 8)),
                               //autofocus: true,
                             ),
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: model.password,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Şifre",
+                                    hintText: 'Şifre',
                                     contentPadding: EdgeInsets.only(left: 8)),
                                 //autofocus: true,
                               ),
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () {},
                             child: Container(
                               child: Text(
-                                "Şifreni mi Unuttun?",
+                                'Şifreni mi Unuttun?',
                                 style: GoogleFonts.poppins(
                                     color: ColorTable.swatch4, fontSize: 13),
                               ),
@@ -113,13 +113,13 @@ class _LoginPageState extends State<LoginPage> {
                   ButtonInkWell(() {
                     _services.signIn(
                         context, model.email.text, model.password.text);
-                  }, "Giriş"),
+                  }, 'Giriş'),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Hesabın Yok mu?",
+                        'Hesabın Yok mu?',
                         style: GoogleFonts.poppins(
                           color: ColorTable.textColor,
                           fontWeight: FontWeight.w400,
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
                               },
                               child: Text(
-                                "Kayıt ol",
+                                'Kayıt ol',
                                 style: GoogleFonts.poppins(
                                   color: ColorTable.swatch4,
                                   fontWeight: FontWeight.w400,

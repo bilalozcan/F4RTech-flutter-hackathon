@@ -36,16 +36,17 @@ class SignUpPageServices {
           'telephone': phone,
           'email': email,
           'username': username,
-          'numberofstudentsadded': null,
+          'numberofstudentsadded': 0,
           'dateofregistration': DateTime.now(),
-          'lasttransactiondate': null,
-          'addedstudentlist': null,
-          'numberofdonationsmade': null,
-          'donationamount': null,
+          'lasttransactiondate': <String>[],
+          'addedstudentlist': <String>[],
+          'numberofdonationsmade': 0,
+          'donationamount': 0,
           'level': 0,
           'point': 0,
+          'listOfPost' : <String>[],
         });
-        await Navigator.push(
+        await Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }
