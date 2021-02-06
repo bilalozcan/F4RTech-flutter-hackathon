@@ -45,150 +45,157 @@ class _PostPageState extends State<PostPage> {
               return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: ColorTable.textColor.withOpacity(0.05),
-                                    blurRadius: 8,
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                FutureBuilder(
-                                    future: _postPageServices
-                                        .initUser(snapshot.data[index].publisher),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot sp) {
-                                      if(sp.hasData){
-                                        return UserWidget(rozet: 'assets/1st.png',
-                                            username: sp.data.username,
-                                            seviye: sp.data.level);
-                                      }else{
-                                        return CircularProgressIndicator();
-                                      }
-                                    }),
-                                Container(
-                                  height: Constants.getHeight(context) / 4,
-                                  width: Constants.getWidth(context),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                        child: Image.asset(
-                                          model.phtpTable[model.rng.nextInt(4)],
-                                          fit: BoxFit.contain,
-                                          height: Constants.getHeight(context) / 5,
-                                          width: Constants.getWidth(context) / 2.5,
-                                        ),
-                                      ),
-                                     Column(
-                                       children: [
-                                         StudentInfo('Öğrenci Adı-Soyadı',snapshot.data[index].fullname),
-                                         StudentInfo('Öğrenci Yaşı',snapshot.data[index].age.toString()),
-                                         StudentInfo('Sınıfı',snapshot.data[index].classOfStudent.toString()),
-                                       ],
-                                     )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left:20.0),
-                                  child: Container(
-                                      height: Constants.getHeight(context)/14.22,
-                                      width: Constants.getWidth(context),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Icon(
-                                                  Icons.star_border
-                                              ),
-                                              Text(
-                                                '100 yıldız',style: GoogleFonts.crimsonText(
-                                                fontSize: 9
-                                              ),
-                                              )
-                                            ],
-                                          ),Column(
-                                            children: [
-                                              Icon(
-                                                  Icons.messenger_outline
-                                              ),
-                                              Text(
-                                                '100 yorum',style: GoogleFonts.crimsonText(
-                                                  fontSize: 9
-                                              ),
-                                              )
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Icon(
-                                                  Icons.money_sharp
-                                              ),
-                                              Text(
-                                                '10 Bağış',style: GoogleFonts.crimsonText(
-                                                  fontSize: 9
-                                              ),
-                                              )
-                                            ],
-                                          )
-
-
-                                        ],
-                                      )
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: 20,
-                          top: 10,
-                          child: Container(
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                            ),
-                              child:Row(
+                    return GestureDetector(
+                     onTap: (){
+                       setState(() {
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>PostDetailPage(snapshot.data[index])));
+                       });
+                     },
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: ColorTable.textColor.withOpacity(0.05),
+                                      blurRadius: 8,
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(
-                                    snapshot.data[index].approvalStatus
-                                        ? Icons.verified
-                                        : Icons.adjust_outlined,
-                                    color: snapshot.data[index].approvalStatus
-                                        ? Colors.green
-                                        : Colors.yellow.shade700,
-                                    size: 35,
+                                  FutureBuilder(
+                                      future: _postPageServices
+                                          .initUser(snapshot.data[index].publisher),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot sp) {
+                                        if(sp.hasData){
+                                          return UserWidget(rozet: 'assets/1st.png',
+                                              username: sp.data.username,
+                                              seviye: sp.data.level);
+                                        }else{
+                                          return CircularProgressIndicator();
+                                        }
+                                      }),
+                                  Container(
+                                    height: Constants.getHeight(context) / 4,
+                                    width: Constants.getWidth(context),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                          child: Image.asset(
+                                            model.phtpTable[model.rng.nextInt(4)],
+                                            fit: BoxFit.contain,
+                                            height: Constants.getHeight(context) / 5,
+                                            width: Constants.getWidth(context) / 2.5,
+                                          ),
+                                        ),
+                                       Column(
+                                         children: [
+                                           StudentInfo('Öğrenci Adı-Soyadı',snapshot.data[index].fullname),
+                                           StudentInfo('Öğrenci Yaşı',snapshot.data[index].age.toString()),
+                                           StudentInfo('Sınıfı',snapshot.data[index].classOfStudent.toString()),
+                                         ],
+                                       )
+                                      ],
+                                    ),
                                   ),
-                                  Text(
-                                    '${ snapshot.data[index].approvalStatus ? 'Onaylandı':'Onay Bekliyor'}',style: GoogleFonts.lemonada(
-                                      fontSize: 10
-                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:20.0),
+                                    child: Container(
+                                        height: Constants.getHeight(context)/14.22,
+                                        width: Constants.getWidth(context),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Icon(
+                                                    Icons.star_border
+                                                ),
+                                                Text(
+                                                  '100 yıldız',style: GoogleFonts.crimsonText(
+                                                  fontSize: 9
+                                                ),
+                                                )
+                                              ],
+                                            ),Column(
+                                              children: [
+                                                Icon(
+                                                    Icons.messenger_outline
+                                                ),
+                                                Text(
+                                                  '100 yorum',style: GoogleFonts.crimsonText(
+                                                    fontSize: 9
+                                                ),
+                                                )
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Icon(
+                                                    Icons.money_sharp
+                                                ),
+                                                Text(
+                                                  '10 Bağış',style: GoogleFonts.crimsonText(
+                                                    fontSize: 9
+                                                ),
+                                                )
+                                              ],
+                                            )
+
+
+                                          ],
+                                        )
+                                    ),
                                   ),
                                 ],
-                              )
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            right: 20,
+                            top: 10,
+                            child: Container(
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                              ),
+                                child:Row(
+                                  children: [
+                                    Icon(
+                                      snapshot.data[index].approvalStatus
+                                          ? Icons.verified
+                                          : Icons.adjust_outlined,
+                                      color: snapshot.data[index].approvalStatus
+                                          ? Colors.green
+                                          : Colors.yellow.shade700,
+                                      size: 35,
+                                    ),
+                                    Text(
+                                      '${ snapshot.data[index].approvalStatus ? 'Onaylandı':'Onay Bekliyor'}',style: GoogleFonts.lemonada(
+                                        fontSize: 10
+                                    ),
+                                    ),
+                                  ],
+                                )
+                            ),
+                          ),
 
-                      ],
+                        ],
+                      ),
                     );
                   });
             } else {
