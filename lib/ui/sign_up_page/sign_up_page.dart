@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Container(
           width: Constants.getWidth(context),
           height: Constants.getHeight(context),
-          color: ColorTable.swatch1,
+          color: ColorTable.swatch2,
 
           child: Padding(
             padding: const EdgeInsets.only(left: 35, right: 35, top: 40),
@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: GoogleFonts.russoOne(
 
                       fontSize: Constants.getHeight(context) / 25,
-                      color: ColorTable.swatch1,
+                      color: ColorTable.textColor,
 
                       fontWeight: FontWeight.w500),
                 ),
