@@ -1,5 +1,3 @@
-import 'package:education/models/Student.dart';
-import 'package:education/ui/post_page/post_page_model.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  final PostPageModel _postPageModel = PostPageModel();
   final PostPageServices _postPageServices = PostPageServices();
 
   @override

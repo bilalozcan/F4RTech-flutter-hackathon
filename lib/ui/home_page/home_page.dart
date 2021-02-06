@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: RaisedButton(
-          child: Text("Tıkla"),
+          child: Text('Tıkla'),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfilePage()));
