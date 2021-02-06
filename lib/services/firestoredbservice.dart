@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education/models/Comment.dart';
 import 'package:education/models/Student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:education/models/User.dart' as usr;
@@ -39,17 +40,16 @@ class FirestoreDBService {
     }
   }
 
-
-  Future<dynamic> getUser(String uid) async{
+  Future<dynamic> getUser(String uid) async {
     var _user;
-    try{
+    try {
       var result = await _instance.collection('Users').doc(uid).get();
-      if(result != null){
+      if (result != null) {
         _user = usr.User.fromSnapshot(result);
       }
       return _user;
-    }catch(e){
-      print('A'+e);
+    } catch (e) {
+      print('A' + e);
       return e;
     }
   }
@@ -64,6 +64,20 @@ class FirestoreDBService {
         _student = Student.fromSnapshot(result);
         return _student;
       }
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  Future<dynamic> postComment(Comment comment) async {
+    var shareName = DateTime.now().microsecondsSinceEpoch.toString();
+    try {
+      var result = await FirebaseFirestore.instance
+          .collection('Comments')
+          .doc(shareName)
+          .set(comment.toMap());
+      return true;
     } catch (e) {
       print(e);
       return e;
