@@ -28,7 +28,7 @@ class LoginPageServices {
         print(login.code);
       }
     } else if (login != null) {
-      await Navigator.push(
+      await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => Scaffold(
