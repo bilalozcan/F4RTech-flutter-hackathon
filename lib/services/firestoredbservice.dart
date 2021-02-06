@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:education/models/User.dart' as usr;
+import 'package:flutter/cupertino.dart';
 
 class FirestoreDBService {
   final _instance = FirebaseFirestore.instance;
@@ -18,5 +21,21 @@ class FirestoreDBService {
       list.add(map);
     }
     return list;
+  }
+
+  Future<dynamic> getCurrentUser() async {
+    var auth = FirebaseAuth.instance;
+    var user = auth.currentUser;
+    var _user;
+    try {
+      var result = await _instance.collection('Users').doc('${user.uid}').get();
+      if (result != null) {
+        _user = usr.User.fromSnapshot(result);
+      }
+      return _user;
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 }
