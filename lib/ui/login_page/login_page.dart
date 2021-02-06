@@ -1,4 +1,4 @@
-import 'package:education/app/colors.dart';
+import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page_model.dart';
 import 'package:education/ui/login_page/login_page_services.dart';
@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorTable.backroundColor,
+      backgroundColor: ColorTable.swatch2,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                         Container(
                           height: Constants.getHeight(context) / 12.93,
                           decoration: BoxDecoration(
-                            color: Color(0xffdcbe9b).withOpacity(0.5),
+                            color: ColorTable.swatch1.withOpacity(0.4),
                           ),
                           child: Center(
                             child: TextField(
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Container(
                             height: Constants.getHeight(context) / 12.93,
                             decoration: BoxDecoration(
-                              color: Color(0xffdcbe9b).withOpacity(0.5),
+                              color: ColorTable.swatch1.withOpacity(0.4),
                             ),
                             child: Center(
                               child: TextField(
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text(
                                 "Şifreni mi Unuttun?",
                                 style: GoogleFonts.poppins(
-                                    color: Color(0xff264dfa), fontSize: 13),
+                                    color: ColorTable.swatch4, fontSize: 13),
                               ),
                             ),
                           ),
@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text(
                                 "Kayıt ol",
                                 style: GoogleFonts.poppins(
-                                  color: Color(0xff264dfa),
+                                  color: ColorTable.swatch4,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),

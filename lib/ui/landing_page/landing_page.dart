@@ -1,4 +1,4 @@
-import 'package:education/app/colors.dart';
+import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/widget/button/buttonInkWell.dart';
@@ -28,7 +28,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: ColorTable.backroundColor,
+      backgroundColor: ColorTable.swatch2,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: PageView(
@@ -36,7 +36,7 @@ class _LandingPageState extends State<LandingPage> {
           scrollDirection: Axis.horizontal,
           children: [
             Scaffold(
-              backgroundColor: ColorTable.backroundColor,
+              backgroundColor: ColorTable.swatch2,
               body: SingleChildScrollView(
                 child: Column(
                   children: [

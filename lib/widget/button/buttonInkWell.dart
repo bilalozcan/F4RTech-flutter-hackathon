@@ -1,4 +1,4 @@
-import 'package:education/app/colors.dart';
+import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
