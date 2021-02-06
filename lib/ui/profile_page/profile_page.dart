@@ -20,8 +20,12 @@ class _ProfilePageState extends State<ProfilePage> {
         body: FutureBuilder(
             future: model.getUser(),
             builder: (context, snapshot) {
-              if (model.user != null) {
-                return Column(
+
+              if (snapshot.hasData) {
+                return ListView(
+                  physics: BouncingScrollPhysics(),
+
+
                   children: [
                     Stack(
                       children: [
@@ -61,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       height: Constants.getHeight(context) -
-                          Constants.getHeight(context) / 4,
+                          Constants.getHeight(context) / 3,
                       width: Constants.getWidth(context),
                       child: Column(
                         children: [
@@ -170,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        height: Constants.getHeight(context) / 2.5,
+        height: Constants.getHeight(context) / 3.3,
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(color: ColorTable.swatch1.withOpacity(0.2), blurRadius: 10)
         ]),
@@ -347,7 +351,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.check,
             color: Colors.green,
           ),
-          Text('ONAYLANDI'),
+          Text('ONAYLANDI',style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w500,
+            color: Colors.green
+          ),),
         ],
       );
     }
@@ -358,7 +365,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.close,
             color: Colors.red,
           ),
-          Text('ONAYLANMADI'),
+          Text('ONAYLANMADI',style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              color: Colors.red
+          ),),
         ],
       );
     }
@@ -369,7 +379,10 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.linear_scale,
             color: Colors.yellow,
           ),
-          Text('BEKLİYOR'),
+          Text('BEKLİYOR',style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              color: Colors.yellow
+          ),),
         ],
       );
     }

@@ -1,6 +1,9 @@
+import 'package:education/app/constants.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
+import 'package:education/widget/UserWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -45,48 +48,64 @@ class _PostPageState extends State<PostPage> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.green,
-                              ),
-                              Column(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '@username',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text('Seviye',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                          )),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Icon(Icons.share),
-                              Row(
-                                children: [Icon(Icons.star), Text('(15)')],
-                              ),
+                              UserWidget(
+                                  rozet: 'assets/1st.png',
+                                  username: 'username',
+                                  seviye: 100),
+                              Container(
+                                child: Icon(
+                                  Icons.verified_outlined,
+                                  size: 50,
+                                ),
+                              )
                             ],
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            child: Image.network(
-                                'https://lh3.googleusercontent.com/6yhnZ_AjXZms_nqtlmSLNyQKAXJlZdsFpz_sg17jrnz0uwL7rMYmPQcO9MAqySxShCqFqNAqP6UvWjme2lLpebtdl0iMG_jYFymR=w1296-v1'),
-                          ),
                           Container(
+                            height: Constants.getHeight(context) / 4,
+                            width: Constants.getWidth(context),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                                  child: Image.network(
+                                    'https://lh3.googleusercontent.com/6yhnZ_AjXZms_nqtlmSLNyQKAXJlZdsFpz_sg17jrnz0uwL7rMYmPQcO9MAqySxShCqFqNAqP6UvWjme2lLpebtdl0iMG_jYFymR=w1296-v1',
+                                    fit: BoxFit.fill,
+                                    height: Constants.getHeight(context) / 5,
+                                    width: Constants.getWidth(context) / 2.5,
+                                  ),
+                                ),
+                               Column(
+                                 children: [
+                                   StudentInfo("Öğrenci Adı-Soyadı","Bilal Özcan"),
+                                   StudentInfo("Öğrenci Yaşı","20"),
+                                   StudentInfo("Sınıfı","5"),
+                                 ],
+                               )
+                              ],
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Açıklama",style: GoogleFonts.sriracha(
+                                  fontSize: 12
+                              ),),
+                              Container(
+                                height: 100,
+                                width: Constants.getWidth(context),
+                                color: Colors.black,
+                              ),
+                            ],
+                          )
+                          /*Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -113,7 +132,7 @@ class _PostPageState extends State<PostPage> {
                                 )
                               ],
                             ),
-                          )
+                          )*/
                         ],
                       ),
                     );
@@ -127,5 +146,37 @@ class _PostPageState extends State<PostPage> {
         ),
       ),
     );
+  }
+
+  StudentInfo(String s,String data) {
+    return                                 Padding(
+      padding: const EdgeInsets.only(left:10),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(s,style: GoogleFonts.sriracha(
+                fontSize: 12
+            ),),
+            Container(
+                alignment: Alignment.centerLeft,
+                height: 30,
+                width: 150,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 8
+                      )
+                    ]
+                ),
+                child: Text(data,style: GoogleFonts.robotoSlab(),)),
+          ],
+        ),
+      ),
+    );
+
   }
 }
