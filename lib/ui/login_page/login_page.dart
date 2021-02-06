@@ -1,18 +1,21 @@
-
 import 'package:education/ui/login_page/login_page_model.dart';
+import 'package:education/ui/login_page/login_page_services.dart';
 import 'package:education/ui/sign_up_page/sign_up_page.dart';
 import 'package:education/widget/button/buttonInkWell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginPageModel model =LoginPageModel();
+  LoginPageModel model = LoginPageModel();
+  LoginPageServices _services = LoginPageServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.roboto(
                         color: Colors.black,
                         fontWeight: FontWeight.w900,
-                        fontSize:
-                        MediaQuery.of(context).size.height / 20),
+                        fontSize: MediaQuery.of(context).size.height / 20),
                   ),
                   Container(
                     child: Column(
@@ -54,61 +56,51 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height:
-                          MediaQuery.of(context).size.height / 12.93,
+                          height: MediaQuery.of(context).size.height / 12.93,
                           decoration: BoxDecoration(
                             color: Color(0xffdcbe9b).withOpacity(0.5),
                           ),
                           child: Center(
                             child: TextField(
-                              keyboardType:
-                              TextInputType.numberWithOptions(
-                                  decimal: true),
+                              keyboardType: TextInputType.text,
                               controller: model.email,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "E-posta",
-                                  contentPadding:
-                                  EdgeInsets.only(left: 8)),
-                              autofocus: true,
+                                  contentPadding: EdgeInsets.only(left: 8)),
+                              //autofocus: true,
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 18.0),
                           child: Container(
-                            height: MediaQuery.of(context).size.height /
-                                12.93,
+                            height: MediaQuery.of(context).size.height / 12.93,
                             decoration: BoxDecoration(
                               color: Color(0xffdcbe9b).withOpacity(0.5),
                             ),
                             child: Center(
                               child: TextField(
-                                keyboardType:
-                                TextInputType.numberWithOptions(
-                                    decimal: true),
-                                controller: model.email,
+                                keyboardType: TextInputType.text,
+                                controller: model.password,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Şifre",
-                                    contentPadding:
-                                    EdgeInsets.only(left: 8)),
-                                autofocus: true,
+                                    contentPadding: EdgeInsets.only(left: 8)),
+                                //autofocus: true,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding:
-                          const EdgeInsets.only(top: 8.0, left: 2),
+                          padding: const EdgeInsets.only(top: 8.0, left: 2),
                           child: GestureDetector(
                             onTap: () {},
                             child: Container(
                               child: Text(
                                 "Şifreni mi Unuttun?",
                                 style: GoogleFonts.poppins(
-                                    color: Color(0xff264dfa),
-                                    fontSize: 13),
+                                    color: Color(0xff264dfa), fontSize: 13),
                               ),
                             ),
                           ),
@@ -116,10 +108,10 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  ButtonInkWell(  () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
-                  },"Giriş"),
+                  ButtonInkWell(() {
+                    _services.signIn(
+                        context, model.email.text, model.password.text);
+                  }, "Giriş"),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
