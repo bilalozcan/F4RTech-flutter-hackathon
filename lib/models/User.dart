@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User {
+  DocumentReference reference;
   String _fullname;
   String _telephone;
   String _email;
@@ -38,7 +39,7 @@ class User {
     this._telephone = telephone;
   }
 
-  User.fromMap(Map<String, dynamic> parsedMap)
+  User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _uid = parsedMap["id"],
         _fullname = parsedMap["fullname"],
         _telephone = parsedMap["telephone"],
@@ -74,4 +75,7 @@ class User {
       "point": _point
     };
   }
+
+  User.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data(), reference: snapshot.reference);
 }
