@@ -1,5 +1,5 @@
 
-import 'package:education/app/colors.dart';
+import 'file:///D:/Projects/F4RTech-flutter-hackathon/lib/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 
 import 'package:education/ui/sign_up_page/sign_up_page_model.dart';
@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Container(
           width: Constants.getWidth(context),
           height: Constants.getHeight(context),
-          color: ColorTable.backroundColor,
+          color: ColorTable.swatch1,
 
           child: Padding(
             padding: const EdgeInsets.only(left: 35, right: 35, top: 40),
@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: GoogleFonts.russoOne(
 
                       fontSize: Constants.getHeight(context) / 25,
-                      color: ColorTable.backroundColor,
+                      color: ColorTable.swatch1,
 
                       fontWeight: FontWeight.w500),
                 ),
@@ -132,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
         height: Constants.getHeight(context) / 12.93,
 
         decoration: BoxDecoration(
-            color: 'dcbe9b'.toColor().withOpacity(0.5),
+            color: ColorTable.swatch1.withOpacity(0.5),
             borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Center(
           child: TextField(
