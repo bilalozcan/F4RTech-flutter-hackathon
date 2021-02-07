@@ -80,13 +80,54 @@ class FirestoreDBService {
     }
   }
 
-  Future<dynamic> postComment(Comment comment) async {
+  Future<dynamic> postComment(Comment comment, Student student) async {
     var shareName = DateTime.now().microsecondsSinceEpoch.toString();
+    student.listOfComments.add(shareName);
     try {
       var result = await FirebaseFirestore.instance
           .collection('Comments')
           .doc(shareName)
           .set(comment.toMap());
+      var result2 = await student.reference.update({
+        'listofcomments': student.listOfComments,
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  Future<dynamic> addLikeorDislikeStudent(Student student, usr.User user) async {
+    if (!student.listOfLikes.contains(user.uid)) {
+      student.listOfLikes.add(user.uid);
+      student.likeCount += 1;
+    } else {
+      student.listOfLikes.remove(user.uid);
+      student.likeCount -= 1;
+    }
+    try {
+      await student.reference.update({
+        'listoflikes': student.listOfLikes,
+        'likecount': student.likeCount,
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  Future<dynamic> addLikeorDislikeUser(Student student, usr.User user) async {
+    if (!user.likeList.contains(student.uid)) {
+      user.likeList.add(student.uid);
+    } else {
+      user.likeList.remove(student.uid);
+    }
+    try {
+      await user.reference.update({
+        'likeList': user.likeList,
+      });
       return true;
     } catch (e) {
       print(e);
