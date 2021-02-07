@@ -35,7 +35,7 @@ class SignUpPageServices {
       } else if (signup != null) {
         final user = FirebaseAuth.instance.currentUser;
         var db = usr.User.Info(fullName, phone, email, username, user.uid, 0,
-            DateTime.now(), DateTime.now(), <String>[], <String>[], 0, 0, 0, 0);
+            DateTime.now(), DateTime.now(), <String>[], <String>[], 0, 0, 0, 0, []);
         await FirebaseFirestore.instance
             .collection('Users')
             .doc(user.uid)
