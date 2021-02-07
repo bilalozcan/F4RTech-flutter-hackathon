@@ -2,8 +2,10 @@ import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 
 import 'package:education/app/helper.dart';
+import 'package:education/services/authentication.dart';
 
 import 'package:education/ui/background.dart';
+import 'package:education/ui/login_page/login_page.dart';
 
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
@@ -22,7 +24,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         backgroundContainer(context),
@@ -46,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Image.asset(
                                     'assets/bagis.png',
                                   ),
-                                  color: ColorTable.swatch3.withOpacity(0.5),
+                                  color: ColorTable.swatch4.withOpacity(0.5),
                                   width: double.infinity,
                                   height: Constants.getHeight(context) / 4,
                                 ),
@@ -75,8 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         width: 105,
                                         height: 105,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(52),
+                                          borderRadius: BorderRadius.circular(52),
                                           color: ColorTable.swatch3,
                                         ),
                                       ),
@@ -91,10 +91,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ))
                             ],
                           ),
-
                         ),
                         Column(
                           children: [
+                            FlatButton(
+                              color: ColorTable.swatch4.withOpacity(0.5),
+                              child: Text(
+                                'Çıkış yap',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                var _firebaseAuth = Authentication();
+                                _firebaseAuth.signOut();
+                                Navigator.of(context)
+                                    .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (Route<dynamic> route) => false);
+                              },
+                            ),
+                            SizedBox(height: 5),
                             Listwidget(model),
                           ],
                         )
@@ -148,8 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
             indent: 50,
             color: Colors.black,
           ),
-          userInfo(
-              'Telephone: ', snapshot.data.telephone, 12.0, FontWeight.w500),
+          userInfo('Telephone: ', snapshot.data.telephone, 12.0, FontWeight.w500),
         ],
       ),
     );
@@ -158,10 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Text userInfo(String text, detail, size, weight) {
     return Text(
       '$text ${detail}',
-      style: GoogleFonts.poppins(
-          color: ColorTable.textColor.withOpacity(1),
-          fontSize: size,
-          fontWeight: weight),
+      style: GoogleFonts.poppins(color: ColorTable.textColor.withOpacity(1), fontSize: size, fontWeight: weight),
     );
   }
 
@@ -169,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: Container(
-        height: Constants.getHeight(context) / 2,
+        height: Constants.getHeight(context) * 0.4,
         decoration: BoxDecoration(),
         child: Column(
           children: [
@@ -191,16 +200,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         border: model.listType == false
                             ? Border.all(width: 2, color: ColorTable.swatch6)
                             : Border.all(width: 2, color: ColorTable.swatch4),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8)
-                        ]),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8)]),
                     child: Center(
                         child: Text(
                           'Eklenen Öğrenciler',
-                          style: GoogleFonts.poppins(
-                              color: ColorTable.textColor, fontSize: 14),
+                          style: GoogleFonts.poppins(color: ColorTable.textColor, fontSize: 14),
                         )),
                   ),
                 ),
@@ -219,24 +223,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         border: model.listType == true
                             ? Border.all(width: 2, color: ColorTable.swatch6)
                             : Border.all(width: 2, color: ColorTable.swatch4),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8)
-                        ]),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8)]),
                     child: Center(
                         child: Text(
                           'Yapılan  Bağışlar',
-                          style: GoogleFonts.poppins(
-                              color: ColorTable.textColor, fontSize: 14),
+                          style: GoogleFonts.poppins(color: ColorTable.textColor, fontSize: 14),
                         )),
                   ),
                 )
               ],
             ),
-            ListMethod(model.listType == false
-                ? model.user.listOfPost.length
-                : model.user.listOfDonationsMade.length),
+            ListMethod(model.listType == false ? model.user.listOfPost.length : model.user.listOfDonationsMade.length),
           ],
         ),
       ),
@@ -253,9 +250,7 @@ class _ProfilePageState extends State<ProfilePage> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: model.listType == false
-                  ? AddStudentWidget(index)
-                  : YapilanBagis(index),
+              child: model.listType == false ? AddStudentWidget(index) : YapilanBagis(index),
             );
           }),
     );
@@ -266,9 +261,7 @@ class _ProfilePageState extends State<ProfilePage> {
       width: Constants.getWidth(context) / 2,
       height: Constants.getHeight(context) / 15,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+          borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -292,19 +285,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: FutureBuilder(
-                    future: model.firestoreDBService
-                        .getStudent(model.user.listOfPost[index]),
+                    future: model.firestoreDBService.getStudent(model.user.listOfPost[index]),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         return Text(
                           snapshot.data.fullname,
-                          style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              color: ColorTable.textColor,
-                              fontWeight: FontWeight.w600),
+                          style: GoogleFonts.poppins(fontSize: 15, color: ColorTable.textColor, fontWeight: FontWeight.w600),
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return LoadingBouncingGrid.square(
+                          size: 30,
+                          backgroundColor: Colors.white,
+                        );
                       }
                     },
                   ),
@@ -363,12 +355,9 @@ class _ProfilePageState extends State<ProfilePage> {
       width: Constants.getWidth(context) / 2,
       height: Constants.getHeight(context) / 15,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+          borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
       child: FutureBuilder(
-        future: model.firestoreDBService
-            .getDonations(model.user.listOfDonationsMade[index]),
+        future: model.firestoreDBService.getDonations(model.user.listOfDonationsMade[index]),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Row(
@@ -395,10 +384,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
                           '${snapshot.data.amount} ₺',
-                          style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              color: ColorTable.textColor,
-                              fontWeight: FontWeight.w600),
+                          style: GoogleFonts.poppins(fontSize: 15, color: ColorTable.textColor, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
