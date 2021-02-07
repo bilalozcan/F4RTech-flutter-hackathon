@@ -15,13 +15,14 @@ class Student {
   bool _approvalStatus;
   String _affiliatedInstitution;
   List _donationsReceived;
-  double _donationAmountReceived;
+  int _donationAmountReceived;
   List _listOfDonations;
+  int _likeCount;
   int _classOfStudent;
   String _explanation;
   List _listOfComments;
   List _listOfLikes;
-  int _likeCount;
+  int _donationCount;
 
   Student(
       [this._publisher,
@@ -43,7 +44,8 @@ class Student {
       this._explanation,
       this._listOfComments,
       this._listOfLikes,
-      this._likeCount]);
+      this._likeCount,
+      this._donationCount]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
@@ -61,13 +63,14 @@ class Student {
         _approvalStatus = parsedMap['approvalstatus'],
         _affiliatedInstitution = parsedMap['affiliatedInstitution'],
         _donationsReceived = parsedMap['donationsReceived'],
-        _donationAmountReceived = parsedMap['donationAmountReceived'],
+        _donationAmountReceived = parsedMap['donationamountreceived'],
         _listOfDonations = parsedMap['listofDonations'],
         _classOfStudent = parsedMap['classofstudent'],
         _explanation = parsedMap['explanation'],
         _listOfComments = parsedMap['listofcomments'],
         _listOfLikes = parsedMap['listoflikes'],
-        _likeCount = parsedMap['likecount'];
+        _likeCount = parsedMap['likecount'],
+        _donationCount = parsedMap['donationcount'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -91,12 +94,19 @@ class Student {
       'listofcomments': _listOfComments,
       'listoflikes': _listOfLikes,
       'likecount': _likeCount,
+      'donationcount': _donationCount,
     };
   }
 
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
+
+  int get donationCount => _donationCount;
+
+  set donationCount(int value) {
+    _donationCount = value;
+  }
 
   List get listOfComments => _listOfComments;
 
@@ -112,7 +122,6 @@ class Student {
     _listOfLikes = value;
   }
 
-
   String get explanation => _explanation;
 
   set explanation(String value) {
@@ -125,16 +134,15 @@ class Student {
     _classOfStudent = value;
   }
 
-
   List get listOfDonations => _listOfDonations;
 
   set listOfDonations(List value) {
     _listOfDonations = value;
   }
 
-  double get donationAmountReceived => _donationAmountReceived;
+  int get donationAmountReceived => _donationAmountReceived;
 
-  set donationAmountReceived(double value) {
+  set donationAmountReceived(int value) {
     _donationAmountReceived = value;
   }
 
