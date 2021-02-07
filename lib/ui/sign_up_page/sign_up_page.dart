@@ -52,7 +52,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           InputWidget(model.username, context, 'Kullanıcı adı',
                               TextInputType.text, validator: (String value) {
                             for (var i = 0; i < snapshot.data.length; ++i) {
-                              if (snapshot.data[i] == value) {
+                              if (snapshot.data[i].toString().toLowerCase() ==
+                                  value.toLowerCase()) {
                                 return 'Bu kullanıcı adı zaten sistemde kayıtlı';
                               }
                             }
@@ -67,12 +68,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           InputWidget(model.password, context, 'Şifre',
                               TextInputType.visiblePassword,
                               validator: _services.passwordValidator),
-                          InputWidget(model.passwordAgain, context,
-                              'Şifre tekrar', TextInputType.visiblePassword,
-                              validator: (value) {
-                            return _services.repeatPasswordValidator(
-                                value, model.password.text);
-                          }),
+                          InputWidget(
+                            model.passwordAgain,
+                            context,
+                            'Şifre tekrar',
+                            TextInputType.visiblePassword,
+                            validator: (value) {
+                              return _services.repeatPasswordValidator(
+                                  value, model.password.text);
+                            },
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Material(
@@ -136,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget InputWidget(TextEditingController controller, BuildContext context,
       String string, TextInputType textInputType,
-      {Function validator}) {
+      {Function validator, suffixIcon}) {
     return Padding(
       padding: const EdgeInsets.only(top: 18.0),
       child: Container(
@@ -146,6 +151,9 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Center(
           child: TextFormField(
+            obscureText: (string == 'Şifre') || (string == 'Şifre tekrar')
+                ? true
+                : false,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validator,
             keyboardType: textInputType,
