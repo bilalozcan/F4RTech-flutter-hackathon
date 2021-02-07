@@ -29,12 +29,10 @@ class _PostPageState extends State<PostPage> {
   @override
   void initState() {
     super.initState();
-    photoNumber = model.rng.nextInt(4);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         backgroundContainer(context),
@@ -118,7 +116,6 @@ class _PostPageState extends State<PostPage> {
                                                         .withOpacity(0.05),
                                                     blurRadius: 8,
                                                   )
-
                                                 ],
                                               ),
                                               child: Column(
@@ -137,10 +134,11 @@ class _PostPageState extends State<PostPage> {
                                                         if (sp.hasData) {
                                                           return UserWidget(
                                                               rozet:
-                                                              '${Helper.UserIconLevel(sp.data)[1]}',
+                                                                  '${Helper.UserIconLevel(sp.data)[1]}',
                                                               username: sp.data
                                                                   .username,
-                                                              seviye: '${Helper.UserIconLevel(sp.data)[0]}');
+                                                              seviye:
+                                                                  '${Helper.UserIconLevel(sp.data)[0]}');
                                                         } else {
                                                           return CircularProgressIndicator();
                                                         }
@@ -166,8 +164,7 @@ class _PostPageState extends State<PostPage> {
                                                                       .circular(
                                                                           10)),
                                                           child: Image.asset(
-                                                            model.phtpTable[
-                                                                photoNumber],
+                                                              'assets/student/${int.parse(snapshot.data[index].uid)%17+1}.png',
                                                             fit: BoxFit.contain,
                                                             height: Constants
                                                                     .getHeight(
