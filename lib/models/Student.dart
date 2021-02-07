@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Student {
   DocumentReference reference;
+  String _uid;
   String _publisher;
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
@@ -24,6 +25,7 @@ class Student {
 
   Student(
       [this._publisher,
+      this._uid,
       this._dateOfRegistration,
       this._lastTransactionDate,
       this._fullname,
@@ -45,6 +47,7 @@ class Student {
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
+        _uid = parsedMap['uid'],
         _dateOfRegistration =
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
@@ -59,7 +62,7 @@ class Student {
         _affiliatedInstitution = parsedMap['affiliatedInstitution'],
         _donationsReceived = parsedMap['donationsReceived'],
         _donationAmountReceived = parsedMap['donationAmountReceived'],
-        _listOfDonations = parsedMap['listofdonations'],
+        _listOfDonations = parsedMap['listofDonations'],
         _classOfStudent = parsedMap['classofstudent'],
         _explanation = parsedMap['explanation'],
         _listOfComments = parsedMap['listofcomments'],
@@ -69,6 +72,7 @@ class Student {
   Map<String, dynamic> toMap() {
     return {
       'publisher': _publisher,
+      'uid': _uid,
       'fullname': _fullname,
       'dateofregistration': _dateOfRegistration,
       'lasttransactiondate': _lastTransactionDate,
@@ -93,8 +97,14 @@ class Student {
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
-  List<String> get listOfComments => _listOfComments;
 
+  List get listOfComments => _listOfComments;
+
+  set listOfComments(List value) {
+    _listOfComments = value;
+  }
+
+  String get uid => _uid;
 
   List get listOfLikes => _listOfLikes;
 
@@ -102,9 +112,6 @@ class Student {
     _listOfLikes = value;
   }
 
-  set listOfComments(List<String> value) {
-    _listOfComments = value;
-  }
 
   String get explanation => _explanation;
 
@@ -118,9 +125,10 @@ class Student {
     _classOfStudent = value;
   }
 
-  List<String> get listOfDonations => _listOfDonations;
 
-  set listOfDonations(List<String> value) {
+  List get listOfDonations => _listOfDonations;
+
+  set listOfDonations(List value) {
     _listOfDonations = value;
   }
 

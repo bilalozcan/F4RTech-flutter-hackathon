@@ -109,8 +109,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
                               child: Icon(Icons.double_arrow_sharp),
                               onTap: () {
                                 _postDetailPageServices.postComment(
-                                    snapshot.data.uid,
-                                    widget._student.reference.id,
+                                    snapshot.data,
+                                    widget._student,
                                     content.text);
                               },
                             ),
