@@ -1,5 +1,6 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/ui/background.dart';
 import 'package:education/ui/webview_page/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,6 @@ import 'package:education/models/Student.dart';
 class DonatePage extends StatefulWidget {
   final usr.User user;
   final Student student;
-
 
   DonatePage(this.user, this.student);
 
@@ -47,15 +47,7 @@ class _DonatePageState extends State<DonatePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [ColorTable.swatch4, ColorTable.swatch5],
-                  begin: FractionalOffset.topLeft,
-                  end: FractionalOffset.bottomRight)),
-        ),
+        backgroundContainer(context),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -146,7 +138,7 @@ class _DonatePageState extends State<DonatePage> {
                 ],
               ),
               packageDetail(bagis),
-              goToLink(link, text,context, bagis)
+              goToLink(link, text, context, bagis)
             ],
           ),
         ),
@@ -154,14 +146,17 @@ class _DonatePageState extends State<DonatePage> {
     );
   }
 
-  Widget goToLink(link, title,BuildContext context ,bagis) {
+  Widget goToLink(link, title, BuildContext context, bagis) {
     return Column(
       children: [
         InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => WebviewPage(link, title, bagis, widget.student, widget.user)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebviewPage(
+                        link, title, bagis, widget.student, widget.user)));
           },
           child: Container(
             alignment: Alignment.center,
@@ -170,7 +165,7 @@ class _DonatePageState extends State<DonatePage> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 gradient: LinearGradient(
-                    colors: [ColorTable.swatch5, ColorTable.swatch4],
+                    colors: [ColorTable.swatch3, ColorTable.swatch4],
                     begin: FractionalOffset.topLeft,
                     end: FractionalOffset.bottomRight)),
             child: Padding(
@@ -211,7 +206,7 @@ class _DonatePageState extends State<DonatePage> {
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             blurRadius: 10, offset: Offset(0, 0), color: Colors.blue.shade800)
-      ], color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+      ], color: ColorTable.swatch1, borderRadius: BorderRadius.circular(20)),
     );
   }
 

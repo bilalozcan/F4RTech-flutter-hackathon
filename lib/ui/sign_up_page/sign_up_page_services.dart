@@ -64,40 +64,44 @@ class SignUpPageServices {
     if (name.length < 2) {
       return 'Lütfen geçerli bir isim giriniz';
     }
-    if (name.contains(RegExp("[0-9]"))) {
-      return "Lutfen gecerli bir isim giriniz";
+    if (name.contains(RegExp('[0-9]'))) {
+      return 'Lutfen gecerli bir isim giriniz';
     }
     return null;
   }
 
   String passwordValidator(String password) {
-    if (password.length < 6)
-      return "Şifrenizin 6 karakterden daha büyük olması gerekmektedir.";
-    if (!password.contains(RegExp("[0-9]")) ||
-        !password.contains(RegExp("[a-z]")) ||
-        !password.contains(RegExp("[A-Z]")))
-      return "Şifreniz en az bir sayı,bir büyük harf ve bir küçük harf içermelidir";
+    if (password.length < 6) {
+      return 'Şifrenizin 6 karakterden daha büyük olması gerekmektedir.';
+    }
+    if (!password.contains(RegExp('[0-9]')) ||
+        !password.contains(RegExp('[a-z]')) ||
+        !password.contains(RegExp('[A-Z]'))) {
+      return 'Şifreniz en az bir sayı,bir büyük harf ve bir küçük harf içermelidir';
+    }
     return null;
   }
 
   String repeatPasswordValidator(String repeatPassword, String password) {
-    if (repeatPassword != password)
-      return "Şifreler birbirleriyle eşleşmiyor";
-    else
+    if (repeatPassword != password) {
+      return 'Şifreler birbirleriyle eşleşmiyor';
+    } else {
       return null;
+    }
   }
 
   String emailValidator(String email) {
     if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email))
+        .hasMatch(email)) {
       return null;
-    else
-      return "Hata";
+    } else {
+      return 'Hata';
+    }
   }
 
   String phoneValidator(phone) {
-    RegExp regExp = new RegExp("(05|5)[0-9][0-9][0-9]([0-9]){6,6}");
+    var regExp = RegExp('(05|5)[0-9][0-9][0-9]([0-9]){6,6}');
     if (phone.length == 0) {
       return 'Lütfen Telefon Numarası Giriniz';
     } else if (!regExp.hasMatch(phone)) {

@@ -1,5 +1,6 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/ui/background.dart';
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,87 +18,93 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: FutureBuilder(
-            future: model.getUser(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: [
-                    Container(
-                      width: Constants.getWidth(context),
-                      height: Constants.getHeight(context) * 0.4,
-                      child: Stack(
-                        overflow: Overflow.visible,
-                        children: [
-                          ClipPath(
-                            clipper: MyCustomClipper(),
-                            child: Container(
-                              child: Image.asset(
-                                'assets/bagis.png',
-                              ),
-                              color: Color(0xff3c8f7c),
-                              width: double.infinity,
-                              height: Constants.getHeight(context) / 4,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 32,
-                            right: 20,
-                            child: topInfo(context, snapshot),
-                          ),
-                          Positioned(
-                            right: 15,
-                            top: Constants.getHeight(context) * 0.16,
-                            child: Image.asset(
-                              'assets/donation.png',
-                              width: 50,
-                            ),
-                          ),
-                          //burası ranklar verildikten sonra widgetlara ayrılacak
-                          Positioned(
-                              top: Constants.getHeight(context) / 7,
-                              left: 10,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    width: 105,
-                                    height: 105,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(52),
-                                      color: Color(0xff3c8f7c),
-                                    ),
-                                  ),
-                                  ClipRRect(
-                                    child: Image.asset(
-                                      'assets/5.png',
-                                      height: 100,
-                                    ),
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      ),
-                    ),
-                    Column(
+    return Stack(
+      children: [
+        backgroundContainer(context),
+        Scaffold(
+            backgroundColor: Colors.transparent,
+            body: FutureBuilder(
+                future: model.getUser(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
                       children: [
-                        Listwidget(model),
+                        Container(
+                          width: Constants.getWidth(context),
+                          height: Constants.getHeight(context) * 0.4,
+                          child: Stack(
+                            overflow: Overflow.visible,
+                            children: [
+                              ClipPath(
+                                clipper: MyCustomClipper(),
+                                child: Container(
+                                  child: Image.asset(
+                                    'assets/bagis.png',
+                                  ),
+                                  color: ColorTable.swatch3.withOpacity(0.5),
+                                  width: double.infinity,
+                                  height: Constants.getHeight(context) / 4,
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 32,
+                                right: 20,
+                                child: topInfo(context, snapshot),
+                              ),
+                              Positioned(
+                                right: 15,
+                                top: Constants.getHeight(context) * 0.16,
+                                child: Image.asset(
+                                  'assets/donation.png',
+                                  width: 50,
+                                ),
+                              ),
+                              //burası ranklar verildikten sonra widgetlara ayrılacak
+                              Positioned(
+                                  top: Constants.getHeight(context) / 7,
+                                  left: 10,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        width: 105,
+                                        height: 105,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(52),
+                                          color: ColorTable.swatch3,
+                                        ),
+                                      ),
+                                      ClipRRect(
+                                        child: Image.asset(
+                                          'assets/5.png',
+                                          height: 100,
+                                        ),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Listwidget(model),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                );
-              } else {
-                return Center(
-                  child: LoadingBouncingGrid.square(
-                    size: 30,
-                    backgroundColor: Colors.white,
-                  ),
-                );
-              }
-            }));
+                    );
+                  } else {
+                    return Center(
+                      child: LoadingBouncingGrid.square(
+                        size: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    );
+                  }
+                })),
+      ],
+    );
   }
 
   Container topInfo(BuildContext context, AsyncSnapshot snapshot) {
@@ -157,9 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
       padding: const EdgeInsets.only(top: 0),
       child: Container(
         height: Constants.getHeight(context) / 2,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
+        decoration: BoxDecoration(),
         child: Column(
           children: [
             Row(
@@ -172,14 +177,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     });
                   },
                   child: Container(
-                    height: Constants.getHeight(context) / 28.44,
+                    height: Constants.getHeight(context) / 20,
                     width: Constants.getWidth(context) / 2.74,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == false
-                            ? Border.all(width: 2, color: Color(0xff3c8f7c))
-                            : Border.all(width: 2, color: Colors.red),
+                            ? Border.all(width: 2, color: ColorTable.swatch6)
+                            : Border.all(width: 2, color: ColorTable.swatch4),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -200,14 +205,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     });
                   },
                   child: Container(
-                    height: Constants.getHeight(context) / 28.44,
+                    height: Constants.getHeight(context) / 20,
                     width: Constants.getWidth(context) / 2.74,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == true
-                            ? Border.all(width: 2, color: Color(0xff3c8f7c))
-                            : Border.all(width: 2, color: Colors.red),
+                            ? Border.all(width: 2, color: ColorTable.swatch6)
+                            : Border.all(width: 2, color: ColorTable.swatch4),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),

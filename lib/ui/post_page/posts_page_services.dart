@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education/models/Donation.dart';
 import 'package:education/models/Student.dart';
 import 'package:education/models/User.dart' as usr;
 import 'package:education/services/firestoredbservice.dart';
@@ -24,6 +23,7 @@ class PostPageServices {
       return null;
     }
   }
+
   Future<dynamic> initUser(String uid) async {
     var firestoreDBService = FirestoreDBService();
     var result = await firestoreDBService.getUser(uid);
@@ -33,9 +33,9 @@ class PostPageServices {
       return null;
     }
   }
-  Future likeorDislike(Student student, usr.User user) async{
+
+  Future likeorDislike(Student student, usr.User user) async {
     var result = firestoreDBService.addLikeorDislikeStudent(student, user);
     var result2 = firestoreDBService.addLikeorDislikeUser(student, user);
   }
-
 }

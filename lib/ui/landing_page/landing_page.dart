@@ -28,81 +28,76 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      backgroundColor: ColorTable.swatch2,
-      body: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: PageView(
-          controller: _pageController,
-          scrollDirection: Axis.horizontal,
-          children: [
-            Scaffold(
-              backgroundColor: ColorTable.swatch2,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      width: Constants.getWidth(context),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                constraints: BoxConstraints(
-                                    maxWidth:
-                                        Constants.getWidth(context) * 0.5),
-                                child: Text(
-                                    'Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.',
-                                    style: GoogleFonts.roboto(
-                                        color: ColorTable.textColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15)),
-                              ),
-                              Image.asset(
-                                'assets/landing1.png',
-                                height: Constants.getHeight(context) / 2.1,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+    return ScrollConfiguration(
+      behavior: MyBehavior(),
+      child: PageView(
+        controller: _pageController,
+        scrollDirection: Axis.horizontal,
+        children: [
+          Scaffold(
+            backgroundColor: Color(0xffe8ffff),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: Constants.getWidth(context),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: Constants.getWidth(context) * 0.5),
+                              child: Text(
+                                  'Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.',
+                                  style: GoogleFonts.roboto(
+                                      color: ColorTable.textColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15)),
+                            ),
+                            Image.asset(
+                              'assets/landing1.png',
+                              height: Constants.getHeight(context) / 2.1,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Container(
-                      height: Constants.getHeight(context) / 2,
-                      width: Constants.getWidth(context) / 1.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'F 4 R - E D U C A T I O N',
-                            style: GoogleFonts.roboto(
-                                color: ColorTable.textColor,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 25),
-                          ),
-                          Image.asset(
-                            'assets/login.png',
-                            height: Constants.getHeight(context) / 4.74,
-                          ),
-                          textRow('Keşfetmeye hazır mısın?'),
-                          ButtonInkWell(() {
-                            page();
-                          }, 'Keşfet'),
-                        ],
-                      ),
+                  ),
+                  Container(
+                    height: Constants.getHeight(context) / 2,
+                    width: Constants.getWidth(context) / 1.5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'F 4 R - E D U C A T I O N',
+                          style: GoogleFonts.roboto(
+                              color: ColorTable.textColor,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 24),
+                        ),
+                        Image.asset(
+                          'assets/login.png',
+                          height: Constants.getHeight(context) / 4.74,
+                        ),
+                        textRow('Keşfetmeye hazır mısın?'),
+                        ButtonInkWell(() {
+                          page();
+                        }, 'Keşfet'),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            LoginPage()
-          ],
-        ),
+          ),
+          LoginPage()
+        ],
       ),
     );
   }
