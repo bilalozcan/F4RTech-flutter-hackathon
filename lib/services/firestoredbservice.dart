@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education/models/Comment.dart';
 import 'package:education/models/Student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:education/models/User.dart' as usr;
@@ -73,6 +74,20 @@ class FirestoreDBService {
         _student = Student.fromSnapshot(result);
         return _student;
       }
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  Future<dynamic> postComment(Comment comment) async {
+    var shareName = DateTime.now().microsecondsSinceEpoch.toString();
+    try {
+      var result = await FirebaseFirestore.instance
+          .collection('Comments')
+          .doc(shareName)
+          .set(comment.toMap());
+      return true;
     } catch (e) {
       print(e);
       return e;

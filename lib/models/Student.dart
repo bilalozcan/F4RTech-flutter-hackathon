@@ -120,9 +120,9 @@ class Student {
     _approvalStatus = value;
   }
 
-  List<String> get picturesOfStudent => _picturesOfStudent;
+  List get picturesOfStudent => _picturesOfStudent;
 
-  set picturesOfStudent(List<String> value) {
+  set picturesOfStudent(List value) {
     _picturesOfStudent = value;
   }
 
