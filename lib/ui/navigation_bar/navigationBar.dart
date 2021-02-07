@@ -54,14 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           /// Liderlik
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(FontAwesomeIcons.trophy),
             title: Text('Liderlik'),
             selectedColor: Colors.purple,
           ),
 
           /// Anasayfa
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(FontAwesomeIcons.home),
             title: Text('Anasayfa'),
             selectedColor: Colors.pink,
           ),
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // More
           SalomonBottomBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(FontAwesomeIcons.ellipsisH),
             title: Text('More'),
             selectedColor: Colors.teal,
           ),
