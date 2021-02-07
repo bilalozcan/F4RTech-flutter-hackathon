@@ -80,12 +80,8 @@ class _ShareContentState extends State<ShareContent> {
 
   Future<dynamic> postImage(Asset imageFile) async {
     var fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    var reference = FirebaseStorage.instance
-        .ref()
-        .child('Students')
-        .child('student' + fileName + '.jpg');
-    var uploadTask =
-        reference.putData((await imageFile.getByteData()).buffer.asUint8List());
+    var reference = FirebaseStorage.instance.ref().child('Students').child('student' + fileName + '.jpg');
+    var uploadTask = reference.putData((await imageFile.getByteData()).buffer.asUint8List());
     var storageTaskSnapshot = await uploadTask.onComplete;
     print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
@@ -99,9 +95,7 @@ class _ShareContentState extends State<ShareContent> {
         DateTime.now(),
         model.studentName.text,
         model.studentPhone.text,
-        model.studentTC.text.isNotEmpty
-            ? model.studentTC.text
-            : 'Bilgi Verilmedi',
+        model.studentTC.text.isNotEmpty ? model.studentTC.text : 'Bilgi Verilmedi',
         int.parse(model.studentAge.text),
         model.studentAddress.text,
         imageUrls,
@@ -112,10 +106,19 @@ class _ShareContentState extends State<ShareContent> {
         [],
         int.parse(model.studentClass.text),
         model.explanation.text,
+<<<<<<< Updated upstream
         []);
     var shareName = DateTime.now().microsecondsSinceEpoch.toString();
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);
+=======
+        [],
+        [],
+        0,
+        0);
+
+    var studentInfo = FirebaseFirestore.instance.collection('Students').doc(shareName);
+>>>>>>> Stashed changes
     await studentInfo.set(db.toMap());
     await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
       'listOfPost': FieldValue.arrayUnion([shareName])
@@ -134,20 +137,24 @@ class _ShareContentState extends State<ShareContent> {
       }).catchError((err) {
         print(err);
       });
+<<<<<<< Updated upstream
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(user.uid)
           .update({
         'listOfPost': FieldValue.arrayUnion([shareName])
+=======
+      await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
+        'point': FieldValue.increment(50),
+        'listOfPost': FieldValue.arrayUnion([shareName]),
+>>>>>>> Stashed changes
       });
     }
   }
 
   Future delay() async {
     await Future.delayed(Duration(milliseconds: 4000), () {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
-          (Route<dynamic> route) => true);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => true);
       bottomNavBarSelectedIndex = 1;
     });
   }
@@ -169,6 +176,7 @@ class _ShareContentState extends State<ShareContent> {
             height: size.height,
             child: Column(
               children: [
+<<<<<<< Updated upstream
                 customAppBar(context),
                 Expanded(
                   child: Container(
@@ -219,6 +227,42 @@ class _ShareContentState extends State<ShareContent> {
                               TextInputType.number, 2),
                           userInput(model.explanation, 'Açıklama',
                               TextInputType.text, 400),
+=======
+                Expanded(
+                  child: Container(
+                    height: Constants.getHeight(context) * 0.8,
+                    width: Constants.getWidth(context) * 0.9,
+                    padding: EdgeInsets.only(left: 25, right: 25),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white.withOpacity(0.1)),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            'Öğrenci Bildir',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(height: 2, width: 50, color: ColorTable.swatch5),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          userInput(model.studentName, 'Öğrenci Adı', TextInputType.text, 50),
+                          userInput(model.studentPhone, 'Telefon Numarası', TextInputType.number, 11),
+                          userInput(model.studentTC, 'TC Kimlik Numarası (İsteğe Bağlı)', TextInputType.number, 11),
+                          userInput(model.studentAge, 'Yaşı', TextInputType.number, 2),
+                          userInput(model.studentAddress, 'Adresi', TextInputType.text, 80),
+                          userInput(model.studentClass, 'Sınıf', TextInputType.number, 2),
+                          userInput(model.explanation, 'Açıklama', TextInputType.text, 400),
+>>>>>>> Stashed changes
                           Container(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
@@ -232,24 +276,36 @@ class _ShareContentState extends State<ShareContent> {
                                   child: Container(
                                     height: 44,
                                     width: 44,
+<<<<<<< Updated upstream
                                     child: Icon(FontAwesomeIcons.image,
                                         color: Colors.blueGrey),
+=======
+                                    child: Icon(FontAwesomeIcons.image, color: Colors.blueGrey),
+>>>>>>> Stashed changes
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 30),
                                   child: Text(
                                     '${images.length}/4',
+<<<<<<< Updated upstream
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 14),
+=======
+                                    style: TextStyle(color: Colors.black, fontSize: 14),
+>>>>>>> Stashed changes
                                   ),
                                 ),
                               ],
                             ),
                           ),
+<<<<<<< Updated upstream
                           images.isEmpty
                               ? SizedBox()
                               : Container(child: buildGridView()),
+=======
+                          images.isEmpty ? SizedBox() : Container(child: buildGridView()),
+>>>>>>> Stashed changes
                           SizedBox(height: Constants.getHeight(context) * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -272,6 +328,7 @@ class _ShareContentState extends State<ShareContent> {
   }
 
   Widget shareButton() {
+<<<<<<< Updated upstream
     return Stack(
       children: [
         Shimmer.fromColors(
@@ -282,6 +339,31 @@ class _ShareContentState extends State<ShareContent> {
             height: 80,
             decoration: BoxDecoration(
                 color: Colors.red, borderRadius: BorderRadius.circular(20)),
+=======
+    return InkWell(
+      onTap: () async {
+        if (firstpress) {
+          firstpress = false;
+
+          await postPaylasim();
+          setState(() {
+            Navigator.of(context)
+                .pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => (loadingIcon(context))), (Route<dynamic> route) => true);
+            delay();
+          });
+        }
+      },
+      child: Stack(
+        children: [
+          Shimmer.fromColors(
+            baseColor: ColorTable.swatch3,
+            highlightColor: ColorTable.swatch4,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
+            ),
+>>>>>>> Stashed changes
           ),
         ),
         InkWell(
@@ -302,11 +384,17 @@ class _ShareContentState extends State<ShareContent> {
           },
           child: Container(
               alignment: Alignment.center,
+<<<<<<< Updated upstream
               width: 80,
               height: 80,
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20)),
+=======
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10)),
+>>>>>>> Stashed changes
               child: Icon(FontAwesomeIcons.check, color: Colors.white)),
         ),
       ],
