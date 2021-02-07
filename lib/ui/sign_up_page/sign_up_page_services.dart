@@ -34,8 +34,22 @@ class SignUpPageServices {
         }
       } else if (signup != null) {
         final user = FirebaseAuth.instance.currentUser;
-        var db = usr.User.Info(fullName, phone, email, username, user.uid, 0,
-            DateTime.now(), DateTime.now(), <String>[], <String>[], 0, 0, 0, 0, []);
+        var db = usr.User.Info(
+            fullName,
+            phone,
+            email,
+            username,
+            user.uid,
+            0,
+            DateTime.now(),
+            DateTime.now(),
+            <String>[],
+            <String>[],
+            0,
+            0,
+            0,
+            0,
+            []);
         await FirebaseFirestore.instance
             .collection('Users')
             .doc(user.uid)
@@ -82,5 +96,13 @@ class SignUpPageServices {
       return "Hata";
   }
 
-  String phoneValidator(String phone) {}
+  String phoneValidator(phone) {
+    RegExp regExp = new RegExp("(05|5)[0-9][0-9][0-9]([0-9]){6,6}");
+    if (phone.length == 0) {
+      return 'Lütfen Telefon Numarası Giriniz';
+    } else if (!regExp.hasMatch(phone)) {
+      return 'Geçersiz Telefon Numarası';
+    }
+    return null;
+  }
 }
