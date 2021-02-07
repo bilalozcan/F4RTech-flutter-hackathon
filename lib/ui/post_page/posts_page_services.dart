@@ -9,8 +9,9 @@ class PostPageServices {
   Future<List<dynamic>> getAllStudent() async {
     var studentList = [];
     try {
-      var result =
-          await FirebaseFirestore.instance.collection('Students').orderBy('uid',descending: true).get();
+
+      var result = await FirebaseFirestore.instance.collection('Students').orderBy('uid', descending: true).get();
+
       if (result != null) {
         result.docs.forEach((element) {
           studentList.add(Student.fromSnapshot(element));

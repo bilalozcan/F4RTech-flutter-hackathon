@@ -5,21 +5,16 @@ import 'package:education/app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-Widget theFirstTree(context, number, imageUrl, size, username, point, icon,
-    [positionLeft, positionRight, positionTop]) {
+Widget theFirstTree(context, number, imageUrl, size, username, point, icon, [positionLeft, positionRight, positionTop]) {
   return Positioned(
     left: positionLeft,
     top: positionTop,
     right: positionRight,
     child: Column(
       children: [
-        SizedBox(
-          height: 30,
-        ),
         Text(
           number,
-          style: TextStyle(
-              color: ColorTable.swatch1, fontSize: 24, fontFamily: 'Poppins'),
+          style: TextStyle(color: ColorTable.swatch1, fontSize: Constants.getWidth(context) * 0.05, fontFamily: 'Poppins'),
         ),
         Icon(
           icon,
@@ -33,24 +28,25 @@ Widget theFirstTree(context, number, imageUrl, size, username, point, icon,
         SizedBox(
           height: Constants.getHeight(context) * 0.01,
         ),
-        nameAndPoint(username, point)
+        nameAndPoint(username, point, context)
       ],
     ),
   );
 }
 
-Widget nameAndPoint(username, point) {
+Widget nameAndPoint(username, point, context) {
   return Column(
     children: [
-      Text(
-        username,
-        style: TextStyle(
-            color: ColorTable.swatch1, fontSize: 14, fontFamily: 'Poppins'),
+      Container(
+        constraints: BoxConstraints(maxWidth: Constants.getWidth(context) * 0.17),
+        child: Text(
+          username,
+          style: TextStyle(color: ColorTable.swatch1, fontSize: Constants.getWidth(context) * 0.03, fontFamily: 'Poppins'),
+        ),
       ),
       Text(
         point,
-        style:
-            TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),
+        style: TextStyle(color: Colors.white, fontSize: Constants.getWidth(context) * 0.04, fontFamily: 'Poppins'),
       ),
     ],
   );
@@ -63,8 +59,8 @@ Widget imageWidget(imageUrl, size) {
       Container(
         width: size + 5.0,
         height: size + 5.0,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(size / 2)),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(size / 2)),
+
       ),
       ClipRRect(
         borderRadius: BorderRadius.circular(size / 2),
@@ -103,8 +99,8 @@ Widget listViewOrderHeader(int index) {
     children: [
       Text(
         (index + 4).toString(),
-        style: TextStyle(
-            color: ColorTable.swatch1, fontSize: 17, fontFamily: 'Poppins'),
+        style: TextStyle(color: ColorTable.swatch1, fontSize: 17, fontFamily: 'Poppins'),
+
       ),
       Icon(
         FontAwesomeIcons.chevronUp,
@@ -119,9 +115,8 @@ Widget listViewInfoBody(BuildContext context, name, point) {
   return Container(
     height: 60,
     width: Constants.getWidth(context) * 0.75,
-    decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(30)),
+    decoration: BoxDecoration(color: Colors.white.withOpacity(0.5), borderRadius: BorderRadius.circular(30)),
+
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -140,7 +135,8 @@ Widget listViewInfoBody(BuildContext context, name, point) {
             ),
             Text(
               name,
-              style: TextStyle(color: ColorTable.swatch5, fontSize: 17),
+              style: TextStyle(color: ColorTable.swatch5, fontSize: Constants.getWidth(context) * 0.042),
+
             ),
           ],
         ),
@@ -164,8 +160,8 @@ Widget customAppBar(BuildContext context) {
       children: [
         Text(
           'Liderlik Tablosu',
-          style: TextStyle(
-              color: ColorTable.swatch2, fontSize: 22, fontFamily: 'Poppins'),
+          style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Poppins'),
+
         ),
       ],
     ),

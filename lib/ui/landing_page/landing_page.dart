@@ -49,14 +49,9 @@ class _LandingPageState extends State<LandingPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              constraints: BoxConstraints(
-                                  maxWidth: Constants.getWidth(context) * 0.5),
-                              child: Text(
-                                  'Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.',
-                                  style: GoogleFonts.roboto(
-                                      color: ColorTable.textColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15)),
+                              constraints: BoxConstraints(maxWidth: Constants.getWidth(context) * 0.5),
+                              child: Text('Yardımseverlerle, öğrencileri buluşturduğumuz uygulamamıza hoş geldin.',
+                                  style: GoogleFonts.roboto(color: ColorTable.textColor, fontWeight: FontWeight.w700, fontSize: 15)),
                             ),
                             Image.asset(
                               'assets/landing1.png',
@@ -66,6 +61,7 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ],
                     ),
+
                   ),
                   Container(
                     height: Constants.getHeight(context) / 2,
@@ -75,11 +71,10 @@ class _LandingPageState extends State<LandingPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'F 4 R - E D U C A T I O N',
+                          'Back to School',
                           style: GoogleFonts.roboto(
-                              color: ColorTable.textColor,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 24),
+                              color: ColorTable.textColor, fontWeight: FontWeight.w900, fontSize: Constants.getHeight(context) * 0.037),
+
                         ),
                         Image.asset(
                           'assets/login.png',
@@ -130,6 +125,5 @@ class _LandingPageState extends State<LandingPage> {
 
 class MyBehavior extends ScrollBehavior {
   @override
-  ScrollPhysics getScrollPhysics(BuildContext context) =>
-      ClampingScrollPhysics();
+  ScrollPhysics getScrollPhysics(BuildContext context) => ClampingScrollPhysics();
 }

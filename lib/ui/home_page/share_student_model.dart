@@ -15,13 +15,13 @@ class ShareStudentModel {
   TextEditingController explanation = TextEditingController();
 }
 
+
 Widget loadingIcon(BuildContext context) {
   return Center(
     child: Container(
       width: Constants.getWidth(context),
       height: Constants.getHeight(context),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Color(0xff0f3057)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xff0f3057)),
       child: LoadingBouncingGrid.square(
         size: 30,
         backgroundColor: Color(0xff8cfffb),
@@ -57,13 +57,14 @@ Widget userInput(_controller, text, textInputType, length) {
       inputFormatters: [
         LengthLimitingTextInputFormatter(length),
       ],
-      cursorColor: ColorTable.swatch6,
+      cursorColor: ColorTable.swatch4,
       autofocus: false,
       keyboardType: textInputType,
-      style: TextStyle(fontSize: 15.0, color: ColorTable.swatch6),
+      style: TextStyle(fontSize: 15.0, color: ColorTable.swatch4),
       decoration: InputDecoration(
         hintText: text,
-        hintStyle: TextStyle(color: Color(0xff435189)),
+        hintStyle: TextStyle(color: ColorTable.swatch4),
+
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.only(left: 14.0, bottom: 6.0, top: 8.0),
@@ -79,3 +80,4 @@ Widget userInput(_controller, text, textInputType, length) {
     ),
   );
 }
+

@@ -1,10 +1,9 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
-
 import 'package:education/app/helper.dart';
-
+import 'package:education/services/authentication.dart';
 import 'package:education/ui/background.dart';
-
+import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,17 +21,16 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: FutureBuilder(
+            future: model.user,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    Stack(
 
-    return Stack(
-      children: [
-        backgroundContainer(context),
-        Scaffold(
-            backgroundColor: Colors.transparent,
-            body: FutureBuilder(
-                future: model.getUser(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
                       children: [
                         Container(
                           width: Constants.getWidth(context),
@@ -93,8 +91,90 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
 
                         ),
+
+    return Stack(
+      children: [
+        backgroundContainer(context),
+        Scaffold(
+            backgroundColor: Colors.transparent,
+            body: FutureBuilder(
+                future: model.getUser(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: Constants.getWidth(context),
+                          height: Constants.getHeight(context) * 0.4,
+                          child: Stack(
+                            overflow: Overflow.visible,
+                            children: [
+                              ClipPath(
+                                clipper: MyCustomClipper(),
+                                child: Container(
+                                  child: Image.asset(
+                                    'assets/bagis.png',
+                                  ),
+                                  color: ColorTable.swatch4.withOpacity(0.6),
+                                  width: double.infinity,
+                                  height: Constants.getHeight(context) / 4,
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 32,
+                                right: 20,
+                                child: topInfo(context, snapshot),
+                              ),
+                              Positioned(
+                                right: 15,
+                                top: Constants.getHeight(context) * 0.16,
+                                child: Image.asset(
+                                  'assets/donation.png',
+                                  width: 50,
+                                ),
+                              ),
+                              Positioned(
+                                  top: Constants.getHeight(context) / 7,
+                                  left: 10,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        width: 105,
+                                        height: 105,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(52),
+                                          color: ColorTable.swatch3,
+                                        ),
+                                      ),
+                                      ClipRRect(
+                                        child: Image.asset(
+                                          '${Helper.UserIconLevel(snapshot.data)[1]}',
+                                          height: 100,
+                                        ),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        ),
                         Column(
                           children: [
+                            FlatButton(
+                              color: ColorTable.swatch4.withOpacity(0.6),
+                              child: Text(
+                                'Çıkış yap',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                var _firebaseAuth = Authentication();
+                                _firebaseAuth.signOut();
+                                Navigator.of(context)
+                                    .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (Route<dynamic> route) => false);
+                              },
+                            ),
+                            SizedBox(height: 10),
                             Listwidget(model),
                           ],
                         )
@@ -141,36 +221,31 @@ class _ProfilePageState extends State<ProfilePage> {
             indent: 50,
             color: Colors.black,
           ),
-          userInfo('E-posta: ', snapshot.data.email, 12.0, FontWeight.w500),
-          Divider(
-            height: 5,
-            endIndent: 50,
-            indent: 50,
-            color: Colors.black,
-          ),
-          userInfo(
-              'Telephone: ', snapshot.data.telephone, 12.0, FontWeight.w500),
+          userInfo('Telephone: ', snapshot.data.telephone, 12.0, FontWeight.w500),
+
         ],
       ),
     );
   }
 
+
   Text userInfo(String text, detail, size, weight) {
     return Text(
       '$text ${detail}',
-      style: GoogleFonts.poppins(
-          color: ColorTable.textColor.withOpacity(1),
-          fontSize: size,
-          fontWeight: weight),
+      style: GoogleFonts.poppins(color: ColorTable.textColor.withOpacity(1), fontSize: size, fontWeight: weight),
     );
   }
+
 
   Padding Listwidget(ProfilePageModel model) {
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: Container(
-        height: Constants.getHeight(context) / 2,
-        decoration: BoxDecoration(),
+        height: Constants.getHeight(context) / 2.5,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(color: ColorTable.swatch1.withOpacity(0.2), blurRadius: 10)
+        ]),
+        height: Constants.getHeight(context) * 0.45,
         child: Column(
           children: [
             Row(
@@ -189,6 +264,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == false
+
                             ? Border.all(width: 2, color: ColorTable.swatch6)
                             : Border.all(width: 2, color: ColorTable.swatch4),
                         boxShadow: [
@@ -200,7 +276,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                       'Eklenen Öğrenciler',
                       style: GoogleFonts.poppins(
-                          color: ColorTable.textColor, fontSize: 14),
+                            ? Border.all(width: 2, color: ColorTable.swatch6)
+                            : Border.all(width: 2, color: ColorTable.swatch4),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8)]),
+                    child: Center(
+                        child: Text(
+                      'Eklenen Öğrenciler',
+                      style: GoogleFonts.poppins(color: ColorTable.textColor, fontSize: 14),
+
                     )),
                   ),
                 ),
@@ -217,6 +300,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == true
+
                             ? Border.all(width: 2, color: ColorTable.swatch6)
                             : Border.all(width: 2, color: ColorTable.swatch4),
                         boxShadow: [
@@ -228,15 +312,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                       'Yapılan  Bağışlar',
                       style: GoogleFonts.poppins(
-                          color: ColorTable.textColor, fontSize: 14),
+                          color: ColorTable.textColor, fontSize: 11),
+                            ? Border.all(width: 2, color: ColorTable.swatch6)
+                            : Border.all(width: 2, color: ColorTable.swatch4),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8)]),
+                    child: Center(
+                        child: Text(
+                      'Yapılan  Bağışlar',
+                      style: GoogleFonts.poppins(color: ColorTable.textColor, fontSize: 14),
                     )),
                   ),
                 )
               ],
             ),
-            ListMethod(model.listType == false
-                ? model.user.listOfPost.length
-                : model.user.listOfDonationsMade.length),
+            ListMethod(model.listType == false ? model.user.listOfPost.length : model.user.listOfDonationsMade.length),
+
           ],
         ),
       ),
@@ -253,9 +343,8 @@ class _ProfilePageState extends State<ProfilePage> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: model.listType == false
-                  ? AddStudentWidget(index)
-                  : YapilanBagis(index),
+              child: model.listType == false ? AddStudentWidget(index) : YapilanBagis(index),
+
             );
           }),
     );
@@ -266,9 +355,7 @@ class _ProfilePageState extends State<ProfilePage> {
       width: Constants.getWidth(context) / 2,
       height: Constants.getHeight(context) / 15,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+          borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -287,6 +374,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Icon(
                     Icons.account_circle,
                     color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: FutureBuilder(
+                    future: model.firestoreDBService.getStudent(model.user.listOfPost[index]),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          snapshot.data.fullname,
+                          style: GoogleFonts.poppins(fontSize: 15, color: ColorTable.textColor, fontWeight: FontWeight.w600),
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
                   ),
                 ),
                 Padding(
@@ -361,14 +464,13 @@ class _ProfilePageState extends State<ProfilePage> {
   Container YapilanBagis(index) {
     return Container(
       width: Constants.getWidth(context) / 2,
-      height: Constants.getHeight(context) / 15,
+      height: Constants.getHeight(context) / 8,
+      color: ColorTable.swatch2.withOpacity(0.5),
+
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+          borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
       child: FutureBuilder(
-        future: model.firestoreDBService
-            .getDonations(model.user.listOfDonationsMade[index]),
+        future: model.firestoreDBService.getDonations(model.user.listOfDonationsMade[index]),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Row(
@@ -395,10 +497,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
                           '${snapshot.data.amount} ₺',
-                          style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              color: ColorTable.textColor,
-                              fontWeight: FontWeight.w600),
+                          style: GoogleFonts.poppins(fontSize: 15, color: ColorTable.textColor, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],

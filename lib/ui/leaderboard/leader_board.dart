@@ -1,3 +1,5 @@
+import 'package:education/services/authentication.dart';
+import 'package:education/ui/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
@@ -51,14 +53,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '2',
                                       'assets/2nd.png',
-                                      95.0,
-                                      snapshot.data.length < 2
-                                          ? '-'
-                                          : snapshot.data[1]['fullname'],
-                                      snapshot.data.length < 2
-                                          ? '-'
-                                          : snapshot.data[1]['point']
-                                              .toString(),
+                                      Constants.getHeight(context) * 0.12,
+                                      snapshot.data.length < 2 ? '-' : snapshot.data[1]['fullname'],
+                                      snapshot.data.length < 2 ? '-' : snapshot.data[1]['point'].toString(),
+
                                       FontAwesomeIcons.chevronUp,
                                       -Constants.getHeight(context) * 0.24,
                                       -Constants.getHeight(context) * 0.01,
@@ -68,14 +66,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '3',
                                       'assets/3th.png',
-                                      95.0,
-                                      snapshot.data.length < 3
-                                          ? '-'
-                                          : snapshot.data[2]['fullname'],
-                                      snapshot.data.length < 3
-                                          ? '-'
-                                          : snapshot.data[2]['point']
-                                              .toString(),
+                                      Constants.getHeight(context) * 0.12,
+                                      snapshot.data.length < 3 ? '-' : snapshot.data[2]['fullname'],
+                                      snapshot.data.length < 3 ? '-' : snapshot.data[2]['point'].toString(),
+
                                       FontAwesomeIcons.chevronDown,
                                       -Constants.getHeight(context) * 0.01,
                                       -Constants.getHeight(context) * 0.24,
@@ -85,7 +79,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '1',
                                       'assets/1st.png',
-                                      120.0,
+                                      Constants.getHeight(context) * 0.16,
+
                                       snapshot.data[0]['fullname'],
                                       snapshot.data[0]['point'].toString(),
                                       FontAwesomeIcons.crown,
@@ -113,10 +108,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               return listViewContainer(
-                                  context,
-                                  index,
-                                  snapshot.data[index + 3]['fullname'],
-                                  snapshot.data[index + 3]['point'].toString());
+                                  context, index, snapshot.data[index + 3]['fullname'], snapshot.data[index + 3]['point'].toString());
+
                             },
                           ),
                         ],

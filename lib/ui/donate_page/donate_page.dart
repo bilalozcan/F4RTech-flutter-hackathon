@@ -50,6 +50,11 @@ class _DonatePageState extends State<DonatePage> {
         backgroundContainer(context),
         Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+          ),
+
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.light,
             child: Container(
@@ -81,27 +86,12 @@ class _DonatePageState extends State<DonatePage> {
                             });
                           },
                           children: <Widget>[
+                            pageWidgets(context, 'Destek Paketi 1', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/12.png',
+                                'https://www.shopier.com/ShowProductNew/products.php?id=5944810', 10),
                             pageWidgets(
-                                context,
-                                'Destek Paketi 1',
-                                'Çorbada sizin de tuzunuz bulunsun.',
-                                'assets/12.png',
-                                'https://www.shopier.com/ShowProductNew/products.php?id=5944810',
-                                10),
-                            pageWidgets(
-                                context,
-                                'Destek Paketi 2',
-                                'Çorbada sizin de tuzunuz bulunsun.',
-                                'assets/11.png',
-                                'https://shopier.com/5944854',
-                                25),
-                            pageWidgets(
-                                context,
-                                'Destek Paketi 3',
-                                'Çorbada sizin de tuzunuz bulunsun.',
-                                'assets/10.png',
-                                'https://www.shopier.com/ShowProductNew/products.php?id=5949650',
-                                50),
+                                context, 'Destek Paketi 2', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/11.png', 'https://shopier.com/5944854', 25),
+                            pageWidgets(context, 'Destek Paketi 3', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/10.png',
+                                'https://www.shopier.com/ShowProductNew/products.php?id=5949650', 50),
                           ],
                         ),
                       ),
@@ -116,8 +106,7 @@ class _DonatePageState extends State<DonatePage> {
     );
   }
 
-  Widget pageWidgets(
-      BuildContext context, text, snippet, imageUrl, link, bagis) {
+  Widget pageWidgets(BuildContext context, text, snippet, imageUrl, link, bagis) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(left: 30.0, right: 30, top: 25),
@@ -152,11 +141,7 @@ class _DonatePageState extends State<DonatePage> {
         InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WebviewPage(
-                        link, title, bagis, widget.student, widget.user)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => WebviewPage(link, title, bagis, widget.student, widget.user)));
           },
           child: Container(
             alignment: Alignment.center,
@@ -165,18 +150,15 @@ class _DonatePageState extends State<DonatePage> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 gradient: LinearGradient(
-                    colors: [ColorTable.swatch3, ColorTable.swatch4],
-                    begin: FractionalOffset.topLeft,
-                    end: FractionalOffset.bottomRight)),
+                    colors: [ColorTable.swatch3, ColorTable.swatch4], begin: FractionalOffset.topLeft, end: FractionalOffset.bottomRight)),
+
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Destek Verin',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+
               ),
             ),
           ),
@@ -189,24 +171,18 @@ class _DonatePageState extends State<DonatePage> {
     return Text(
       '♦ Öğrencimizin eğitimine $bagis TL destek vererek katkıda bulunun.',
       textAlign: TextAlign.start,
-      style: TextStyle(
-          height: 1.7,
-          fontSize: 14,
-          color: Colors.white,
-          fontWeight: FontWeight.bold),
+      style: TextStyle(height: 1.7, fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 
   Widget lightBar(BuildContext context) {
     return Container(
       height: 3,
-      width: MediaQuery.of(context).size.width < 350
-          ? MediaQuery.of(context).size.width * 0.9
-          : MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            blurRadius: 10, offset: Offset(0, 0), color: Colors.blue.shade800)
-      ], color: ColorTable.swatch1, borderRadius: BorderRadius.circular(20)),
+      width: MediaQuery.of(context).size.width < 350 ? MediaQuery.of(context).size.width * 0.9 : MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+          boxShadow: [BoxShadow(blurRadius: 10, offset: Offset(0, 0), color: Colors.blue.shade800)],
+          color: ColorTable.swatch1,
+          borderRadius: BorderRadius.circular(20)),
     );
   }
 
@@ -219,8 +195,7 @@ class _DonatePageState extends State<DonatePage> {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 8,

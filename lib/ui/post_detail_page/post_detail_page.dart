@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 class PostDetailPage extends StatefulWidget {
   final Student _student;
@@ -26,8 +27,7 @@ class PostDetailPage extends StatefulWidget {
 }
 
 class _PostDetailPageState extends State<PostDetailPage> {
-  final PostDetailPageServices _postDetailPageServices =
-      PostDetailPageServices();
+  final PostDetailPageServices _postDetailPageServices = PostDetailPageServices();
   final PostPageServices _postPageServices = PostPageServices();
   final Authentication _authentication = Authentication();
   final FirestoreDBService _firestoreDBService = FirestoreDBService();
@@ -45,9 +45,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
           appBar: AppBar(
             title: Text(
               '${widget._student.fullname}',
-              style: GoogleFonts.libreBaskerville(color: Colors.white),
             ),
-            backgroundColor: ColorTable.swatch2.withOpacity(0),
+            backgroundColor: Colors.transparent,
+
             shadowColor: Colors.white.withOpacity(0),
           ),
           body: FutureBuilder(
@@ -79,7 +79,12 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   ),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                  child: LoadingBouncingGrid.square(
+                    size: 30,
+                    backgroundColor: Colors.white,
+                  ),
+                );
               }
             },
           ),
@@ -95,14 +100,17 @@ class _PostDetailPageState extends State<PostDetailPage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            children: [CommentUserInfo(rozet, fullname, comment.content)],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CommentUserInfo(rozet, fullname, comment.content),
+              Text(
+                StringConstants.getDate(comment.dateOfComment),
+                style: GoogleFonts.poppins(fontSize: Constants.getHeight(context) / 79, color: Colors.white),
+              ),
+            ],
           ),
         ),
-        Text(
-          StringConstants.getDate(comment.dateOfComment),
-          style: GoogleFonts.poppins(
-              fontSize: Constants.getHeight(context) / 79, color: Colors.white),
-        ),
+
         Divider(),
       ],
     );
@@ -117,15 +125,12 @@ class _PostDetailPageState extends State<PostDetailPage> {
         Container(
           height: Constants.getWidth(context) / 9,
           width: Constants.getWidth(context) / 9,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 15,
-                )
-              ]),
+          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white, boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 15,
+            )
+          ]),
           child: Image.asset(
             rozet,
             fit: BoxFit.fill,
@@ -133,16 +138,29 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 4.0),
-          child: Container(
-            child: Text(
-              '@${username} ${comment}',
-              style: GoogleFonts.lato(
-                fontSize: Constants.getHeight(context) / 65,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                '@${username}',
+                style: GoogleFonts.lato(
+                  fontSize: Constants.getHeight(context) * 0.02,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+                maxLines: 3,
               ),
-              maxLines: 3,
-            ),
+              Text(
+                '${comment}',
+                style: GoogleFonts.lato(
+                  fontSize: Constants.getHeight(context) * 0.02,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+                maxLines: 3,
+              ),
+            ],
+
           ),
         )
       ],
@@ -160,53 +178,54 @@ class _PostDetailPageState extends State<PostDetailPage> {
               builder: (BuildContext context, AsyncSnapshot sp) {
                 if (sp.hasData) {
                   return UserWidget(
-                      rozet: '${Helper.UserIconLevel(sp.data)[1]}',
-                      username: sp.data.username,
-                      seviye: '${Helper.UserIconLevel(sp.data)[0]}');
+                      rozet: '${Helper.UserIconLevel(sp.data)[1]}', username: sp.data.username, seviye: '${Helper.UserIconLevel(sp.data)[0]}');
+
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
               }),
-          Expanded(
-            child: widget._student.picturesOfStudent.isEmpty
-                ? Image.asset(
-              'assets/student/${int.parse(widget._student.uid)%17+1}.png',
-                    fit: BoxFit.fill,
-                  )
-                : Swiper(
-                    itemBuilder: (BuildContext context, int index) {
-                      return Image.network(
-                          widget._student.picturesOfStudent[index],
-                          fit: BoxFit.scaleDown,
-                          frameBuilder: (BuildContext context, Widget child,
-                                  int frame, bool wasSynchronouslyLoaded) =>
-                              wasSynchronouslyLoaded
-                                  ? child
-                                  : AnimatedOpacity(
-                                      child: child,
-                                      opacity: frame == null ? 0 : 1,
-                                      duration: const Duration(seconds: 2),
-                                      curve: Curves.easeOut,
-                                    ),
-                          loadingBuilder: (BuildContext context, Widget child,
-                              ImageChunkEvent loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes
-                                    : null,
-                              ),
-                            );
-                          });
-                    },
-                    itemCount: widget._student.picturesOfStudent.length,
-                    itemWidth: Constants.getWidth(context),
-                    itemHeight: Constants.getHeight(context) / 4,
-                    layout: SwiperLayout.STACK,
-                  ),
+          SizedBox(height: 5),
+          Container(
+            width: Constants.getWidth(context) * 0.8,
+            height: Constants.getHeight(context) * 0.32,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white.withOpacity(0.3)),
+            child: Expanded(
+              child: widget._student.picturesOfStudent.isEmpty
+                  ? Image.asset(
+                      'assets/student/${int.parse(widget._student.uid) % 17 + 1}.png',
+                      fit: BoxFit.fill,
+                      height: Constants.getHeight(context) * 0.28,
+                    )
+                  : Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.network(widget._student.picturesOfStudent[index],
+                            fit: BoxFit.scaleDown,
+                            frameBuilder: (BuildContext context, Widget child, int frame, bool wasSynchronouslyLoaded) => wasSynchronouslyLoaded
+                                ? child
+                                : AnimatedOpacity(
+                                    child: child,
+                                    opacity: frame == null ? 0 : 1,
+                                    duration: const Duration(seconds: 2),
+                                    curve: Curves.easeOut,
+                                  ),
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                      : null,
+                                ),
+                              );
+                            });
+                      },
+                      itemCount: widget._student.picturesOfStudent.length,
+                      itemWidth: Constants.getWidth(context),
+                      itemHeight: Constants.getHeight(context) / 4,
+                      layout: SwiperLayout.STACK,
+                    ),
+            ),
+
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -215,7 +234,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  widget._student.explanation,
+                  'Açıklama: ' + widget._student.explanation,
+
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
@@ -233,8 +253,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
     return Container(
       height: Constants.getHeight(context) / 3.55,
       child: StreamBuilder(
-        stream:
-            _postDetailPageServices.initComments(widget._student.reference.id),
+        stream: _postDetailPageServices.initComments(widget._student.reference.id),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
@@ -252,19 +271,22 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   future: _firestoreDBService.getUser(comment.publisher),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return CommentWidget(
-                          '${Helper.UserIconLevel(snapshot.data)[1]}', snapshot.data.fullname, comment);
+                      return CommentWidget('${Helper.UserIconLevel(snapshot.data)[1]}', snapshot.data.fullname, comment);
                     } else {
                       return SizedBox(
-                        width: Constants.getHeight(context) / 28.44,
-                        height: Constants.getHeight(context) / 28.44,
-                        child: Center(child: CircularProgressIndicator()),
-                      );
+                          width: Constants.getHeight(context) / 28.44,
+                          height: Constants.getHeight(context) / 28.44,
+                          child: Center(
+                            child: LoadingBouncingGrid.square(
+                              size: 30,
+                              backgroundColor: Colors.white,
+                            ),
+                          ));
+
                     }
                   },
                 ),
               );
-              //TEK BİR YORUM -----------------
             }).toList(),
           );
         },
@@ -281,9 +303,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(width: 1),
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(25),
-                  topRight: Radius.circular(25))),
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(25), topRight: Radius.circular(25))),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -320,8 +340,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   onTap: () {
                     setState(() {
                       if (userUid != null && content.text != '') {
-                        _postDetailPageServices.postComment(
-                            userUid, widget._student, content.text);
+                        _postDetailPageServices.postComment(userUid, widget._student, content.text);
                         content.text = '';
                         enableKeyboard = false;
                       }
@@ -330,9 +349,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   child: Container(
                     child: Text(
                       'Paylaş',
-                      style: GoogleFonts.barlow(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.w500),
+                      style: GoogleFonts.barlow(color: Colors.blueAccent, fontWeight: FontWeight.w500),
+
                     ),
                   ),
                 ),
