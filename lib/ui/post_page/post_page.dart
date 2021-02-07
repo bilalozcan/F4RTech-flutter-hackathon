@@ -137,11 +137,10 @@ class _PostPageState extends State<PostPage> {
                                                         if (sp.hasData) {
                                                           return UserWidget(
                                                               rozet:
-                                                                  'assets/1st.png',
+                                                              '${Helper.UserIconLevel(sp.data)[1]}',
                                                               username: sp.data
                                                                   .username,
-                                                              seviye: sp
-                                                                  .data.level);
+                                                              seviye: '${Helper.UserIconLevel(sp.data)[0]}');
                                                         } else {
                                                           return CircularProgressIndicator();
                                                         }
