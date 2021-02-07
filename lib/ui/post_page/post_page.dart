@@ -165,10 +165,10 @@ class _PostPageState extends State<PostPage> {
                             ),
                           ),
                           Positioned(
-                            right: 20,
-                            top: 10,
+                            right: Constants.getWidth(context)/20.55,
+                            top: Constants.getHeight(context)/71.1,
                             child: Container(
-                              width: 120,
+                              width: Constants.getWidth(context)/3.1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 color: Colors.white,
@@ -186,7 +186,7 @@ class _PostPageState extends State<PostPage> {
                                     ),
                                     Text(
                                       '${ snapshot.data[index].approvalStatus ? 'Onaylandı':'Onay Bekliyor'}',style: GoogleFonts.lemonada(
-                                        fontSize: 10
+                                        fontSize: Constants.getHeight(context)/71.1
                                     ),
                                     ),
                                   ],
@@ -218,12 +218,12 @@ class _PostPageState extends State<PostPage> {
           children: [
             Text(
               s,
-              style: GoogleFonts.sriracha(fontSize: 12),
+              style: GoogleFonts.sriracha(fontSize: Constants.getHeight(context)/59.25),
             ),
             Container(
                 alignment: Alignment.centerLeft,
-                height: 30,
-                width: 150,
+                height: Constants.getHeight(context)/23.7,
+                width: Constants.getWidth(context)/2.74,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Colors.white,
@@ -233,7 +233,9 @@ class _PostPageState extends State<PostPage> {
                     ]),
                 child: Text(
                   data,
-                  style: GoogleFonts.robotoSlab(),
+                  style: GoogleFonts.robotoSlab(
+                    fontSize: Constants.getHeight(context)/59.25
+                  ),
                 )),
           ],
         ),

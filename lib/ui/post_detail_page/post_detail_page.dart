@@ -7,7 +7,6 @@ import 'package:education/services/authentication.dart';
 import 'package:education/services/firestoredbservice.dart';
 import 'package:education/ui/post_detail_page/post_detail_page_services.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 
 class PostDetailPage extends StatefulWidget {
   final Student _student;
