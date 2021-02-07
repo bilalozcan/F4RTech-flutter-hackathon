@@ -72,18 +72,6 @@ class _ShareContentState extends State<ShareContent> {
       error = e.toString();
     }
 
-    List<File> fileImageArray = [];
-
-    resultList.forEach((imageAsset) async {
-      final filePath =
-          await FlutterAbsolutePath.getAbsolutePath(imageAsset.identifier);
-
-      File tempFile = File(filePath);
-      if (tempFile.existsSync()) {
-        fileImageArray.add(tempFile);
-      }
-    });
-
     if (!mounted) return;
 
     setState(() {

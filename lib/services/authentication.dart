@@ -53,4 +53,11 @@ class Authentication {
       );
     }
   }
+
+  signOut() async {
+    var _user = await FirebaseAuth.instance;
+    if (currentUser != null) {
+      await _user.signOut();
+    }
+  }
 }

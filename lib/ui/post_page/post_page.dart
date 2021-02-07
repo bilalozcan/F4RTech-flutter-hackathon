@@ -5,6 +5,7 @@ import 'package:education/app/constants.dart';
 import 'package:education/services/authentication.dart';
 import 'package:education/services/firestoredbservice.dart';
 import 'package:education/ui/donate_page/donate_page.dart';
+import 'package:education/ui/login_page/login_page.dart';
 import 'package:education/ui/post_detail_page/post_detail_page.dart';
 import 'package:education/ui/post_page/post_page_model.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
@@ -34,6 +35,18 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       backgroundColor: ColorTable.swatch2.withOpacity(0.05),
       appBar: AppBar(
+        actions: [
+          FlatButton(
+            child: Text('Çıkış yap'),
+            onPressed: () {
+              var _firebaseAuth = Authentication();
+              _firebaseAuth.signOut();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  (Route<dynamic> route) => false);
+            },
+          )
+        ],
         automaticallyImplyLeading: false,
         title: Text(
           'Forum',
