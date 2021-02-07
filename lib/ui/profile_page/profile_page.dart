@@ -14,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ProfilePageModel model = ProfilePageModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,7 +223,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               ],
             ),
-            ListMethod(model.user.listOfPost.length ?? 0),
+            ListMethod(model.listType == false
+                ? model.user.listOfPost.length
+                : model.user.listOfDonationsMade.length),
           ],
         ),
       ),
@@ -353,8 +356,8 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
       child: FutureBuilder(
-        future:
-            model.firestoreDBService.getStudent(model.user.listOfPost[index]),
+        future: model.firestoreDBService
+            .getDonations(model.user.listOfDonationsMade[index]),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Row(
@@ -380,7 +383,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          '1.500,00 ₺',
+                          '${snapshot.data.amount} ₺',
                           style: GoogleFonts.poppins(
                               fontSize: 15,
                               color: ColorTable.textColor,
@@ -392,8 +395,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child:
-                      CheckStatus(snapshot.data.approvalStatus == true ? 1 : 2),
+                  child: CheckStatus(1),
                 )
               ],
             );

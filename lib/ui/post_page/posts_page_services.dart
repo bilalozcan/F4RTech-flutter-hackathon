@@ -37,12 +37,5 @@ class PostPageServices {
     var result = firestoreDBService.addLikeorDislikeStudent(student, user);
     var result2 = firestoreDBService.addLikeorDislikeUser(student, user);
   }
-  Future<dynamic> addDonation(usr.User donor, Student student, int amount) async {
-    var donationName = DateTime
-        .now()
-        .microsecondsSinceEpoch
-        .toString();
-    var donation = Donation(donationName, amount, DateTime.now(), donor.uid, student.reference.id);
-    var result = await firestoreDBService.addDonation(donation, donor, student, donationName);
-  }
+
 }

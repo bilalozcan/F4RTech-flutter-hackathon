@@ -116,7 +116,7 @@ class _ShareContentState extends State<ShareContent> {
         model.explanation.text,
         [],
         [],
-        0);
+        0, 0);
 
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);

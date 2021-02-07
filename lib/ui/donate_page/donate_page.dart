@@ -1,10 +1,18 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/ui/webview_page/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:education/models/User.dart' as usr;
+import 'package:education/models/Student.dart';
 
 class DonatePage extends StatefulWidget {
+  final usr.User user;
+  final Student student;
+
+
+  DonatePage(this.user, this.student);
+
   @override
   _DonatePageState createState() => _DonatePageState();
 }
@@ -100,7 +108,7 @@ class _DonatePageState extends State<DonatePage> {
                                 'Destek Paketi 3',
                                 'Çorbada sizin de tuzunuz bulunsun.',
                                 'assets/10.png',
-                                'https://shopier.com/5944854',
+                                'https://www.shopier.com/ShowProductNew/products.php?id=5949650',
                                 50),
                           ],
                         ),
@@ -138,7 +146,7 @@ class _DonatePageState extends State<DonatePage> {
                 ],
               ),
               packageDetail(bagis),
-              goToLink(link, context)
+              goToLink(link, text,context, bagis)
             ],
           ),
         ),
@@ -146,13 +154,14 @@ class _DonatePageState extends State<DonatePage> {
     );
   }
 
-  Widget goToLink(link, BuildContext context) {
+  Widget goToLink(link, title,BuildContext context ,bagis) {
     return Column(
       children: [
         InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            launch(link);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => WebviewPage(link, title, bagis, widget.student, widget.user)));
           },
           child: Container(
             alignment: Alignment.center,
