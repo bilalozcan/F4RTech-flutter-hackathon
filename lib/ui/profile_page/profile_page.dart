@@ -20,12 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
         body: FutureBuilder(
             future: model.getUser(),
             builder: (context, snapshot) {
-
               if (snapshot.hasData) {
-                return ListView(
-                  physics: BouncingScrollPhysics(),
-
-
+                return Column(
                   children: [
                     Stack(
                       children: [
@@ -51,6 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         AppBar(
+                          automaticallyImplyLeading: false,
                           shadowColor: ColorTable.swatch2.withOpacity(0),
                           backgroundColor: Colors.white.withOpacity(0),
                           title: Text(
@@ -65,16 +62,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       height: Constants.getHeight(context) -
-                          Constants.getHeight(context) / 3,
+                          Constants.getHeight(context) / 2.7,
                       width: Constants.getWidth(context),
-                      child: Column(
-                        children: [
-                          UserInfoWidget(
-                              snapshot.data.fullname, snapshot.data.username),
-                          UserInfoWidget2('E-Posta', snapshot.data.email),
-                          UserInfoWidget2('Telefon', snapshot.data.telephone),
-                          Listwidget(model),
-                        ],
+                      child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            UserInfoWidget(
+                                snapshot.data.fullname, snapshot.data.username),
+                            UserInfoWidget2('E-Posta', snapshot.data.email),
+                            UserInfoWidget2('Telefon', snapshot.data.telephone),
+                            Listwidget(model),
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -109,14 +109,14 @@ class _ProfilePageState extends State<ProfilePage> {
               s,
               style: GoogleFonts.poppins(
                   color: ColorTable.textColor.withOpacity(0.8),
-                  fontSize: 20,
+                  fontSize: Constants.getHeight(context)/35.5,
                   fontWeight: FontWeight.w600),
             ),
             Text(
               '@$username',
               style: GoogleFonts.poppins(
                   color: ColorTable.textColor.withOpacity(0.3),
-                  fontSize: 15,
+                  fontSize: Constants.getHeight(context)/47.4,
                   fontWeight: FontWeight.w600),
             ),
           ],
