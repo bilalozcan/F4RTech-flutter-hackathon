@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       ClipRRect(
                                         child: Image.asset(
-                                          'assets/5.png',
+                                          '${Helper.UserIconLevel(snapshot.data)[1]}',
                                           height: 100,
                                         ),
                                         borderRadius: BorderRadius.circular(50),
