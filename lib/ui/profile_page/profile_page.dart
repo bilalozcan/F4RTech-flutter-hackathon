@@ -1,5 +1,6 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/app/helper.dart';
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             clipper: MyCustomClipper(),
                             child: Container(
                               child: Image.asset(
-                                'assets/bagis.png',
+                                '${Helper.UserIconLevel(snapshot.data)[1]}',
                               ),
                               color: Color(0xff3c8f7c),
                               width: double.infinity,
@@ -72,7 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   ClipRRect(
                                     child: Image.asset(
-                                      'assets/5.png',
+                                      '${Helper.UserIconLevel(snapshot.data)[1]}',
+                                      fit: BoxFit.contain,
                                       height: 100,
                                     ),
                                     borderRadius: BorderRadius.circular(50),

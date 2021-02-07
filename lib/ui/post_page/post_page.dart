@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/app/helper.dart';
 import 'package:education/services/authentication.dart';
 import 'package:education/services/firestoredbservice.dart';
 import 'package:education/ui/donate_page/donate_page.dart';
@@ -106,9 +107,9 @@ class _PostPageState extends State<PostPage> {
                                                 AsyncSnapshot sp) {
                                               if (sp.hasData) {
                                                 return UserWidget(
-                                                    rozet: 'assets/1st.png',
+                                                    rozet: '${Helper.UserIconLevel(sp.data)[1]}',
                                                     username: sp.data.username,
-                                                    seviye: sp.data.level);
+                                                    seviye: '${Helper.UserIconLevel(sp.data)[0]}');
                                               } else {
                                                 return CircularProgressIndicator();
                                               }

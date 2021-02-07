@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/app/helper.dart';
 import 'package:education/app/strings.dart';
 import 'package:education/models/Comment.dart';
 import 'package:education/models/Student.dart';
@@ -154,9 +155,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
               builder: (BuildContext context, AsyncSnapshot sp) {
                 if (sp.hasData) {
                   return UserWidget(
-                      rozet: 'assets/1st.png',
+                      rozet: '${Helper.UserIconLevel(sp.data)[1]}',
                       username: sp.data.username,
-                      seviye: sp.data.level);
+                      seviye: '${Helper.UserIconLevel(sp.data)[0]}');
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
@@ -244,7 +245,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return CommentWidget(
-                          'assets/1st.png', snapshot.data.fullname, comment);
+                          '${Helper.UserIconLevel(snapshot.data)[1]}', snapshot.data.fullname, comment);
                     } else {
                       return SizedBox(
                         width: Constants.getHeight(context) / 28.44,
