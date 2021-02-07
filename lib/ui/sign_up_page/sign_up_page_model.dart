@@ -8,4 +8,5 @@ class SignInPageModel {
   TextEditingController password = TextEditingController();
   TextEditingController passwordAgain = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool obscureText = false;
 }
