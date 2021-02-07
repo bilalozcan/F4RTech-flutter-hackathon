@@ -23,6 +23,16 @@ class FirestoreDBService {
     return list;
   }
 
+  Future<dynamic> getAllUsersUsername() async {
+    var list = [];
+    var collectionReference = await _instance.collection('Users');
+    var querySnapshot = await collectionReference.get();
+    for (var i = 0; i < querySnapshot.docs.length; ++i) {
+      list.add(querySnapshot.docs[i].data()['username']);
+    }
+    return list;
+  }
+
   Future<dynamic> getCurrentUser() async {
     var auth = FirebaseAuth.instance;
     var user = auth.currentUser;
@@ -39,17 +49,16 @@ class FirestoreDBService {
     }
   }
 
-
-  Future<dynamic> getUser(String uid) async{
+  Future<dynamic> getUser(String uid) async {
     var _user;
-    try{
+    try {
       var result = await _instance.collection('Users').doc(uid).get();
-      if(result != null){
+      if (result != null) {
         _user = usr.User.fromSnapshot(result);
       }
       return _user;
-    }catch(e){
-      print('A'+e);
+    } catch (e) {
+      print('A' + e);
       return e;
     }
   }

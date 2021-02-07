@@ -32,4 +32,14 @@ class LoginPageServices {
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }
   }
+
+  String _nameValidator(String name) {
+    if (name.length < 2) {
+      return 'Lütfen geçerli bir isim giriniz';
+    }
+    if (name.contains(RegExp("[0-9]"))) {
+      return "Lutfen gecerli bir isim giriniz";
+    }
+    return null;
+  }
 }
