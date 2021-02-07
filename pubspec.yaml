@@ -42,7 +42,11 @@ dependencies:
   shimmer: ^1.1.2
   salomon_bottom_bar: ^2.0.0
   loading_animations: ^2.1.0
+
+  flutter_swiper: ^1.1.6
+
   url_launcher: ^5.7.10
+
 
 
 

@@ -41,4 +41,10 @@ class Comment {
   set publisher(String value) {
     _publisher = value;
   }
+
+  DateTime get dateOfComment => _dateOfComment;
+
+  set dateOfComment(DateTime value) {
+    _dateOfComment = value;
+  }
 }
