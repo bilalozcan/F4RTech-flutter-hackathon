@@ -1,4 +1,3 @@
-
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/ui/login_page/login_page_model.dart';
@@ -40,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               height: Constants.getHeight(context) / 2,
-              width:Constants.getWidth(context) / 1.5,
+              width: Constants.getWidth(context) / 1.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Center(
                               child: TextField(
                                 keyboardType: TextInputType.text,
+                                obscureText: true,
                                 controller: model.password,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -131,7 +131,10 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.only(left: 8.0),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpPage()));
                               },
                               child: Text(
                                 'Kayıt ol',
