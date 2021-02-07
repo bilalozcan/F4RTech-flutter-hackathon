@@ -15,7 +15,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class ShareContent extends StatefulWidget {
   @override
