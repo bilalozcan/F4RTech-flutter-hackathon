@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/models/Comment.dart';
+import 'package:education/models/Student.dart';
 import 'package:education/services/firestoredbservice.dart';
+import 'package:education/models/User.dart' as usr;
 
 class PostDetailPageServices {
   FirestoreDBService firestoreDBService = FirestoreDBService();
@@ -15,8 +17,8 @@ class PostDetailPageServices {
     }
   }
 
-  Future postComment(String publisher, String student, String content) async {
-    var comment = Comment(publisher, student, content, DateTime.now());
-    var result = await firestoreDBService.postComment(comment);
+  Future postComment(usr.User publisher, Student student, String content) async {
+    var comment = Comment(publisher.uid, student.uid, content, DateTime.now());
+    var result = await firestoreDBService.postComment(comment, student);
   }
 }

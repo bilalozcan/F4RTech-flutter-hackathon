@@ -61,7 +61,7 @@ class User {
         _level = parsedMap['level'],
         _point = parsedMap['point'],
         _listOfPost = parsedMap['listOfPost'],
-        _likeList = parsedMap['likedList'];
+        _likeList = parsedMap['likeList'];
 
   Map<String, dynamic> toMap() {
     return {

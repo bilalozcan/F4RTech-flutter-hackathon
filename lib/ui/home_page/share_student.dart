@@ -93,8 +93,10 @@ class _ShareContentState extends State<ShareContent> {
 
   Future postPaylasim() async {
     var user = FirebaseAuth.instance.currentUser;
+    var shareName = DateTime.now().microsecondsSinceEpoch.toString();
     var db = Student(
         user.uid,
+        shareName,
         DateTime.now(),
         DateTime.now(),
         model.studentName.text,
@@ -115,7 +117,7 @@ class _ShareContentState extends State<ShareContent> {
         [],
         [],
         0);
-    var shareName = DateTime.now().microsecondsSinceEpoch.toString();
+
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);
     await studentInfo.set(db.toMap());
