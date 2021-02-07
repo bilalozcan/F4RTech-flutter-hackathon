@@ -2,17 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/models/Student.dart';
-import 'package:education/services/authentication.dart';
+import 'package:education/ui/background.dart';
 import 'package:education/ui/home_page/share_student_model.dart';
 import 'package:education/ui/navigation_bar/navigationBar.dart';
 import 'package:education/ui/navigation_bar/navigationbar_model.dart';
-import 'package:education/ui/post_page/post_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -89,8 +87,10 @@ class _ShareContentState extends State<ShareContent> {
 
   Future postPaylasim() async {
     var user = FirebaseAuth.instance.currentUser;
+    var shareName = DateTime.now().microsecondsSinceEpoch.toString();
     var db = Student(
         user.uid,
+        shareName,
         DateTime.now(),
         DateTime.now(),
         model.studentName.text,
@@ -106,22 +106,16 @@ class _ShareContentState extends State<ShareContent> {
         [],
         int.parse(model.studentClass.text),
         model.explanation.text,
-<<<<<<< Updated upstream
         []);
     var shareName = DateTime.now().microsecondsSinceEpoch.toString();
+
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);
-=======
-        [],
-        [],
-        0,
-        0);
 
-    var studentInfo = FirebaseFirestore.instance.collection('Students').doc(shareName);
->>>>>>> Stashed changes
     await studentInfo.set(db.toMap());
     await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
-      'listOfPost': FieldValue.arrayUnion([shareName])
+      'listOfPost': FieldValue.arrayUnion([shareName]),
+      'point': FieldValue.increment(50)
     });
     for (var imageFile in images) {
       await postImage(imageFile).then((downloadUrl) {
@@ -137,17 +131,16 @@ class _ShareContentState extends State<ShareContent> {
       }).catchError((err) {
         print(err);
       });
-<<<<<<< Updated upstream
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(user.uid)
           .update({
         'listOfPost': FieldValue.arrayUnion([shareName])
-=======
+
       await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
         'point': FieldValue.increment(50),
         'listOfPost': FieldValue.arrayUnion([shareName]),
->>>>>>> Stashed changes
+
       });
     }
   }
@@ -161,22 +154,17 @@ class _ShareContentState extends State<ShareContent> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Container(
-          height: size.height * 0.3,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [ColorTable.swatch4, ColorTable.swatch6])),
-        ),
+        backgroundContainer(context),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Container(
-            height: size.height,
+            height: Constants.getHeight(context),
+            width: Constants.getWidth(context),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-<<<<<<< Updated upstream
                 customAppBar(context),
                 Expanded(
                   child: Container(
@@ -227,42 +215,7 @@ class _ShareContentState extends State<ShareContent> {
                               TextInputType.number, 2),
                           userInput(model.explanation, 'Açıklama',
                               TextInputType.text, 400),
-=======
-                Expanded(
-                  child: Container(
-                    height: Constants.getHeight(context) * 0.8,
-                    width: Constants.getWidth(context) * 0.9,
-                    padding: EdgeInsets.only(left: 25, right: 25),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white.withOpacity(0.1)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            'Öğrenci Bildir',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(height: 2, width: 50, color: ColorTable.swatch5),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          userInput(model.studentName, 'Öğrenci Adı', TextInputType.text, 50),
-                          userInput(model.studentPhone, 'Telefon Numarası', TextInputType.number, 11),
-                          userInput(model.studentTC, 'TC Kimlik Numarası (İsteğe Bağlı)', TextInputType.number, 11),
-                          userInput(model.studentAge, 'Yaşı', TextInputType.number, 2),
-                          userInput(model.studentAddress, 'Adresi', TextInputType.text, 80),
-                          userInput(model.studentClass, 'Sınıf', TextInputType.number, 2),
-                          userInput(model.explanation, 'Açıklama', TextInputType.text, 400),
->>>>>>> Stashed changes
+
                           Container(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
@@ -276,46 +229,118 @@ class _ShareContentState extends State<ShareContent> {
                                   child: Container(
                                     height: 44,
                                     width: 44,
-<<<<<<< Updated upstream
                                     child: Icon(FontAwesomeIcons.image,
                                         color: Colors.blueGrey),
-=======
-                                    child: Icon(FontAwesomeIcons.image, color: Colors.blueGrey),
->>>>>>> Stashed changes
+
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 30),
                                   child: Text(
                                     '${images.length}/4',
-<<<<<<< Updated upstream
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 14),
-=======
-                                    style: TextStyle(color: Colors.black, fontSize: 14),
->>>>>>> Stashed changes
+
                                   ),
                                 ),
                               ],
                             ),
                           ),
-<<<<<<< Updated upstream
                           images.isEmpty
                               ? SizedBox()
                               : Container(child: buildGridView()),
-=======
-                          images.isEmpty ? SizedBox() : Container(child: buildGridView()),
->>>>>>> Stashed changes
+
                           SizedBox(height: Constants.getHeight(context) * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               shareButton(),
+                Container(
+                  height: Constants.getHeight(context) * 0.8,
+                  width: Constants.getWidth(context) * 0.9,
+                  padding: EdgeInsets.only(left: 25, right: 25),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white.withOpacity(0.1)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'Öğrenci Bildir',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                            height: 2, width: 50, color: ColorTable.swatch5),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        userInput(model.studentName, 'Öğrenci Adı',
+                            TextInputType.text, 50),
+                        userInput(model.studentPhone, 'Telefon Numarası',
+                            TextInputType.number, 11),
+                        userInput(
+                            model.studentTC,
+                            'TC Kimlik Numarası (İsteğe Bağlı)',
+                            TextInputType.number,
+                            11),
+                        userInput(
+                            model.studentAge, 'Yaşı', TextInputType.number, 2),
+                        userInput(model.studentAddress, 'Adresi',
+                            TextInputType.text, 80),
+                        userInput(model.studentClass, 'Sınıf',
+                            TextInputType.number, 2),
+                        userInput(model.explanation, 'Açıklama',
+                            TextInputType.text, 400),
+                        Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              InkWell(
+                                onTap: () {
+                                  loadAssets();
+                                },
+                                child: Container(
+                                  height: 44,
+                                  width: 44,
+                                  child: Icon(FontAwesomeIcons.image,
+                                      color: Colors.blueGrey),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 30),
+                                child: Text(
+                                  '${images.length}/4',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14),
+                                ),
+                              ),
                             ],
                           ),
-                          SizedBox(height: Constants.getHeight(context) * 0.05)
-                        ],
-                      ),
+                        ),
+                        images.isEmpty
+                            ? SizedBox()
+                            : Container(child: buildGridView()),
+                        SizedBox(height: Constants.getHeight(context) * 0.05),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            shareButton(),
+                          ],
+                        ),
+                        SizedBox(height: Constants.getHeight(context) * 0.05)
+                      ],
                     ),
                   ),
                 ),
@@ -328,7 +353,7 @@ class _ShareContentState extends State<ShareContent> {
   }
 
   Widget shareButton() {
-<<<<<<< Updated upstream
+
     return Stack(
       children: [
         Shimmer.fromColors(
@@ -339,12 +364,10 @@ class _ShareContentState extends State<ShareContent> {
             height: 80,
             decoration: BoxDecoration(
                 color: Colors.red, borderRadius: BorderRadius.circular(20)),
-=======
     return InkWell(
       onTap: () async {
         if (firstpress) {
           firstpress = false;
-
           await postPaylasim();
           setState(() {
             Navigator.of(context)
@@ -363,7 +386,6 @@ class _ShareContentState extends State<ShareContent> {
               height: 60,
               decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
             ),
->>>>>>> Stashed changes
           ),
         ),
         InkWell(
@@ -371,97 +393,45 @@ class _ShareContentState extends State<ShareContent> {
             if (firstpress) {
               firstpress = false;
 
-              await postPaylasim();
-              setState(() {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            (loadingIcon(context))),
-                    (Route<dynamic> route) => true);
-                delay();
-              });
-            }
-          },
-          child: Container(
+
+          await postPaylasim();
+          setState(() {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (BuildContext context) => (loadingIcon(context))),
+                (Route<dynamic> route) => true);
+            delay();
+          });
+        }
+      },
+      child: Stack(
+        children: [
+          Shimmer.fromColors(
+            baseColor: ColorTable.swatch3,
+            highlightColor: ColorTable.swatch4,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+          Container(
               alignment: Alignment.center,
-<<<<<<< Updated upstream
+
               width: 80,
               height: 80,
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20)),
-=======
+
               width: 60,
               height: 60,
-              decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10)),
->>>>>>> Stashed changes
+              decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10)),
               child: Icon(FontAwesomeIcons.check, color: Colors.white)),
-        ),
-      ],
-    );
-  }
-
-  Widget loadingIcon(BuildContext context) {
-    return Center(
-      child: Container(
-        width: Constants.getWidth(context),
-        height: Constants.getHeight(context),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40), color: Color(0xff0f3057)),
-        child: LoadingBouncingGrid.square(
-          size: 30,
-          backgroundColor: Color(0xff8cfffb),
-        ),
-      ),
-    );
-  }
-
-  Widget customAppBar(BuildContext context) {
-    return Container(
-      height: Constants.getHeight(context) * 0.13,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-              padding: EdgeInsets.only(top: 30, left: 20),
-              child: GestureDetector(
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              )),
         ],
-      ),
-    );
-  }
-
-  Widget userInput(_controller, text, textInputType, length) {
-    return Padding(
-      padding: EdgeInsets.only(top: 10.0),
-      child: TextFormField(
-        controller: _controller,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(length),
-        ],
-        cursorColor: ColorTable.swatch6,
-        autofocus: false,
-        keyboardType: textInputType,
-        style: TextStyle(fontSize: 15.0, color: ColorTable.swatch6),
-        decoration: InputDecoration(
-          labelText: text,
-          labelStyle: TextStyle(color: Color(0xff435189)),
-          filled: true,
-          fillColor: Colors.white,
-          contentPadding: EdgeInsets.only(left: 14.0, bottom: 6.0, top: 8.0),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black.withOpacity(0.1)),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black.withOpacity(0.1)),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-        ),
       ),
     );
   }

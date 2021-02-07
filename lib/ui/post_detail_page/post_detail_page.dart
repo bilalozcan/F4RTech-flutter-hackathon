@@ -47,6 +47,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
               '${widget._student.fullname}',
             ),
             backgroundColor: Colors.transparent,
+
             shadowColor: Colors.white.withOpacity(0),
           ),
           body: FutureBuilder(
@@ -109,6 +110,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
             ],
           ),
         ),
+
         Divider(),
       ],
     );
@@ -158,6 +160,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 maxLines: 3,
               ),
             ],
+
           ),
         )
       ],
@@ -176,6 +179,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 if (sp.hasData) {
                   return UserWidget(
                       rozet: '${Helper.UserIconLevel(sp.data)[1]}', username: sp.data.username, seviye: '${Helper.UserIconLevel(sp.data)[0]}');
+
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
@@ -221,6 +225,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       layout: SwiperLayout.STACK,
                     ),
             ),
+
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -230,6 +235,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'Açıklama: ' + widget._student.explanation,
+
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
@@ -276,6 +282,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                               backgroundColor: Colors.white,
                             ),
                           ));
+
                     }
                   },
                 ),
@@ -343,6 +350,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     child: Text(
                       'Paylaş',
                       style: GoogleFonts.barlow(color: Colors.blueAccent, fontWeight: FontWeight.w500),
+
                     ),
                   ),
                 ),

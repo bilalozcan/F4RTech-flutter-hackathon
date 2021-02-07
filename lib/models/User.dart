@@ -13,7 +13,6 @@ class User {
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
 
-  List _addedStudentList; //Student or String List
   List _listOfDonationsMade;
   List _listOfPost;
 
@@ -21,6 +20,7 @@ class User {
   int _donationAmount;
   int _level;
   int _point;
+  List _likeList;
 
   User({@required id, @required email}) {
     _uid = id;
@@ -28,17 +28,21 @@ class User {
   }
 
   User.Info(
-      {@required id,
-      @required email,
-      @required username,
-      @required fullname,
-      @required telephone}) {
-    _uid = id;
-    _email = email;
-    _username = username;
-    _fullname = fullname;
-    _telephone = telephone;
-  }
+      this._fullname,
+      this._telephone,
+      this._email,
+      this._username,
+      this._uid,
+      this._numberOfStudentsAdded,
+      this._dateOfRegistration,
+      this._lastTransactionDate,
+      this._listOfDonationsMade,
+      this._listOfPost,
+      this._numberOfDonationsMade,
+      this._donationAmount,
+      this._level,
+      this._point,
+      this._likeList);
 
   User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _uid = parsedMap['id'],
@@ -51,13 +55,13 @@ class User {
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
             (parsedMap['lasttransactiondate'] as Timestamp).toDate(),
-        _addedStudentList = parsedMap['addedstudentslist'],
         _listOfDonationsMade = parsedMap['listofdonationsmade'],
         _numberOfDonationsMade = parsedMap['numberofdonationsmade'],
         _donationAmount = parsedMap['donationamount'],
         _level = parsedMap['level'],
         _point = parsedMap['point'],
-        _listOfPost = parsedMap['listOfPost'];
+        _listOfPost = parsedMap['listOfPost'],
+        _likeList = parsedMap['likeList'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -69,18 +73,24 @@ class User {
       'numberofstudentsadded': _numberOfStudentsAdded,
       'dateofregistration': _dateOfRegistration,
       'lasttransactiondate': _lastTransactionDate,
-      'addedstudentlist': _addedStudentList,
       'listofdonationsmade': _listOfDonationsMade,
       'numberofdonationsmade': _numberOfDonationsMade,
       'donationamount': _donationAmount,
       'level': _level,
       'point': _point,
       'listOfPost': _listOfPost,
+      'likeList': _likeList,
     };
   }
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  List get likeList => _likeList;
+
+  set likeList(List value) {
+    _likeList = value;
+  }
 
   int get point => _point;
 
@@ -106,16 +116,10 @@ class User {
     _numberOfDonationsMade = value;
   }
 
-  List<String> get listOfDonationsMade => _listOfDonationsMade;
+  List get listOfDonationsMade => _listOfDonationsMade;
 
   set listOfDonationsMade(List<String> value) {
     _listOfDonationsMade = value;
-  }
-
-  List<String> get addedStudentList => _addedStudentList;
-
-  set addedStudentList(List<String> value) {
-    _addedStudentList = value;
   }
 
   DateTime get lastTransactionDate => _lastTransactionDate;
@@ -162,9 +166,14 @@ class User {
     _fullname = value;
   }
 
-  List<String> get listOfPost => _listOfPost;
+  List get listOfPost => _listOfPost;
 
-  set listOfPost(List<String> value) {
+  set listOfPost(List value) {
     _listOfPost = value;
+  }
+
+  @override
+  String toString() {
+    return 'User';
   }
 }

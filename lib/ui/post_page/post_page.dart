@@ -1,13 +1,21 @@
+import 'package:education/app/colors/colors.dart';
+import 'package:education/app/constants.dart';
+import 'package:education/app/helper.dart';
+import 'package:education/services/authentication.dart';
+import 'package:education/services/firestoredbservice.dart';
+import 'package:education/ui/donate_page/donate_page.dart';
+import 'package:education/ui/login_page/login_page.dart';
+import 'package:education/ui/post_detail_page/post_detail_page.dart';
+import 'package:education/ui/post_page/post_page_model.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
+import 'package:education/widget/UserWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
-=======
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animations/loading_animations.dart';
-
 import '../background.dart';
->>>>>>> Stashed changes
+
 
 class PostPage extends StatefulWidget {
   @override
@@ -16,6 +24,9 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   final PostPageServices _postPageServices = PostPageServices();
+  final PostPageModel model = PostPageModel();
+  final FirestoreDBService _firestoreDBService = FirestoreDBService();
+  var photoNumber;
 
   @override
   void initState() {
@@ -24,7 +35,6 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     return Scaffold(
       appBar: AppBar(
         title: Text('Forum'),
@@ -132,7 +142,6 @@ class _PostPageState extends State<PostPage> {
               );
             }
           },
-=======
     return Stack(
       children: [
         backgroundContainer(context),
@@ -150,6 +159,7 @@ class _PostPageState extends State<PostPage> {
                         return FutureBuilder(
                           future: _postPageServices.getAllStudent(),
                           builder: (BuildContext context, AsyncSnapshot snapshot) {
+
                             if (snapshot.hasData) {
                               return ListView.builder(
                                   shrinkWrap: true,
@@ -160,6 +170,7 @@ class _PostPageState extends State<PostPage> {
                                       onTap: () {
                                         setState(() {
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => PostDetailPage(snapshot.data[index])));
+
                                         });
                                       },
                                       child: Stack(
@@ -207,6 +218,7 @@ class _PostPageState extends State<PostPage> {
                                                             fit: BoxFit.contain,
                                                             height: Constants.getHeight(context) / 5,
                                                             width: Constants.getWidth(context) / 2.5,
+
                                                           ),
                                                         ),
                                                         Column(
@@ -214,6 +226,7 @@ class _PostPageState extends State<PostPage> {
                                                             StudentInfo('Öğrenci Adı-Soyadı', snapshot.data[index].fullname),
                                                             StudentInfo('Öğrenci Yaşı', snapshot.data[index].age.toString()),
                                                             StudentInfo('Sınıfı', snapshot.data[index].classOfStudent.toString()),
+
                                                           ],
                                                         )
                                                       ],
@@ -243,6 +256,7 @@ class _PostPageState extends State<PostPage> {
                                                                   Text(
                                                                     '${snapshot.data[index].likeCount} yıldız',
                                                                     style: GoogleFonts.crimsonText(fontSize: 9),
+
                                                                   )
                                                                 ],
                                                               ),
@@ -258,6 +272,7 @@ class _PostPageState extends State<PostPage> {
                                                                   Text(
                                                                     '${snapshot.data[index].listOfComments.length} yorum',
                                                                     style: GoogleFonts.crimsonText(fontSize: 9),
+
                                                                   )
                                                                 ],
                                                               ),
@@ -268,11 +283,13 @@ class _PostPageState extends State<PostPage> {
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder: (context) => DonatePage(
+
                                                                               auth.data,
                                                                               snapshot.data[index],
                                                                             )));
                                                                 setState(() {
                                                                   snapshot.data[index].donationCount;
+
                                                                 });
                                                               },
                                                               child: Column(
@@ -281,6 +298,7 @@ class _PostPageState extends State<PostPage> {
                                                                   Text(
                                                                     '${snapshot.data[index].donationCount} Bağış',
                                                                     style: GoogleFonts.crimsonText(fontSize: 9),
+
                                                                   )
                                                                 ],
                                                               ),
@@ -299,6 +317,7 @@ class _PostPageState extends State<PostPage> {
                                                 width: Constants.getWidth(context) / 3.1,
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.all(Radius.circular(10)),
+
                                                   color: Colors.white,
                                                 ),
                                                 child: Row(
@@ -306,11 +325,13 @@ class _PostPageState extends State<PostPage> {
                                                     Icon(
                                                       snapshot.data[index].approvalStatus ? Icons.verified : Icons.adjust_outlined,
                                                       color: snapshot.data[index].approvalStatus ? Colors.green : Colors.yellow.shade700,
+
                                                       size: 35,
                                                     ),
                                                     Text(
                                                       '${snapshot.data[index].approvalStatus ? 'Onaylandı' : 'Onay Bekliyor'}',
                                                       style: GoogleFonts.lemonada(fontSize: Constants.getHeight(context) / 71.1),
+
                                                     ),
                                                   ],
                                                 )),
@@ -325,6 +346,7 @@ class _PostPageState extends State<PostPage> {
                                   size: 30,
                                   backgroundColor: Colors.white,
                                 ),
+
                               );
                             }
                           },
@@ -336,6 +358,7 @@ class _PostPageState extends State<PostPage> {
                             backgroundColor: Colors.white,
                           ),
                         );
+
                       }
                     },
                   ),
@@ -358,6 +381,7 @@ class _PostPageState extends State<PostPage> {
             Text(
               s,
               style: GoogleFonts.poppins(fontSize: Constants.getHeight(context) / 59.25, fontWeight: FontWeight.w700),
+
             ),
             Container(
                 alignment: Alignment.center,
@@ -372,7 +396,7 @@ class _PostPageState extends State<PostPage> {
                   style: GoogleFonts.poppins(fontSize: Constants.getHeight(context) / 59.25),
                 )),
           ],
->>>>>>> Stashed changes
+
         ),
       ),
     );

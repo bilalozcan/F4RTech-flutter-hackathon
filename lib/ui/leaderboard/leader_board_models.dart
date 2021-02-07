@@ -60,6 +60,7 @@ Widget imageWidget(imageUrl, size) {
         width: size + 5.0,
         height: size + 5.0,
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(size / 2)),
+
       ),
       ClipRRect(
         borderRadius: BorderRadius.circular(size / 2),
@@ -99,6 +100,7 @@ Widget listViewOrderHeader(int index) {
       Text(
         (index + 4).toString(),
         style: TextStyle(color: ColorTable.swatch1, fontSize: 17, fontFamily: 'Poppins'),
+
       ),
       Icon(
         FontAwesomeIcons.chevronUp,
@@ -114,6 +116,7 @@ Widget listViewInfoBody(BuildContext context, name, point) {
     height: 60,
     width: Constants.getWidth(context) * 0.75,
     decoration: BoxDecoration(color: Colors.white.withOpacity(0.5), borderRadius: BorderRadius.circular(30)),
+
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -133,6 +136,7 @@ Widget listViewInfoBody(BuildContext context, name, point) {
             Text(
               name,
               style: TextStyle(color: ColorTable.swatch5, fontSize: Constants.getWidth(context) * 0.042),
+
             ),
           ],
         ),
@@ -157,6 +161,7 @@ Widget customAppBar(BuildContext context) {
         Text(
           'Liderlik Tablosu',
           style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Poppins'),
+
         ),
       ],
     ),

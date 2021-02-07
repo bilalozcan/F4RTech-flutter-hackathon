@@ -56,6 +56,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       Constants.getHeight(context) * 0.12,
                                       snapshot.data.length < 2 ? '-' : snapshot.data[1]['fullname'],
                                       snapshot.data.length < 2 ? '-' : snapshot.data[1]['point'].toString(),
+
                                       FontAwesomeIcons.chevronUp,
                                       -Constants.getHeight(context) * 0.24,
                                       -Constants.getHeight(context) * 0.01,
@@ -68,6 +69,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       Constants.getHeight(context) * 0.12,
                                       snapshot.data.length < 3 ? '-' : snapshot.data[2]['fullname'],
                                       snapshot.data.length < 3 ? '-' : snapshot.data[2]['point'].toString(),
+
                                       FontAwesomeIcons.chevronDown,
                                       -Constants.getHeight(context) * 0.01,
                                       -Constants.getHeight(context) * 0.24,
@@ -78,6 +80,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       '1',
                                       'assets/1st.png',
                                       Constants.getHeight(context) * 0.16,
+
                                       snapshot.data[0]['fullname'],
                                       snapshot.data[0]['point'].toString(),
                                       FontAwesomeIcons.crown,
@@ -106,6 +109,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             itemBuilder: (BuildContext context, int index) {
                               return listViewContainer(
                                   context, index, snapshot.data[index + 3]['fullname'], snapshot.data[index + 3]['point'].toString());
+
                             },
                           ),
                         ],

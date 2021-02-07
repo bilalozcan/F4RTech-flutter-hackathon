@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Student {
   DocumentReference reference;
+  String _uid;
   String _publisher;
   DateTime _dateOfRegistration;
   DateTime _lastTransactionDate;
@@ -14,15 +15,18 @@ class Student {
   bool _approvalStatus;
   String _affiliatedInstitution;
   List _donationsReceived;
-  double _donationAmountReceived;
+  int _donationAmountReceived;
   List _listOfDonations;
+  int _likeCount;
   int _classOfStudent;
   String _explanation;
   List _listOfComments;
-
+  List _listOfLikes;
+  int _donationCount;
 
   Student(
       [this._publisher,
+      this._uid,
       this._dateOfRegistration,
       this._lastTransactionDate,
       this._fullname,
@@ -38,10 +42,14 @@ class Student {
       this._listOfDonations,
       this._classOfStudent,
       this._explanation,
-      this._listOfComments]);
+      this._listOfComments,
+      this._listOfLikes,
+      this._likeCount,
+      this._donationCount]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
+        _uid = parsedMap['uid'],
         _dateOfRegistration =
             (parsedMap['dateofregistration'] as Timestamp).toDate(),
         _lastTransactionDate =
@@ -55,15 +63,19 @@ class Student {
         _approvalStatus = parsedMap['approvalstatus'],
         _affiliatedInstitution = parsedMap['affiliatedInstitution'],
         _donationsReceived = parsedMap['donationsReceived'],
-        _donationAmountReceived = parsedMap['donationAmountReceived'],
-        _listOfDonations = parsedMap['listofdonations'],
+        _donationAmountReceived = parsedMap['donationamountreceived'],
+        _listOfDonations = parsedMap['listofDonations'],
         _classOfStudent = parsedMap['classofstudent'],
         _explanation = parsedMap['explanation'],
-        _listOfComments = parsedMap['listofcomments'];
+        _listOfComments = parsedMap['listofcomments'],
+        _listOfLikes = parsedMap['listoflikes'],
+        _likeCount = parsedMap['likecount'],
+        _donationCount = parsedMap['donationcount'];
 
   Map<String, dynamic> toMap() {
     return {
       'publisher': _publisher,
+      'uid': _uid,
       'fullname': _fullname,
       'dateofregistration': _dateOfRegistration,
       'lasttransactiondate': _lastTransactionDate,
@@ -80,15 +92,34 @@ class Student {
       'classofstudent': _classOfStudent,
       'explanation': _explanation,
       'listofcomments': _listOfComments,
+      'listoflikes': _listOfLikes,
+      'likecount': _likeCount,
+      'donationcount': _donationCount,
     };
   }
+
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
-  List<String> get listOfComments => _listOfComments;
 
-  set listOfComments(List<String> value) {
+  int get donationCount => _donationCount;
+
+  set donationCount(int value) {
+    _donationCount = value;
+  }
+
+  List get listOfComments => _listOfComments;
+
+  set listOfComments(List value) {
     _listOfComments = value;
+  }
+
+  String get uid => _uid;
+
+  List get listOfLikes => _listOfLikes;
+
+  set listOfLikes(List value) {
+    _listOfLikes = value;
   }
 
   String get explanation => _explanation;
@@ -103,15 +134,15 @@ class Student {
     _classOfStudent = value;
   }
 
-  List<String> get listOfDonations => _listOfDonations;
+  List get listOfDonations => _listOfDonations;
 
-  set listOfDonations(List<String> value) {
+  set listOfDonations(List value) {
     _listOfDonations = value;
   }
 
-  double get donationAmountReceived => _donationAmountReceived;
+  int get donationAmountReceived => _donationAmountReceived;
 
-  set donationAmountReceived(double value) {
+  set donationAmountReceived(int value) {
     _donationAmountReceived = value;
   }
 
@@ -121,9 +152,9 @@ class Student {
     _approvalStatus = value;
   }
 
-  List<String> get picturesOfStudent => _picturesOfStudent;
+  List get picturesOfStudent => _picturesOfStudent;
 
-  set picturesOfStudent(List<String> value) {
+  set picturesOfStudent(List value) {
     _picturesOfStudent = value;
   }
 
@@ -143,7 +174,6 @@ class Student {
 
   set tcID(String value) {
     _tcID = value;
-
   }
 
   String get telephone => _telephone;
@@ -169,11 +199,16 @@ class Student {
   set dateOfRegistration(DateTime value) {
     _dateOfRegistration = value;
   }
-    
+
   String get publisher => _publisher;
 
   set publisher(String value) {
     _publisher = value;
   }
 
+  int get likeCount => _likeCount;
+
+  set likeCount(int value) {
+    _likeCount = value;
+  }
 }

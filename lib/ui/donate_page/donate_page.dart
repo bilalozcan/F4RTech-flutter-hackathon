@@ -54,6 +54,7 @@ class _DonatePageState extends State<DonatePage> {
             elevation: 0,
             backgroundColor: Colors.transparent,
           ),
+
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.light,
             child: Container(
@@ -150,12 +151,14 @@ class _DonatePageState extends State<DonatePage> {
                 borderRadius: BorderRadius.circular(20),
                 gradient: LinearGradient(
                     colors: [ColorTable.swatch3, ColorTable.swatch4], begin: FractionalOffset.topLeft, end: FractionalOffset.bottomRight)),
+
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Destek Verin',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+
               ),
             ),
           ),

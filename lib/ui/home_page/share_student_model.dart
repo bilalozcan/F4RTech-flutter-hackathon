@@ -1,5 +1,9 @@
+import 'package:education/app/colors/colors.dart';
+import 'package:education/app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:education/services/firestoredbservice.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 class ShareStudentModel {
   TextEditingController studentName = TextEditingController();
@@ -10,8 +14,7 @@ class ShareStudentModel {
   TextEditingController studentClass = TextEditingController();
   TextEditingController explanation = TextEditingController();
 }
-<<<<<<< Updated upstream
-=======
+
 
 Widget loadingIcon(BuildContext context) {
   return Center(
@@ -61,6 +64,7 @@ Widget userInput(_controller, text, textInputType, length) {
       decoration: InputDecoration(
         hintText: text,
         hintStyle: TextStyle(color: ColorTable.swatch4),
+
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.only(left: 14.0, bottom: 6.0, top: 8.0),
@@ -76,4 +80,4 @@ Widget userInput(_controller, text, textInputType, length) {
     ),
   );
 }
->>>>>>> Stashed changes
+
