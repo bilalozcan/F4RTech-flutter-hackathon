@@ -245,7 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               ],
             ),
-            ListMethod(model.user.numberOfStudentsAdded ?? 0),
+            ListMethod(model.user.listOfPost.length ?? 0),
           ],
         ),
       ),
@@ -351,10 +351,11 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.check,
             color: Colors.green,
           ),
-          Text('ONAYLANDI',style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            color: Colors.green
-          ),),
+          Text(
+            'ONAYLANDI',
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500, color: Colors.green),
+          ),
         ],
       );
     }
@@ -365,10 +366,11 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.close,
             color: Colors.red,
           ),
-          Text('ONAYLANMADI',style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w500,
-              color: Colors.red
-          ),),
+          Text(
+            'ONAYLANMADI',
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500, color: Colors.red),
+          ),
         ],
       );
     }
@@ -379,10 +381,11 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.linear_scale,
             color: Colors.yellow,
           ),
-          Text('BEKLİYOR',style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w500,
-              color: Colors.yellow
-          ),),
+          Text(
+            'BEKLİYOR',
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500, color: Colors.yellow),
+          ),
         ],
       );
     }

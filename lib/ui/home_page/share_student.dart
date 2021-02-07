@@ -118,7 +118,8 @@ class _ShareContentState extends State<ShareContent> {
         FirebaseFirestore.instance.collection('Students').doc(shareName);
     await studentInfo.set(db.toMap());
     await FirebaseFirestore.instance.collection('Users').doc(user.uid).update({
-      'listOfPost': FieldValue.arrayUnion([shareName])
+      'listOfPost': FieldValue.arrayUnion([shareName]),
+      'point': FieldValue.increment(50)
     });
     for (var imageFile in images) {
       await postImage(imageFile).then((downloadUrl) {
@@ -138,7 +139,8 @@ class _ShareContentState extends State<ShareContent> {
           .collection('Users')
           .doc(user.uid)
           .update({
-        'listOfPost': FieldValue.arrayUnion([shareName])
+        'point': FieldValue.increment(50),
+        'listOfPost': FieldValue.arrayUnion([shareName]),
       });
     }
   }
