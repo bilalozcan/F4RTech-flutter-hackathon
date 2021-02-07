@@ -170,7 +170,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
           Expanded(
             child: widget._student.picturesOfStudent.isEmpty
                 ? Image.asset(
-                    'assets/student/st1.png',
+              'assets/student/${int.parse(widget._student.uid)%17+1}.png',
                     fit: BoxFit.fill,
                   )
                 : Swiper(
