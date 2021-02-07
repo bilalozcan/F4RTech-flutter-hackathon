@@ -5,6 +5,7 @@ import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -19,165 +20,145 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.white,
         body: FutureBuilder(
             future: model.getUser(),
-            builder: (context, snapshot) {
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Column(
                   children: [
-                    Stack(
-                      children: [
-                        ClipPath(
-                          clipper: MyCustomClipper(),
-                          child: Container(
-                            color: ColorTable.swatch1,
-                            width: double.infinity,
-                            height: Constants.getHeight(context) / 4,
-                          ),
-                        ),
-                        Positioned(
-                          top: Constants.getHeight(context) / 8,
-                          left: Constants.getWidth(context) / 2.4,
-                          right: Constants.getWidth(context) / 2.4,
-                          child: Container(
-                            width: Constants.getWidth(context) / 5.48,
-                            height: Constants.getHeight(context) / 9.48,
-                            decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50))),
-                          ),
-                        ),
-                        AppBar(
-                          automaticallyImplyLeading: false,
-                          shadowColor: ColorTable.swatch2.withOpacity(0),
-                          backgroundColor: Colors.white.withOpacity(0),
-                          title: Text(
-                            'Profil',
-                            style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                color: ColorTable.textColor,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        )
-                      ],
-                    ),
                     Container(
-                      height: Constants.getHeight(context) -
-                          Constants.getHeight(context) / 2.7,
                       width: Constants.getWidth(context),
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            UserInfoWidget(
-                                snapshot.data.fullname, snapshot.data.username),
-                            UserInfoWidget2('E-Posta', snapshot.data.email),
-                            UserInfoWidget2('Telefon', snapshot.data.telephone),
-                            Listwidget(model),
-                          ],
-                        ),
+                      height: Constants.getHeight(context) * 0.4,
+                      child: Stack(
+                        overflow: Overflow.visible,
+                        children: [
+                          ClipPath(
+                            clipper: MyCustomClipper(),
+                            child: Container(
+                              child: Image.asset(
+                                'assets/bagis.png',
+                              ),
+                              color: Color(0xff3c8f7c),
+                              width: double.infinity,
+                              height: Constants.getHeight(context) / 4,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 32,
+                            right: 20,
+                            child: topInfo(context, snapshot),
+                          ),
+                          Positioned(
+                            right: 15,
+                            top: Constants.getHeight(context) * 0.16,
+                            child: Image.asset(
+                              'assets/donation.png',
+                              width: 50,
+                            ),
+                          ),
+                          //burası ranklar verildikten sonra widgetlara ayrılacak
+                          Positioned(
+                              top: Constants.getHeight(context) / 7,
+                              left: 10,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    width: 105,
+                                    height: 105,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(52),
+                                      color: Color(0xff3c8f7c),
+                                    ),
+                                  ),
+                                  ClipRRect(
+                                    child: Image.asset(
+                                      'assets/5.png',
+                                      height: 100,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ],
+                              ))
+                        ],
                       ),
+                    ),
+                    Column(
+                      children: [
+                        Listwidget(model),
+                      ],
                     )
                   ],
                 );
               } else {
-                return Container(
-                    child: Center(child: CircularProgressIndicator()));
+                return Center(
+                  child: LoadingBouncingGrid.square(
+                    size: 30,
+                    backgroundColor: Colors.white,
+                  ),
+                );
               }
             }));
   }
 
-  Container UserInfoWidget(String s, String username) {
+  Container topInfo(BuildContext context, AsyncSnapshot snapshot) {
     return Container(
-      width: Constants.getWidth(context) / 1.5,
-      height: Constants.getHeight(context) / 12,
+      width: Constants.getWidth(context) * 0.80,
+      height: Constants.getHeight(context) * 0.17,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: ColorTable.swatch1,
-              blurRadius: 8,
-            )
-          ]),
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              s,
-              style: GoogleFonts.poppins(
-                  color: ColorTable.textColor.withOpacity(0.8),
-                  fontSize: Constants.getHeight(context)/35.5,
-                  fontWeight: FontWeight.w600),
-            ),
-            Text(
-              '@$username',
-              style: GoogleFonts.poppins(
-                  color: ColorTable.textColor.withOpacity(0.3),
-                  fontSize: Constants.getHeight(context)/47.4,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 7,
+            offset: Offset(0.1, 0.1),
+          ),
+        ],
       ),
-    );
-  }
-
-  Padding UserInfoWidget2(String info, String userInfo) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            info,
-            style:
-                GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500),
+          SizedBox(
+            height: Constants.getHeight(context) * 0.01,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Container(
-              width: Constants.getWidth(context) / 1.2,
-              height: Constants.getHeight(context) / 15,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorTable.swatch1.withOpacity(0.5),
-                    blurRadius: 8,
-                  )
-                ],
-              ),
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  userInfo,
-                  style: GoogleFonts.poppins(
-                      color: ColorTable.textColor.withOpacity(0.8),
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
+          userInfo('', snapshot.data.fullname, 18.0, FontWeight.w800),
+          Divider(
+            height: 5,
+            endIndent: 50,
+            indent: 50,
+            color: Colors.black,
           ),
+          userInfo('E-posta: ', snapshot.data.email, 12.0, FontWeight.w500),
+          Divider(
+            height: 5,
+            endIndent: 50,
+            indent: 50,
+            color: Colors.black,
+          ),
+          userInfo(
+              'Telephone: ', snapshot.data.telephone, 12.0, FontWeight.w500),
         ],
       ),
     );
   }
 
+  Text userInfo(String text, detail, size, weight) {
+    return Text(
+      '$text ${detail}',
+      style: GoogleFonts.poppins(
+          color: ColorTable.textColor.withOpacity(1),
+          fontSize: size,
+          fontWeight: weight),
+    );
+  }
+
   Padding Listwidget(ProfilePageModel model) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 0),
       child: Container(
-        height: Constants.getHeight(context) / 3.3,
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [
-          BoxShadow(color: ColorTable.swatch1.withOpacity(0.2), blurRadius: 10)
-        ]),
+        height: Constants.getHeight(context) / 2,
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
         child: Column(
           children: [
             Row(
@@ -196,10 +177,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == false
-                            ? Border.all(width: 2, color: ColorTable.swatch7)
-                            : Border.all(
-                                width: 2,
-                                color: ColorTable.swatch7.withOpacity(0)),
+                            ? Border.all(width: 2, color: Color(0xff3c8f7c))
+                            : Border.all(width: 2, color: Colors.red),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -209,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                       'Eklenen Öğrenciler',
                       style: GoogleFonts.poppins(
-                          color: ColorTable.textColor, fontSize: 11),
+                          color: ColorTable.textColor, fontSize: 14),
                     )),
                   ),
                 ),
@@ -226,10 +205,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         color: Colors.white,
                         border: model.listType == true
-                            ? Border.all(width: 2, color: ColorTable.swatch7)
-                            : Border.all(
-                                width: 2,
-                                color: ColorTable.swatch7.withOpacity(0)),
+                            ? Border.all(width: 2, color: Color(0xff3c8f7c))
+                            : Border.all(width: 2, color: Colors.red),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -239,13 +216,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text(
                       'Yapılan  Bağışlar',
                       style: GoogleFonts.poppins(
-                          color: ColorTable.textColor, fontSize: 11),
+                          color: ColorTable.textColor, fontSize: 14),
                     )),
                   ),
                 )
               ],
             ),
-            ListMethod(model.user.numberOfStudentsAdded ?? 0),
+            ListMethod(model.user.listOfPost.length ?? 0),
           ],
         ),
       ),
@@ -264,80 +241,68 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.all(8.0),
               child: model.listType == false
                   ? AddStudentWidget(index)
-                  : YApilanBagis(),
+                  : YapilanBagis(index),
             );
           }),
     );
   }
 
-  AddStudentWidget(int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Container(
-        width: Constants.getWidth(context) / 2,
-        height: Constants.getHeight(context) / 15,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: ColorTable.swatch2.withOpacity(0.8), blurRadius: 8)
-            ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 8, bottom: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: Constants.getHeight(context) / 29.5,
-                    height: Constants.getHeight(context) / 29.5,
-                    decoration: BoxDecoration(
-                      color: ColorTable.swatch4.withOpacity(0.1),
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                    ),
+  Widget AddStudentWidget(int index) {
+    return Container(
+      width: Constants.getWidth(context) / 2,
+      height: Constants.getHeight(context) / 15,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 8, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: Constants.getHeight(context) / 29.5,
+                  height: Constants.getHeight(context) / 29.5,
+                  decoration: BoxDecoration(
+                    color: Color(0xff3c8f7c),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: FutureBuilder(
-                          future: model.firestoreDBService
-                              .getStudent(model.user.listOfPost[index]),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      snapshot.data.fullname,
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          color: ColorTable.textColor,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: CheckStatus(
-                                          snapshot.data.approvalStatus == true
-                                              ? 1
-                                              : 2),
-                                    ),
-                                  ]);
-                            } else {
-                              return Center(child: CircularProgressIndicator());
-                            }
-                          })),
-                ],
-              ),
+                  child: Icon(
+                    Icons.account_circle,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: FutureBuilder(
+                    future: model.firestoreDBService
+                        .getStudent(model.user.listOfPost[index]),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          snapshot.data.fullname,
+                          style: GoogleFonts.poppins(
+                              fontSize: 15,
+                              color: ColorTable.textColor,
+                              fontWeight: FontWeight.w600),
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: CheckStatus(3),
+          )
+        ],
       ),
     );
   }
@@ -351,10 +316,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.check,
             color: Colors.green,
           ),
-          Text('ONAYLANDI',style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            color: Colors.green
-          ),),
+          Text('Onaylandı'),
         ],
       );
     }
@@ -365,10 +327,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.close,
             color: Colors.red,
           ),
-          Text('ONAYLANMADI',style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w500,
-              color: Colors.red
-          ),),
+          Text('Onaylanmadı'),
         ],
       );
     }
@@ -379,20 +338,75 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.linear_scale,
             color: Colors.yellow,
           ),
-          Text('BEKLİYOR',style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w500,
-              color: Colors.yellow
-          ),),
+          Text('Bekliyor'),
         ],
       );
     }
   }
 
-  Container YApilanBagis() {
+  Container YapilanBagis(index) {
     return Container(
       width: Constants.getWidth(context) / 2,
-      height: Constants.getHeight(context) / 8,
-      color: ColorTable.swatch2.withOpacity(0.5),
+      height: Constants.getHeight(context) / 15,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 3)]),
+      child: FutureBuilder(
+        future:
+            model.firestoreDBService.getStudent(model.user.listOfPost[index]),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 8, bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        width: Constants.getHeight(context) / 29.5,
+                        height: Constants.getHeight(context) / 29.5,
+                        decoration: BoxDecoration(
+                          color: Color(0xff3c8f7c),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          '1.500,00 ₺',
+                          style: GoogleFonts.poppins(
+                              fontSize: 15,
+                              color: ColorTable.textColor,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child:
+                      CheckStatus(snapshot.data.approvalStatus == true ? 1 : 2),
+                )
+              ],
+            );
+          } else {
+            return Center(
+              child: LoadingBouncingGrid.square(
+                size: 30,
+                backgroundColor: Colors.white,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

@@ -53,6 +53,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
               width: Constants.getWidth(context),
               child: Stack(
                 children: [
+
                   SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Container(
@@ -64,6 +65,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                             height: Constants.getHeight(context) / 14.22,
                           )
                         ],
+
                       ),
                     ),
                   ),
