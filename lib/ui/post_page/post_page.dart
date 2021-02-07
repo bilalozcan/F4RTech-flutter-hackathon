@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
 import 'package:education/services/authentication.dart';
@@ -23,10 +22,12 @@ class _PostPageState extends State<PostPage> {
   final PostPageModel model = PostPageModel();
   final Authentication _authentication = Authentication();
   final FirestoreDBService _firestoreDBService = FirestoreDBService();
+  var photoNumber;
 
   @override
   void initState() {
     super.initState();
+    photoNumber = model.rng.nextInt(4);
   }
 
   @override
@@ -113,8 +114,7 @@ class _PostPageState extends State<PostPage> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(10)),
                                                 child: Image.asset(
-                                                  model.phtpTable[
-                                                      model.rng.nextInt(4)],
+                                                  model.phtpTable[photoNumber],
                                                   fit: BoxFit.contain,
                                                   height: Constants.getHeight(
                                                           context) /
@@ -214,17 +214,17 @@ class _PostPageState extends State<PostPage> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  DonatePage()));
+                                                      //Navigator.push(context, MaterialPageRoute(builder: (context) => DonatePage()));
+                                                      _postPageServices.addDonation(auth.data, snapshot.data[index], 20);
+                                                      setState(() {
+                                                        snapshot.data[index].donationCount;
+                                                      });
                                                     },
                                                     child: Column(
                                                       children: [
                                                         Icon(Icons.money_sharp),
                                                         Text(
-                                                          '${snapshot.data[index].listOfDonations.length} Bağış',
+                                                          '${snapshot.data[index].donationCount} Bağış',
                                                           style: GoogleFonts
                                                               .crimsonText(
                                                                   fontSize: 9),

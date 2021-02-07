@@ -3,13 +3,19 @@ import 'package:education/models/Student.dart';
 
 class Donation {
   DocumentReference reference;
-  double _amount; //Turkish Liras
+  String _uid;
+  int _amount; //Turkish Liras
   DateTime _dateDonation;
-  String _donorID; //String or id or User class
-  Student _donorRecipientID; //??
+  String _donorID; //User
+  String _donorRecipientID;
+
+  Donation(this._uid, this._amount, this._dateDonation, this._donorID,
+      this._donorRecipientID); //Student
+
 
   Donation.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _amount = parsedMap['amount'],
+        _uid = parsedMap['uid'],
         _dateDonation = (parsedMap['datedonation'] as Timestamp).toDate(),
         _donorID = parsedMap['donorid'],
         _donorRecipientID = parsedMap['donorrecipientid'];
@@ -17,6 +23,7 @@ class Donation {
   Map<String, dynamic> toMap() {
     return {
       'amount': _amount,
+      'uid' : _uid,
       'datedonation': _dateDonation,
       'donorid': _donorID,
       'donorrecipientid': _donorRecipientID,
@@ -26,9 +33,15 @@ class Donation {
   Donation.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 
-  Student get donorRecipientID => _donorRecipientID;
+  String get uid => _uid;
 
-  set donorRecipientID(Student value) {
+  set uid(String value) {
+    _uid = value;
+  }
+
+  String get donorRecipientID => _donorRecipientID;
+
+  set donorRecipientID(String value) {
     _donorRecipientID = value;
   }
 
@@ -44,9 +57,9 @@ class Donation {
     _dateDonation = value;
   }
 
-  double get amount => _amount;
+  int get amount => _amount;
 
-  set amount(double value) {
+  set amount(int value) {
     _amount = value;
   }
 }
