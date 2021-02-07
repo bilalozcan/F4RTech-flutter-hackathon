@@ -81,6 +81,20 @@ class FirestoreDBService {
     }
   }
 
+  Future<dynamic> getDonations(donationID)async{
+    var _donation;
+    try{
+      var result = await FirebaseFirestore.instance.collection('Donations').doc('$donationID').get();
+      if(result != null){
+        _donation = Donation.fromSnapshot(result);
+        return _donation;
+      }
+    }catch(e){
+      print('getDonations Erro $e');
+      return e;
+    }
+  }
+
   Future<dynamic> postComment(Comment comment, Student student) async {
     var shareName = DateTime
         .now()

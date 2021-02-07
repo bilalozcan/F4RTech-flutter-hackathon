@@ -227,8 +227,8 @@ class _PostPageState extends State<PostPage> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      //Navigator.push(context, MaterialPageRoute(builder: (context) => DonatePage()));
-                                                      _postPageServices.addDonation(auth.data, snapshot.data[index], 20);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => DonatePage()));
+                                                      //_postPageServices.addDonation(auth.data, snapshot.data[index], 20);
                                                       setState(() {
                                                         snapshot.data[index].donationCount;
                                                       });
