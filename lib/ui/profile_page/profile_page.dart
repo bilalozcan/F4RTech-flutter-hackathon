@@ -1,6 +1,10 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+
+import 'package:education/app/helper.dart';
+
 import 'package:education/ui/background.dart';
+
 import 'package:education/ui/profile_page/profile_page_model.dart';
 import 'package:education/widget/MyClipper.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         backgroundContainer(context),
@@ -86,6 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ))
                             ],
                           ),
+
                         ),
                         Column(
                           children: [

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 class UserWidget extends StatelessWidget {
   String rozet;
   String username;
-  int seviye;
+  String seviye;
 
   @override
   Widget build(BuildContext context) {

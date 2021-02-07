@@ -1,5 +1,6 @@
 import 'package:education/app/colors/colors.dart';
 import 'package:education/app/constants.dart';
+import 'package:education/app/helper.dart';
 import 'package:education/services/authentication.dart';
 import 'package:education/services/firestoredbservice.dart';
 import 'package:education/ui/donate_page/donate_page.dart';
@@ -33,6 +34,7 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         backgroundContainer(context),
@@ -116,6 +118,7 @@ class _PostPageState extends State<PostPage> {
                                                         .withOpacity(0.05),
                                                     blurRadius: 8,
                                                   )
+
                                                 ],
                                               ),
                                               child: Column(
