@@ -30,6 +30,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
   final Authentication _authentication = Authentication();
   final FirestoreDBService _firestoreDBService = FirestoreDBService();
   TextEditingController content = TextEditingController();
+  bool enableKeyboard = true;
   var userUid;
 
   @override
@@ -47,7 +48,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         future: _authentication.currentUser(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            userUid = snapshot.data.uid;
+            userUid = snapshot.data;
             return Container(
               height: Constants.getHeight(context),
               width: Constants.getWidth(context),
@@ -170,7 +171,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     itemBuilder: (BuildContext context, int index) {
                       return Image.network(
                           widget._student.picturesOfStudent[index],
-                          fit: BoxFit.contain,
+                          fit: BoxFit.scaleDown,
                           frameBuilder: (BuildContext context, Widget child,
                                   int frame, bool wasSynchronouslyLoaded) =>
                               wasSynchronouslyLoaded
@@ -237,7 +238,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
             shrinkWrap: true,
             children: snapshot.data.docs.map((DocumentSnapshot document) {
               var comment = Comment.fromSnapshot(document);
-              //TEK BİR YORUM -----------------
               return ListTile(
                 title: FutureBuilder(
                   future: _firestoreDBService.getUser(comment.publisher),
@@ -280,14 +280,28 @@ class _PostDetailPageState extends State<PostDetailPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Container(
-                width: Constants.getWidth(context) / 1.37,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    controller: content,
-                    decoration: InputDecoration(border: InputBorder.none),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    enableKeyboard =true;
+                  });
+                },
+                child: Container(
+                  width: Constants.getWidth(context) / 1.37,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      controller: content,
+                      decoration: InputDecoration(border: InputBorder.none),
+                      enabled: enableKeyboard,
+                      autofocus: true,
+                      onTap: (){
+                        setState(() {
+                          enableKeyboard = true;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -298,10 +312,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     setState(() {
                       if (userUid != null && content.text != '') {
                         _postDetailPageServices.postComment(userUid,
-                            widget._student.reference.id, content.text);
-                        setState(() {
+                            widget._student, content.text);
                           content.text = '';
-                        });
+                          enableKeyboard =false;
                       }
                     });
                   },
