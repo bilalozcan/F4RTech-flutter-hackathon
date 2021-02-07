@@ -19,7 +19,8 @@ class Student {
   int _classOfStudent;
   String _explanation;
   List _listOfComments;
-
+  List _listOfLikes;
+  int _likeCount;
 
   Student(
       [this._publisher,
@@ -38,7 +39,9 @@ class Student {
       this._listOfDonations,
       this._classOfStudent,
       this._explanation,
-      this._listOfComments]);
+      this._listOfComments,
+      this._listOfLikes,
+      this._likeCount]);
 
   Student.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _publisher = parsedMap['publisher'],
@@ -59,7 +62,9 @@ class Student {
         _listOfDonations = parsedMap['listofdonations'],
         _classOfStudent = parsedMap['classofstudent'],
         _explanation = parsedMap['explanation'],
-        _listOfComments = parsedMap['listofcomments'];
+        _listOfComments = parsedMap['listofcomments'],
+        _listOfLikes = parsedMap['listoflikes'],
+        _likeCount = parsedMap['likecount'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -80,11 +85,22 @@ class Student {
       'classofstudent': _classOfStudent,
       'explanation': _explanation,
       'listofcomments': _listOfComments,
+      'listoflikes': _listOfLikes,
+      'likecount': _likeCount,
     };
   }
+
   Student.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
   List<String> get listOfComments => _listOfComments;
+
+
+  List get listOfLikes => _listOfLikes;
+
+  set listOfLikes(List value) {
+    _listOfLikes = value;
+  }
 
   set listOfComments(List<String> value) {
     _listOfComments = value;
@@ -142,7 +158,6 @@ class Student {
 
   set tcID(String value) {
     _tcID = value;
-
   }
 
   String get telephone => _telephone;
@@ -175,4 +190,9 @@ class Student {
     _publisher = value;
   }
 
+  int get likeCount => _likeCount;
+
+  set likeCount(int value) {
+    _likeCount = value;
+  }
 }

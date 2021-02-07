@@ -20,6 +20,7 @@ class User {
   int _donationAmount;
   int _level;
   int _point;
+  List _likeList;
 
   User({@required id, @required email}) {
     _uid = id;
@@ -40,8 +41,8 @@ class User {
       this._numberOfDonationsMade,
       this._donationAmount,
       this._level,
-      this._point);
-
+      this._point,
+      this._likeList);
 
   User.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _uid = parsedMap['id'],
@@ -59,7 +60,8 @@ class User {
         _donationAmount = parsedMap['donationamount'],
         _level = parsedMap['level'],
         _point = parsedMap['point'],
-        _listOfPost = parsedMap['listOfPost'];
+        _listOfPost = parsedMap['listOfPost'],
+        _likeList = parsedMap['likedList'];
 
   Map<String, dynamic> toMap() {
     return {
@@ -77,11 +79,18 @@ class User {
       'level': _level,
       'point': _point,
       'listOfPost': _listOfPost,
+      'likeList': _likeList,
     };
   }
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
+
+  List get likeList => _likeList;
+
+  set likeList(List value) {
+    _likeList = value;
+  }
 
   int get point => _point;
 
@@ -162,6 +171,7 @@ class User {
   set listOfPost(List value) {
     _listOfPost = value;
   }
+
   @override
   String toString() {
     return 'User';

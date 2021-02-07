@@ -112,7 +112,9 @@ class _ShareContentState extends State<ShareContent> {
         [],
         int.parse(model.studentClass.text),
         model.explanation.text,
-        []);
+        [],
+        [],
+        0);
     var shareName = DateTime.now().microsecondsSinceEpoch.toString();
     var studentInfo =
         FirebaseFirestore.instance.collection('Students').doc(shareName);
