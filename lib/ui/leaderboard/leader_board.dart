@@ -21,110 +21,128 @@ class _LeaderBoardState extends State<LeaderBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SingleChildScrollView(
-        child: Container(
+    return Stack(
+      children: [
+        Container(
           width: Constants.getWidth(context),
+          height: Constants.getHeight(context),
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [ColorTable.swatch6, ColorTable.swatch3])),
-          child: Column(
-            children: [
-              customAppBar(context),
-              FutureBuilder(
-                future: _firestoreDBService.getUsers(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        Container(
-                          height: Constants.getHeight(context) * 0.40,
-                          width: Constants.getWidth(context),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Stack(
-                                overflow: Overflow.visible,
-                                children: [
-                                  theFirstTree(
-                                    context,
-                                    '2',
-                                    'assets/2nd.png',
-                                    105.0,
-                                    snapshot.data[1]['fullname'],
-                                    snapshot.data[1]['point'].toString(),
-                                    FontAwesomeIcons.chevronUp,
-                                    -Constants.getHeight(context) * 0.24,
-                                    -Constants.getHeight(context) * 0.01,
-                                    Constants.getHeight(context) * 0.045,
-                                  ),
-                                  theFirstTree(
-                                    context,
-                                    '3',
-                                    'assets/3th.png',
-                                    105.0,
-                                    snapshot.data[2]['fullname'],
-                                    snapshot.data[2]['point'].toString(),
-                                    FontAwesomeIcons.chevronDown,
-                                    -Constants.getHeight(context) * 0.01,
-                                    -Constants.getHeight(context) * 0.24,
-                                    Constants.getHeight(context) * 0.045,
-                                  ),
-                                  theFirstTree(
-                                    context,
-                                    '1',
-                                    'assets/1st.png',
-                                    130.0,
-                                    snapshot.data[0]['fullname'],
-                                    snapshot.data[0]['point'].toString(),
-                                    FontAwesomeIcons.crown,
-                                    -Constants.getHeight(context) * 0.2,
-                                    -Constants.getHeight(context) * 0.2,
-                                    -Constants.getHeight(context) * 0.016,
-                                  ),
-                                  Positioned(
-                                    child: Column(
-                                      children: [],
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                customAppBar(context),
+                FutureBuilder(
+                  future: _firestoreDBService.getUsers(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      print(snapshot.data.length);
+                      return Column(
+                        children: [
+                          Container(
+                            height: Constants.getHeight(context) * 0.40,
+                            width: Constants.getWidth(context),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Stack(
+                                  overflow: Overflow.visible,
+                                  children: [
+                                    theFirstTree(
+                                      context,
+                                      '2',
+                                      'assets/2nd.png',
+                                      105.0,
+                                      snapshot.data.length < 2
+                                          ? '-'
+                                          : snapshot.data[1]['fullname'],
+                                      snapshot.data.length < 2
+                                          ? '-'
+                                          : snapshot.data[1]['point']
+                                          .toString(),
+                                      FontAwesomeIcons.chevronUp,
+                                      -Constants.getHeight(context) * 0.24,
+                                      -Constants.getHeight(context) * 0.01,
+                                      Constants.getHeight(context) * 0.045,
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                    theFirstTree(
+                                      context,
+                                      '3',
+                                      'assets/3th.png',
+                                      105.0,
+                                      snapshot.data.length < 3
+                                          ? '-'
+                                          : snapshot.data[2]['fullname'],
+                                      snapshot.data.length < 3
+                                          ? '-'
+                                          : snapshot.data[2]['point']
+                                          .toString(),
+                                      FontAwesomeIcons.chevronDown,
+                                      -Constants.getHeight(context) * 0.01,
+                                      -Constants.getHeight(context) * 0.24,
+                                      Constants.getHeight(context) * 0.045,
+                                    ),
+                                    theFirstTree(
+                                      context,
+                                      '1',
+                                      'assets/1st.png',
+                                      130.0,
+                                      snapshot.data[0]['fullname'],
+                                      snapshot.data[0]['point'].toString(),
+                                      FontAwesomeIcons.crown,
+                                      -Constants.getHeight(context) * 0.2,
+                                      -Constants.getHeight(context) * 0.2,
+                                      -Constants.getHeight(context) * 0.016,
+                                    ),
+                                    Positioned(
+                                      child: Column(
+                                        children: [],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
+                          ListView.builder(
+                            itemCount: snapshot.data.length <= 3
+                                ? 0
+                                : snapshot.data.length > 50
+                                ? 47
+                                : snapshot.data.length - 3,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return listViewContainer(
+                                  context,
+                                  index,
+                                  snapshot.data[index + 3]['fullname'],
+                                  snapshot.data[index + 3]['point'].toString());
+                            },
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Center(
+                        child: LoadingBouncingGrid.square(
+                          size: 30,
+                          backgroundColor: Colors.white,
                         ),
-                        ListView.builder(
-                          itemCount: snapshot.data.length > 50
-                              ? 47
-                              : snapshot.data.length - 3,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return listViewContainer(
-                                context,
-                                index,
-                                snapshot.data[index + 3]['fullname'],
-                                snapshot.data[index + 3]['point'].toString());
-                          },
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Center(
-                      child: LoadingBouncingGrid.square(
-                        size: 30,
-                        backgroundColor: Colors.white,
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

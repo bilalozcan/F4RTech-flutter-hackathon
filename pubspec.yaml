@@ -43,6 +43,7 @@ dependencies:
   salomon_bottom_bar: ^2.0.0
   loading_animations: ^2.1.0
   url_launcher: ^5.7.10
+  webview_flutter: ^1.0.7
 
 
 
