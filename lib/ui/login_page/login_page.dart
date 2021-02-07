@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../registration_page_input_widget.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -20,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorTable.swatch2,
+      backgroundColor: ColorTable.swatch1,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -56,57 +58,12 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: Constants.getHeight(context) / 12.93,
-                          decoration: BoxDecoration(
-                            color: ColorTable.swatch1.withOpacity(0.4),
-                          ),
-                          child: Center(
-                            child: TextField(
-                              keyboardType: TextInputType.text,
-                              controller: model.email,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'E-posta',
-                                  contentPadding: EdgeInsets.only(left: 8)),
-                              //autofocus: true,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18.0),
-                          child: Container(
-                            height: Constants.getHeight(context) / 12.93,
-                            decoration: BoxDecoration(
-                              color: ColorTable.swatch1.withOpacity(0.4),
-                            ),
-                            child: Center(
-                              child: TextField(
-                                keyboardType: TextInputType.text,
-                                obscureText: true,
-                                controller: model.password,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Şifre',
-                                    contentPadding: EdgeInsets.only(left: 8)),
-                                //autofocus: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 2),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              child: Text(
-                                'Şifreni mi Unuttun?',
-                                style: GoogleFonts.poppins(
-                                    color: ColorTable.swatch4, fontSize: 13),
-                              ),
-                            ),
-                          ),
-                        ),
+                        InputWidget(model.email, context, 'E-posta',
+                            TextInputType.emailAddress,
+                            validator: _services.emailValidator),
+                        InputWidget(model.password, context, 'Şifre',
+                            TextInputType.visiblePassword,
+                            validator: _services.passwordValidator),
                       ],
                     ),
                   ),

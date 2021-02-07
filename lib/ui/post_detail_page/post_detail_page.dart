@@ -7,6 +7,7 @@ import 'package:education/models/Comment.dart';
 import 'package:education/models/Student.dart';
 import 'package:education/services/authentication.dart';
 import 'package:education/services/firestoredbservice.dart';
+import 'package:education/ui/background.dart';
 import 'package:education/ui/post_detail_page/post_detail_page_services.dart';
 import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:education/widget/UserWidget.dart';
@@ -36,54 +37,58 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '${widget._student.fullname}',
-          style: GoogleFonts.libreBaskerville(color: ColorTable.textColor),
-        ),
-        backgroundColor: ColorTable.swatch2.withOpacity(0),
-        shadowColor: Colors.white.withOpacity(0),
-      ),
-      body: FutureBuilder(
-        future: _authentication.currentUser(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            userUid = snapshot.data;
-            return Container(
-              height: Constants.getHeight(context),
-              width: Constants.getWidth(context),
-              child: Stack(
-                children: [
-
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Container(
-                      child: Column(
-                        children: [
-                          StudentInfo(),
-                          CommentInfo(),
-                          SizedBox(
-                            height: Constants.getHeight(context) / 14.22,
-                          )
-                        ],
-
+    return Stack(
+      children: [
+        backgroundContainer(context),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text(
+              '${widget._student.fullname}',
+              style: GoogleFonts.libreBaskerville(color: Colors.white),
+            ),
+            backgroundColor: ColorTable.swatch2.withOpacity(0),
+            shadowColor: Colors.white.withOpacity(0),
+          ),
+          body: FutureBuilder(
+            future: _authentication.currentUser(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                userUid = snapshot.data;
+                return Container(
+                  height: Constants.getHeight(context),
+                  width: Constants.getWidth(context),
+                  child: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              StudentInfo(),
+                              CommentInfo(),
+                              SizedBox(
+                                height: Constants.getHeight(context) / 14.22,
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                      TextInfo(),
+                    ],
                   ),
-                  TextInfo(),
-                ],
-              ),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 
-  CommentWidget(String rozet, String fullname, Comment comment) {
+  Widget CommentWidget(String rozet, String fullname, Comment comment) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -95,8 +100,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
         Text(
           StringConstants.getDate(comment.dateOfComment),
-          style:
-              GoogleFonts.barlow(fontSize: Constants.getHeight(context) / 79),
+          style: GoogleFonts.poppins(
+              fontSize: Constants.getHeight(context) / 79, color: Colors.white),
         ),
         Divider(),
       ],
@@ -134,7 +139,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
               style: GoogleFonts.lato(
                 fontSize: Constants.getHeight(context) / 65,
                 fontWeight: FontWeight.w400,
-                color: ColorTable.textColor,
+                color: Colors.white,
               ),
               maxLines: 3,
             ),
@@ -211,7 +216,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   widget._student.explanation,
-                  style: GoogleFonts.crimsonText(),
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -282,9 +290,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    enableKeyboard =true;
+                    enableKeyboard = true;
                   });
                 },
                 child: Container(
@@ -297,7 +305,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       decoration: InputDecoration(border: InputBorder.none),
                       enabled: enableKeyboard,
                       autofocus: true,
-                      onTap: (){
+                      onTap: () {
                         setState(() {
                           enableKeyboard = true;
                         });
@@ -312,10 +320,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   onTap: () {
                     setState(() {
                       if (userUid != null && content.text != '') {
-                        _postDetailPageServices.postComment(userUid,
-                            widget._student, content.text);
-                          content.text = '';
-                          enableKeyboard =false;
+                        _postDetailPageServices.postComment(
+                            userUid, widget._student, content.text);
+                        content.text = '';
+                        enableKeyboard = false;
                       }
                     });
                   },

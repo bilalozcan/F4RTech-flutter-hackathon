@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:education/ui/home_page/home_page.dart';
 import 'package:education/ui/navigation_bar/navigationBar.dart';
 import 'package:education/ui/navigation_bar/navigationbar_model.dart';
-import 'package:education/ui/post_page/post_page.dart';
-import 'package:education/ui/post_page/posts_page_services.dart';
 import 'package:education/ui/webview_page/webview_page_services.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -26,8 +23,8 @@ class WebviewPage extends StatefulWidget {
 
 class _WebviewPageState extends State<WebviewPage> {
   final Completer<WebViewController> _controller =
-  Completer<WebViewController>();
-  WebviewPageServices _webviewPageServices = WebviewPageServices();
+      Completer<WebViewController>();
+  final WebviewPageServices _webviewPageServices = WebviewPageServices();
 
   @override
   void initState() {
@@ -51,9 +48,10 @@ class _WebviewPageState extends State<WebviewPage> {
                 var result = await _webviewPageServices.addDonation(
                     widget.user, widget.student, widget.bagis);
                 if (result) {
-                  await Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()), (
-                          route) => false);
+                  await Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      (route) => false);
                   bottomNavBarSelectedIndex = 2;
                 }
               })

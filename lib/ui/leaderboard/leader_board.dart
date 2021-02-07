@@ -5,6 +5,7 @@ import 'package:education/services/firestoredbservice.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animations/loading_animations.dart';
 
+import '../background.dart';
 import 'leader_board_models.dart';
 
 class LeaderBoard extends StatefulWidget {
@@ -23,15 +24,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: Constants.getWidth(context),
-          height: Constants.getHeight(context),
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [ColorTable.swatch6, ColorTable.swatch3])),
-        ),
+        backgroundContainer(context),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
@@ -58,14 +51,14 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '2',
                                       'assets/2nd.png',
-                                      105.0,
+                                      95.0,
                                       snapshot.data.length < 2
                                           ? '-'
                                           : snapshot.data[1]['fullname'],
                                       snapshot.data.length < 2
                                           ? '-'
                                           : snapshot.data[1]['point']
-                                          .toString(),
+                                              .toString(),
                                       FontAwesomeIcons.chevronUp,
                                       -Constants.getHeight(context) * 0.24,
                                       -Constants.getHeight(context) * 0.01,
@@ -75,14 +68,14 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '3',
                                       'assets/3th.png',
-                                      105.0,
+                                      95.0,
                                       snapshot.data.length < 3
                                           ? '-'
                                           : snapshot.data[2]['fullname'],
                                       snapshot.data.length < 3
                                           ? '-'
                                           : snapshot.data[2]['point']
-                                          .toString(),
+                                              .toString(),
                                       FontAwesomeIcons.chevronDown,
                                       -Constants.getHeight(context) * 0.01,
                                       -Constants.getHeight(context) * 0.24,
@@ -92,7 +85,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                       context,
                                       '1',
                                       'assets/1st.png',
-                                      130.0,
+                                      120.0,
                                       snapshot.data[0]['fullname'],
                                       snapshot.data[0]['point'].toString(),
                                       FontAwesomeIcons.crown,
@@ -114,8 +107,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             itemCount: snapshot.data.length <= 3
                                 ? 0
                                 : snapshot.data.length > 50
-                                ? 47
-                                : snapshot.data.length - 3,
+                                    ? 47
+                                    : snapshot.data.length - 3,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {

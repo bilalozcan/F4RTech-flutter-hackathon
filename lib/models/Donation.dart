@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education/models/Student.dart';
 
 class Donation {
   DocumentReference reference;
@@ -12,7 +11,6 @@ class Donation {
   Donation(this._uid, this._amount, this._dateDonation, this._donorID,
       this._donorRecipientID); //Student
 
-
   Donation.fromMap(Map<String, dynamic> parsedMap, {this.reference})
       : _amount = parsedMap['amount'],
         _uid = parsedMap['uid'],
@@ -23,13 +21,13 @@ class Donation {
   Map<String, dynamic> toMap() {
     return {
       'amount': _amount,
-      'uid' : _uid,
+      'uid': _uid,
       'datedonation': _dateDonation,
       'donorid': _donorID,
       'donorrecipientid': _donorRecipientID,
-
     };
   }
+
   Donation.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 

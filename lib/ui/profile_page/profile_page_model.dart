@@ -5,7 +5,7 @@ class ProfilePageModel {
       true; //false = eklenen öğrenciler listesi true = yapılan bağışlar listesi
   var user;
   var firestoreDBService = FirestoreDBService();
-  getUser() async {
+  Future getUser() async {
     try {
       user = await firestoreDBService.getCurrentUser();
       return user;

@@ -54,6 +54,7 @@ class Authentication {
     }
   }
 
+  // ignore: always_declare_return_types
   signOut() async {
     var _user = await FirebaseAuth.instance;
     if (currentUser != null) {
