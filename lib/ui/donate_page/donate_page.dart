@@ -86,11 +86,11 @@ class _DonatePageState extends State<DonatePage> {
                             });
                           },
                           children: <Widget>[
-                            pageWidgets(context, 'Destek Paketi 1', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/12.png',
+                            pageWidgets(context, 'Destek Paketi 1', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/donate1.png',
                                 'https://www.shopier.com/ShowProductNew/products.php?id=5944810', 10),
                             pageWidgets(
-                                context, 'Destek Paketi 2', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/11.png', 'https://shopier.com/5944854', 25),
-                            pageWidgets(context, 'Destek Paketi 3', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/10.png',
+                                context, 'Destek Paketi 2', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/donate2.png', 'https://shopier.com/5944854', 25),
+                            pageWidgets(context, 'Destek Paketi 3', 'Çorbada sizin de tuzunuz bulunsun.', 'assets/donate3.png',
                                 'https://www.shopier.com/ShowProductNew/products.php?id=5949650', 50),
                           ],
                         ),

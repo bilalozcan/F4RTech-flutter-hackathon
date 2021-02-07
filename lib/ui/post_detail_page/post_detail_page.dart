@@ -47,7 +47,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
               '${widget._student.fullname}',
             ),
             backgroundColor: Colors.transparent,
-
             shadowColor: Colors.white.withOpacity(0),
           ),
           body: FutureBuilder(
@@ -103,14 +102,16 @@ class _PostDetailPageState extends State<PostDetailPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CommentUserInfo(rozet, fullname, comment.content),
-              Text(
-                StringConstants.getDate(comment.dateOfComment),
-                style: GoogleFonts.poppins(fontSize: Constants.getHeight(context) / 79, color: Colors.white),
-              ),
             ],
           ),
         ),
-
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Text(
+            StringConstants.getDate(comment.dateOfComment),
+            style: GoogleFonts.poppins(fontSize: Constants.getHeight(context) / 79, color: Colors.white),
+          ),
+        ),
         Divider(),
       ],
     );
@@ -150,17 +151,19 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 ),
                 maxLines: 3,
               ),
-              Text(
-                '${comment}',
-                style: GoogleFonts.lato(
-                  fontSize: Constants.getHeight(context) * 0.02,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
+              Container(
+                constraints: BoxConstraints(maxWidth: Constants.getWidth(context) * 0.6),
+                child: Text(
+                  '${comment}',
+                  style: GoogleFonts.lato(
+                    fontSize: Constants.getHeight(context) * 0.02,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
+                  maxLines: 3,
                 ),
-                maxLines: 3,
               ),
             ],
-
           ),
         )
       ],
@@ -179,9 +182,13 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 if (sp.hasData) {
                   return UserWidget(
                       rozet: '${Helper.UserIconLevel(sp.data)[1]}', username: sp.data.username, seviye: '${Helper.UserIconLevel(sp.data)[0]}');
-
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: LoadingBouncingGrid.square(
+                      size: 30,
+                      backgroundColor: Colors.white,
+                    ),
+                  );
                 }
               }),
           SizedBox(height: 5),
@@ -192,54 +199,49 @@ class _PostDetailPageState extends State<PostDetailPage> {
             child: Expanded(
               child: widget._student.picturesOfStudent.isEmpty
                   ? Image.asset(
-                      'assets/student/${int.parse(widget._student.uid) % 17 + 1}.png',
-                      fit: BoxFit.fill,
-                      height: Constants.getHeight(context) * 0.28,
-                    )
+                'assets/student/${int.parse(widget._student.uid) % 17 + 1}.png',
+                fit: BoxFit.fill,
+                height: Constants.getHeight(context) * 0.28,
+              )
                   : Swiper(
-                      itemBuilder: (BuildContext context, int index) {
-                        return Image.network(widget._student.picturesOfStudent[index],
-                            fit: BoxFit.scaleDown,
-                            frameBuilder: (BuildContext context, Widget child, int frame, bool wasSynchronouslyLoaded) => wasSynchronouslyLoaded
-                                ? child
-                                : AnimatedOpacity(
-                                    child: child,
-                                    opacity: frame == null ? 0 : 1,
-                                    duration: const Duration(seconds: 2),
-                                    curve: Curves.easeOut,
-                                  ),
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
-                                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
-                              );
-                            });
-                      },
-                      itemCount: widget._student.picturesOfStudent.length,
-                      itemWidth: Constants.getWidth(context),
-                      itemHeight: Constants.getHeight(context) / 4,
-                      layout: SwiperLayout.STACK,
-                    ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Image.network(widget._student.picturesOfStudent[index],
+                      fit: BoxFit.scaleDown,
+                      frameBuilder: (BuildContext context, Widget child, int frame, bool wasSynchronouslyLoaded) => wasSynchronouslyLoaded
+                          ? child
+                          : AnimatedOpacity(
+                        child: child,
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.easeOut,
+                      ),
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                : null,
+                          ),
+                        );
+                      });
+                },
+                itemCount: widget._student.picturesOfStudent.length,
+                itemWidth: Constants.getWidth(context),
+                itemHeight: Constants.getHeight(context) / 4,
+                layout: SwiperLayout.STACK,
+              ),
             ),
-
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: Constants.getWidth(context),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Açıklama: ' + widget._student.explanation,
-
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+          Container(
+            width: Constants.getWidth(context),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: Text(
+                'Açıklama: ' + widget._student.explanation,
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
@@ -282,7 +284,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
                               backgroundColor: Colors.white,
                             ),
                           ));
-
                     }
                   },
                 ),
@@ -350,7 +351,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     child: Text(
                       'Paylaş',
                       style: GoogleFonts.barlow(color: Colors.blueAccent, fontWeight: FontWeight.w500),
-
                     ),
                   ),
                 ),
