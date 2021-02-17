@@ -164,102 +164,104 @@ class _ShareContentState extends State<ShareContent> {
         backgroundContainer(context),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: Container(
-            height: Constants.getHeight(context),
-            width: Constants.getWidth(context),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: Constants.getHeight(context) * 0.8,
-                  width: Constants.getWidth(context) * 0.9,
-                  padding: EdgeInsets.only(left: 25, right: 25),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white.withOpacity(0.1)),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'Öğrenci Bildir',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
+          body: SingleChildScrollView(
+            child: Container(
+              height: Constants.getHeight(context),
+              width: Constants.getWidth(context),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: Constants.getHeight(context) * 0.8,
+                    width: Constants.getWidth(context) * 0.9,
+                    padding: EdgeInsets.only(left: 25, right: 25),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.1)),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 15,
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                            height: 2, width: 50, color: ColorTable.swatch5),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        userInput(model.studentName, 'Öğrenci Adı',
-                            TextInputType.text, 50),
-                        userInput(model.studentPhone, 'Telefon Numarası',
-                            TextInputType.number, 11),
-                        userInput(
-                            model.studentTC,
-                            'TC Kimlik Numarası (İsteğe Bağlı)',
-                            TextInputType.number,
-                            11),
-                        userInput(
-                            model.studentAge, 'Yaşı', TextInputType.number, 2),
-                        userInput(model.studentAddress, 'Adresi',
-                            TextInputType.text, 80),
-                        userInput(model.studentClass, 'Sınıf',
-                            TextInputType.number, 2),
-                        userInput(model.explanation, 'Açıklama',
-                            TextInputType.text, 400),
-                        Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {
-                                  loadAssets();
-                                },
-                                child: Container(
-                                  height: 44,
-                                  width: 44,
-                                  child: Icon(FontAwesomeIcons.image,
-                                      color: Colors.blueGrey),
+                          Text(
+                            'Öğrenci Bildir',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                              height: 2, width: 50, color: ColorTable.swatch5),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          userInput(model.studentName, 'Öğrenci Adı',
+                              TextInputType.text, 50),
+                          userInput(model.studentPhone, 'Telefon Numarası',
+                              TextInputType.number, 11),
+                          userInput(
+                              model.studentTC,
+                              'TC Kimlik Numarası (İsteğe Bağlı)',
+                              TextInputType.number,
+                              11),
+                          userInput(
+                              model.studentAge, 'Yaşı', TextInputType.number, 2),
+                          userInput(model.studentAddress, 'Adresi',
+                              TextInputType.text, 80),
+                          userInput(model.studentClass, 'Sınıf',
+                              TextInputType.number, 2),
+                          userInput(model.explanation, 'Açıklama',
+                              TextInputType.text, 400),
+                          Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    loadAssets();
+                                  },
+                                  child: Container(
+                                    height: 44,
+                                    width: 44,
+                                    child: Icon(FontAwesomeIcons.image,
+                                        color: Colors.blueGrey),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 30),
-                                child: Text(
-                                  '${images.length}/4',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 14),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 30),
+                                  child: Text(
+                                    '${images.length}/4',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 14),
+                                  ),
                                 ),
-                              ),
+                              ],
+                            ),
+                          ),
+                          images.isEmpty
+                              ? SizedBox()
+                              : Container(child: buildGridView()),
+                          SizedBox(height: Constants.getHeight(context) * 0.05),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              shareButton(),
                             ],
                           ),
-                        ),
-                        images.isEmpty
-                            ? SizedBox()
-                            : Container(child: buildGridView()),
-                        SizedBox(height: Constants.getHeight(context) * 0.05),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            shareButton(),
-                          ],
-                        ),
-                        SizedBox(height: Constants.getHeight(context) * 0.05)
-                      ],
+                          SizedBox(height: Constants.getHeight(context) * 0.05)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
