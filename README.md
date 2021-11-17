@@ -1,4 +1,4 @@
-# education
+# Back To School
 
 Proje konusu olarak nitelikli eğitimi seçtik. Bu konuda, eğitim çağında olan ancak okula gidemeyen öğrencileri duyurmak ve onlara maddi destek sağlamak amacıyla bir uygulama geliştirdik. Böylece 17 küresel amaç içerisindeki ‘yoksulluğa son’ sorununa da çözüm bulmaya çalıştık.!
 
